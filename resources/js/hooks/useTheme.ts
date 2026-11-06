@@ -10,14 +10,11 @@ export function getInitialTheme(): Theme {
   }
   try {
     const saved = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
-    if (saved === 'dark' || saved === 'light') {
-      return saved;
-    }
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    if (saved === 'light') {
       return 'light';
     }
   } catch {
-    // ignore local storage errors in private browsing
+    // ignore
   }
   return 'dark';
 }
@@ -25,12 +22,12 @@ export function getInitialTheme(): Theme {
 export function applyTheme(theme: Theme): void {
   if (typeof document === 'undefined') return;
   const root = document.documentElement;
-  if (theme === 'dark') {
-    root.classList.add('dark');
-    root.classList.remove('light');
-  } else {
+  if (theme === 'light') {
     root.classList.remove('dark');
     root.classList.add('light');
+  } else {
+    root.classList.add('dark');
+    root.classList.remove('light');
   }
   try {
     localStorage.setItem(THEME_STORAGE_KEY, theme);
@@ -44,9 +41,6 @@ export function useTheme() {
     if (typeof document !== 'undefined') {
       if (document.documentElement.classList.contains('light')) {
         return 'light';
-      }
-      if (document.documentElement.classList.contains('dark')) {
-        return 'dark';
       }
     }
     return getInitialTheme();

@@ -8,9 +8,7 @@
             (function() {
                 try {
                     var saved = localStorage.getItem('spiggle_theme');
-                    var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-                    var theme = saved ? saved : (prefersLight ? 'light' : 'dark');
-                    if (theme === 'light') {
+                    if (saved === 'light') {
                         document.documentElement.classList.remove('dark');
                         document.documentElement.classList.add('light');
                     } else {

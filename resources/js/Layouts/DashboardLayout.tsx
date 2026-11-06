@@ -96,23 +96,23 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   };
 
   return (
-    <div className="flex min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased font-sans">
+    <div className="flex min-h-screen bg-zinc-950 text-zinc-100 antialiased font-sans">
       {/* Sidebar */}
       <aside
         aria-label="Sidebar Navigation"
-        className="w-64 border-r border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950 flex flex-col justify-between p-4 shrink-0"
+        className="w-64 border-r border-zinc-800/80 bg-zinc-950 flex flex-col justify-between p-4 shrink-0"
       >
         <div>
           {/* Brand Logo */}
           <Link
             href="/dashboard"
-            className="flex items-center gap-2.5 px-3 py-2 mb-4 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900 transition"
+            className="flex items-center gap-2.5 px-3 py-2 mb-4 rounded-lg hover:bg-zinc-900 transition"
           >
             <div className="h-8 w-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold shadow-md shadow-indigo-500/20">
               <Mail className="w-4 h-4" aria-hidden="true" />
             </div>
-            <span className="font-semibold text-base tracking-tight text-zinc-950 dark:text-white">
-              Spiggle<span className="text-indigo-600 dark:text-indigo-400">Mail</span>
+            <span className="font-semibold text-base tracking-tight text-white">
+              Spiggle<span className="text-indigo-400">Mail</span>
             </span>
           </Link>
 
@@ -121,11 +121,11 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             <button
               type="button"
               onClick={() => setIsSwitcherOpen(!isSwitcherOpen)}
-              className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 text-left transition"
+              className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-left transition"
             >
               <div className="truncate pr-2">
-                <p className="text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold">Active Publication</p>
-                <p className="text-sm font-semibold text-zinc-900 dark:text-white truncate">
+                <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Active Publication</p>
+                <p className="text-sm font-semibold text-white truncate">
                   {activeNewsletter?.name || 'All Publications'}
                 </p>
               </div>
@@ -134,7 +134,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 
             {/* Switcher Dropdown Menu */}
             {isSwitcherOpen && (
-              <div className="absolute top-full left-1 right-1 mt-1.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl p-1.5 z-50 text-xs animate-in fade-in zoom-in-95 duration-100">
+              <div className="absolute top-full left-1 right-1 mt-1.5 rounded-xl bg-zinc-900 border border-zinc-800 shadow-2xl p-1.5 z-50 text-xs animate-in fade-in zoom-in-95 duration-100">
                 <div className="px-2 py-1 text-[10px] uppercase font-semibold text-zinc-500 tracking-wider">
                   Switch Publication
                 </div>
@@ -148,24 +148,24 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                         onClick={() => handleSelectNewsletter(nl.id)}
                         className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-left transition ${
                           isSelected
-                            ? 'bg-indigo-50 dark:bg-indigo-600/20 text-indigo-700 dark:text-indigo-300 font-semibold border border-indigo-200 dark:border-indigo-500/30'
-                            : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white'
+                            ? 'bg-indigo-600/20 text-indigo-300 font-semibold border border-indigo-500/30'
+                            : 'text-zinc-300 hover:bg-zinc-800 hover:text-white'
                         }`}
                       >
                         <span className="truncate">{nl.name}</span>
-                        {isSelected && <Check className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400 shrink-0 ml-1.5" aria-hidden="true" />}
+                        {isSelected && <Check className="w-3.5 h-3.5 text-indigo-400 shrink-0 ml-1.5" aria-hidden="true" />}
                       </button>
                     );
                   })}
                 </div>
 
-                <div className="mt-1 pt-1 border-t border-zinc-200 dark:border-zinc-800/80">
+                <div className="mt-1 pt-1 border-t border-zinc-800/80">
                   <Link
                     href="/settings"
                     onClick={() => setIsSwitcherOpen(false)}
-                    className="flex items-center gap-1.5 w-full px-2.5 py-1.5 rounded-lg text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition text-[11px]"
+                    className="flex items-center gap-1.5 w-full px-2.5 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition text-[11px]"
                   >
-                    <Plus className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" aria-hidden="true" />
+                    <Plus className="w-3.5 h-3.5 text-indigo-400" aria-hidden="true" />
                     <span>Manage publications</span>
                   </Link>
                 </div>
@@ -176,7 +176,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           {/* Navigation Groups */}
           <nav className="space-y-6">
             <div>
-              <p className="px-3 text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">
+              <p className="px-3 text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">
                 Newsletter
               </p>
               <ul className="space-y-0.5">
@@ -186,13 +186,13 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                     <li key={href}>
                       <Link
                         href={href}
-                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition ${
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition ${
                           isActive
-                            ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white font-semibold shadow-xs'
-                            : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-900 font-medium'
+                            ? 'bg-zinc-800 text-white font-semibold'
+                            : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
                         }`}
                       >
-                        <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-zinc-400 dark:text-zinc-500'}`} aria-hidden="true" />
+                        <Icon className="w-4 h-4" aria-hidden="true" />
                         <span>{label}</span>
                       </Link>
                     </li>
@@ -202,7 +202,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             </div>
 
             <div>
-              <p className="px-3 text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">
+              <p className="px-3 text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">
                 Account & Infrastructure
               </p>
               <ul className="space-y-0.5">
@@ -212,13 +212,13 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                     <li key={href}>
                       <Link
                         href={href}
-                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition ${
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition ${
                           isActive
-                            ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white font-semibold shadow-xs'
-                            : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-900 font-medium'
+                            ? 'bg-zinc-800 text-white font-semibold'
+                            : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
                         }`}
                       >
-                        <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-zinc-400 dark:text-zinc-500'}`} aria-hidden="true" />
+                        <Icon className="w-4 h-4" aria-hidden="true" />
                         <span>{label}</span>
                       </Link>
                     </li>
@@ -230,23 +230,23 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         </div>
 
         {/* Footer User Profile & System Status */}
-        <div className="border-t border-zinc-200 dark:border-zinc-800/80 pt-4 px-2">
+        <div className="border-t border-zinc-800/80 pt-4 px-2">
           <div className="flex items-center justify-between">
             <Link
               href="/account"
               className="flex items-center gap-2.5 truncate hover:opacity-80 transition group flex-1 mr-2"
               title="Manage Account Profile"
             >
-              <div className="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xs shrink-0 group-hover:ring-2 group-hover:ring-indigo-500/40 transition">
+              <div className="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-xs shrink-0 group-hover:ring-2 group-hover:ring-indigo-500/40 transition">
                 {user?.name?.charAt(0) ?? 'O'}
               </div>
               <div className="truncate">
                 <div className="flex items-center gap-1.5">
-                  <p className="text-xs font-semibold text-zinc-900 dark:text-white truncate">
+                  <p className="text-xs font-semibold text-white truncate">
                     {user?.name ?? 'Operator'}
                   </p>
                 </div>
-                <p className="text-[10px] text-zinc-500 dark:text-zinc-400 truncate">
+                <p className="text-[10px] text-zinc-400 truncate">
                   {user?.email ?? ''}
                 </p>
               </div>
@@ -258,12 +258,12 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                 onClick={toggleTheme}
                 aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
                 title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-                className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition"
+                className="text-zinc-400 hover:text-white p-1.5 rounded-lg hover:bg-zinc-900 transition shrink-0"
               >
                 {theme === 'dark' ? (
                   <Sun className="w-4 h-4 text-amber-400" aria-hidden="true" />
                 ) : (
-                  <Moon className="w-4 h-4 text-indigo-600" aria-hidden="true" />
+                  <Moon className="w-4 h-4 text-indigo-400" aria-hidden="true" />
                 )}
               </button>
 
@@ -272,7 +272,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                 method="post"
                 as="button"
                 aria-label="Sign out"
-                className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition"
+                className="text-zinc-400 hover:text-white p-1.5 rounded-lg hover:bg-zinc-900 transition shrink-0"
                 title="Sign out"
               >
                 <LogOut className="w-4 h-4" aria-hidden="true" />
