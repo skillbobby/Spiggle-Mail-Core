@@ -57,6 +57,7 @@ export default function ComposeCampaign({
     filteredTemplates,
   } = useCampaignComposer(templates, draft);
 
+  const hasTemplates = (templates?.length ?? 0) > 0;
   const canProceedFromWrite = state.subject.trim().length > 0 && state.htmlContent.trim().length > 0;
 
   const [testEmail, setTestEmail] = useState<string>('');
@@ -237,18 +238,20 @@ export default function ComposeCampaign({
 
         {/* Step Tabs */}
         <nav aria-label="Composer Step Tabs" className="flex items-center gap-1.5 p-1 rounded-xl bg-zinc-900 border border-zinc-800">
-          <button
-            type="button"
-            onClick={() => setStep('templates')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-              state.step === 'templates'
-                ? 'bg-zinc-800 text-white shadow-xs'
-                : 'text-zinc-400 hover:text-white'
-            }`}
-          >
-            <LayoutTemplate className="w-3.5 h-3.5" aria-hidden="true" />
-            1. Templates
-          </button>
+          {hasTemplates && (
+            <button
+              type="button"
+              onClick={() => setStep('templates')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                state.step === 'templates'
+                  ? 'bg-zinc-800 text-white shadow-xs'
+                  : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              <LayoutTemplate className="w-3.5 h-3.5" aria-hidden="true" />
+              1. Templates
+            </button>
+          )}
           <button
             type="button"
             onClick={() => setStep('write')}
@@ -259,7 +262,7 @@ export default function ComposeCampaign({
             }`}
           >
             <Edit3 className="w-3.5 h-3.5" aria-hidden="true" />
-            2. Write
+            {hasTemplates ? '2. Write' : '1. Write'}
           </button>
           <button
             type="button"
@@ -271,7 +274,7 @@ export default function ComposeCampaign({
             }`}
           >
             <Eye className="w-3.5 h-3.5" aria-hidden="true" />
-            3. Review
+            {hasTemplates ? '3. Review' : '2. Review'}
           </button>
           <button
             type="button"
@@ -283,7 +286,7 @@ export default function ComposeCampaign({
             }`}
           >
             <Send className="w-3.5 h-3.5" aria-hidden="true" />
-            4. Send &amp; Schedule
+            {hasTemplates ? '4. Send & Schedule' : '3. Send & Schedule'}
           </button>
         </nav>
       </div>

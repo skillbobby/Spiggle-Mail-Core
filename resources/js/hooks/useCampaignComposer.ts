@@ -43,8 +43,9 @@ export function useCampaignComposer(
   allTemplates: readonly EmailTemplate[],
   initialDraft?: CampaignDraftInitial | null
 ): UseCampaignComposerResult {
+  const hasTemplates = (allTemplates?.length ?? 0) > 0;
   const [step, setStep] = useState<CampaignComposerState['step']>(
-    initialDraft ? 'write' : 'templates'
+    initialDraft || !hasTemplates ? 'write' : 'templates'
   );
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [subject, setSubject] = useState<string>(initialDraft?.subject ?? '');

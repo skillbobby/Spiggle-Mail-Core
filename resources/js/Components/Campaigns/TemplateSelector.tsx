@@ -51,38 +51,55 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
       </div>
 
       {/* Grid of Templates */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {templates.map((tpl) => (
-          <article
-            key={tpl.id}
-            onClick={() => onSelectTemplate(tpl)}
-            className="group cursor-pointer rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-indigo-500/60 p-5 flex flex-col justify-between transition-all hover:shadow-xl hover:shadow-indigo-500/5 text-left"
+      {templates.length === 0 ? (
+        <div className="text-center py-12 px-4 rounded-2xl bg-zinc-900/40 border border-zinc-800/80">
+          <LayoutTemplate className="w-8 h-8 text-zinc-500 mx-auto mb-3" aria-hidden="true" />
+          <p className="text-sm font-semibold text-zinc-300">No email templates available</p>
+          <p className="text-xs text-zinc-500 mt-1 max-w-sm mx-auto">
+            You can compose an email from scratch or use your own HTML content.
+          </p>
+          <button
+            type="button"
+            onClick={onSkipToBlank}
+            className="mt-4 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition"
           >
-            <div>
-              <div className="flex items-center justify-between text-zinc-500 mb-3">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-indigo-400">
-                  {tpl.category}
-                </span>
-                <LayoutTemplate className="w-4 h-4 group-hover:text-indigo-400 transition" aria-hidden="true" />
+            Continue to Editor &rarr;
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {templates.map((tpl) => (
+            <article
+              key={tpl.id}
+              onClick={() => onSelectTemplate(tpl)}
+              className="group cursor-pointer rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-indigo-500/60 p-5 flex flex-col justify-between transition-all hover:shadow-xl hover:shadow-indigo-500/5 text-left"
+            >
+              <div>
+                <div className="flex items-center justify-between text-zinc-500 mb-3">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-indigo-400">
+                    {tpl.category}
+                  </span>
+                  <LayoutTemplate className="w-4 h-4 group-hover:text-indigo-400 transition" aria-hidden="true" />
+                </div>
+                <h3 className="font-semibold text-white text-base group-hover:text-indigo-300 transition">
+                  {tpl.title}
+                </h3>
+                <p className="mt-2 text-xs text-zinc-400 line-clamp-2">
+                  Default subject: &ldquo;{tpl.subjectDefault}&rdquo;
+                </p>
               </div>
-              <h3 className="font-semibold text-white text-base group-hover:text-indigo-300 transition">
-                {tpl.title}
-              </h3>
-              <p className="mt-2 text-xs text-zinc-400 line-clamp-2">
-                Default subject: &ldquo;{tpl.subjectDefault}&rdquo;
-              </p>
-            </div>
 
-            <div className="mt-6 pt-4 border-t border-zinc-800/60 flex items-center justify-between text-xs font-medium text-zinc-400 group-hover:text-white">
-              <span className="inline-flex items-center gap-1">
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" />
-                Prebuilt Shortcodes
-              </span>
-              <span>Use template &rarr;</span>
-            </div>
-          </article>
-        ))}
-      </div>
+              <div className="mt-6 pt-4 border-t border-zinc-800/60 flex items-center justify-between text-xs font-medium text-zinc-400 group-hover:text-white">
+                <span className="inline-flex items-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" />
+                  Prebuilt Shortcodes
+                </span>
+                <span>Use template &rarr;</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
     </section>
   );
 };
