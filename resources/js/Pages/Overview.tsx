@@ -82,7 +82,7 @@ export default function Overview({
             className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-sm shadow-indigo-600/20 whitespace-nowrap"
           >
             <Plus className="w-4 h-4" aria-hidden="true" />
-            New Campaign
+            New Newsletter
           </Link>
         </div>
       </div>
@@ -122,10 +122,10 @@ export default function Overview({
       {/* Recent Campaigns Section */}
       <section aria-label="Recent Campaigns" className="mt-12">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-white tracking-tight">Recent Issues & Sends</h2>
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">Recent Newsletters &amp; Sends</h2>
           <Link
             href="/campaigns"
-            className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition"
+            className="text-xs font-semibold text-indigo-500 dark:text-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 flex items-center gap-1 transition"
           >
             View all
             <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -137,16 +137,16 @@ export default function Overview({
             <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center justify-center mx-auto text-indigo-600 dark:text-zinc-400 mb-4 shadow-xs">
               <Send className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">No campaigns sent yet</h3>
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">No newsletters sent yet</h3>
             <p className="text-sm text-slate-600 dark:text-zinc-400 mt-1 max-w-sm mx-auto">
-              Ready to publish your first issue? Compose in our rich editor, verify deliverability, and send.
+              Ready to publish your first newsletter? Compose in our rich editor, verify deliverability, and send.
             </p>
             <Link
               href="/campaigns/new"
               className="inline-flex items-center gap-2 mt-6 px-4 py-2.5 text-sm font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-sm"
             >
               <Plus className="w-4 h-4" aria-hidden="true" />
-              Write First Issue
+              Write First Newsletter
             </Link>
           </div>
         ) : (

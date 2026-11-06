@@ -342,26 +342,26 @@ export default function SettingsIndex({
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                     <div>
                                         <label className="block text-xs font-medium text-zinc-300 mb-1.5">
-                                            SES Configuration Set Name (Bounce &amp; Complaint Event Routing)
+                                            Configuration Set <span className="text-zinc-500 font-normal">(Optional)</span>
                                         </label>
                                         <input
                                             type="text"
                                             value={formData.sesConfigurationSet || ''}
                                             onChange={(e) => updateField('sesConfigurationSet', e.target.value)}
-                                            placeholder="e.g., spiggle-reputation-events"
+                                            placeholder="e.g., spiggle-events"
                                             className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white placeholder-zinc-600 font-mono focus:outline-none focus:border-indigo-500"
                                         />
                                         <p className="text-[11px] text-zinc-500 mt-1">
-                                            Attach an SES Configuration Set publishing Bounce, Complaint, and Delivery events to SNS.
+                                            SES event destination for bounce tracking.
                                         </p>
                                     </div>
 
                                     <div>
                                         <label className="block text-xs font-medium text-zinc-300 mb-1.5">
-                                            Send Rate Limit (Emails / second)
+                                            Send Rate Limit <span className="text-zinc-500 font-normal">(Emails / sec)</span>
                                         </label>
                                         <input
                                             type="number"
@@ -372,7 +372,7 @@ export default function SettingsIndex({
                                             className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
                                         />
                                         <p className="text-[11px] text-zinc-500 mt-1">
-                                            Paces batch workers below your AWS SES MaxSendRate to prevent throttling.
+                                            Paces batch dispatches below AWS quota.
                                         </p>
                                     </div>
                                 </div>

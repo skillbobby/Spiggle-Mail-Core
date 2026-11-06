@@ -128,18 +128,18 @@ export default function CampaignsIndex({
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-8 border-b border-zinc-800/80">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">Campaigns & Issues</h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Campaigns &amp; Newsletters</h1>
+          <p className="text-sm text-slate-500 dark:text-zinc-400 mt-1">
             Manage your drafts, scheduled dispatches, and sent newsletter archive.
           </p>
         </div>
 
         <Link
           href="/campaigns/new"
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-sm shadow-indigo-600/20"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-sm shadow-indigo-600/20 whitespace-nowrap"
         >
           <Plus className="w-4 h-4" aria-hidden="true" />
-          New Campaign
+          New Newsletter
         </Link>
       </div>
 
@@ -200,10 +200,10 @@ export default function CampaignsIndex({
             <div className="mt-4">
               <Link
                 href="/campaigns/new"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition"
               >
                 <Plus className="w-3.5 h-3.5" />
-                Draft New Issue
+                New Newsletter
               </Link>
             </div>
           </div>

@@ -45,7 +45,7 @@ interface NavItem {
 
 const NEWSLETTER_NAV: readonly NavItem[] = [
   { href: '/dashboard', label: 'Overview', icon: LayoutGrid },
-  { href: '/campaigns', label: 'Campaigns', icon: Send, getBadge: () => 'Issues' },
+  { href: '/campaigns', label: 'Campaigns', icon: Send },
   {
     href: '/contacts',
     label: 'Contacts',
@@ -477,7 +477,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               className="w-full py-3 bg-[#faea78] hover:bg-[#fae459] active:scale-[0.99] text-slate-900 font-bold rounded-2xl flex items-center justify-center gap-2 shadow-sm transition-all whitespace-nowrap"
             >
               <Edit3 className="w-4 h-4 font-bold" aria-hidden="true" />
-              <span className="text-sm tracking-tight whitespace-nowrap">Compose Issue</span>
+              <span className="text-sm tracking-tight whitespace-nowrap">New Newsletter</span>
             </Link>
           </div>
         </aside>
@@ -579,7 +579,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                 className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#faea78] hover:bg-[#fae459] text-slate-900 text-xs font-bold transition shadow-xs"
               >
                 <Edit3 className="w-3.5 h-3.5" />
-                <span>New Issue</span>
+                <span>New Newsletter</span>
               </Link>
             </div>
           </header>
