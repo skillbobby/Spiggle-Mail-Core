@@ -33,6 +33,19 @@
     --card-foreground: 240 10% 3.9%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
+
+    /* Re-map default zinc palette for light mode */
+    --color-zinc-50: #09090b;
+    --color-zinc-100: #0f172a;
+    --color-zinc-200: #18181b;
+    --color-zinc-300: #1e293b;
+    --color-zinc-400: #334155;
+    --color-zinc-500: #475569;
+    --color-zinc-600: #64748b;
+    --color-zinc-700: #cbd5e1;
+    --color-zinc-800: #e2e8f0;
+    --color-zinc-900: #ffffff;
+    --color-zinc-950: #f8fafc;
   }
 }
 
@@ -84,20 +97,23 @@ html:not(.dark) .bg-zinc-900\/95 {
   border-color: #e2e8f0 !important;
 }
 
-/* Subtle secondary chips / table headers / muted blocks */
+/* Inset grey fields, code blocks, webhook boxes, wells inside cards */
+html.light .bg-zinc-950:not(body):not(aside),
 html.light .bg-zinc-800,
 html.light .bg-zinc-800\/30,
 html.light .bg-zinc-800\/40,
 html.light .bg-zinc-800\/50,
 html.light .bg-zinc-800\/60,
 html.light .bg-zinc-800\/80,
+html:not(.dark) .bg-zinc-950:not(body):not(aside),
 html:not(.dark) .bg-zinc-800,
 html:not(.dark) .bg-zinc-800\/30,
 html:not(.dark) .bg-zinc-800\/40,
 html:not(.dark) .bg-zinc-800\/50,
 html:not(.dark) .bg-zinc-800\/60,
 html:not(.dark) .bg-zinc-800\/80 {
-  background-color: #f1f5f9 !important;
+  background-color: #f1f5f9 !important; /* soft slate-100 well */
+  border-color: #cbd5e1 !important;
 }
 
 /* Hover highlights */
@@ -142,18 +158,58 @@ html:not(.dark) .border-zinc-700\/80 {
 
 /* Primary text */
 html.light .text-zinc-100,
+html:not(.dark) .text-zinc-100 {
+  color: #09090b !important;
+}
+
 html.light .text-zinc-200,
-html:not(.dark) .text-zinc-100,
 html:not(.dark) .text-zinc-200 {
   color: #0f172a !important;
 }
 
-/* Muted secondary text */
+/* Labels, strong descriptions, table cells */
+html.light .text-zinc-300,
+html:not(.dark) .text-zinc-300 {
+  color: #1e293b !important; /* crisp slate-800: no more washed-out silver */
+}
+
+/* Section titles, secondary copy, table headers */
 html.light .text-zinc-400,
+html:not(.dark) .text-zinc-400 {
+  color: #334155 !important; /* crisp slate-700 */
+}
+
+/* Footnotes, helper hints, captions */
 html.light .text-zinc-500,
-html:not(.dark) .text-zinc-400,
 html:not(.dark) .text-zinc-500 {
+  color: #475569 !important; /* crisp slate-600 */
+}
+
+html.light .text-zinc-600,
+html:not(.dark) .text-zinc-600 {
   color: #64748b !important;
+}
+
+/* Stronger contrast for text and code inside grey fields/wells */
+html.light .bg-zinc-950 .text-zinc-300,
+html.light .bg-zinc-800 .text-zinc-300,
+html:not(.dark) .bg-zinc-950 .text-zinc-300,
+html:not(.dark) .bg-zinc-800 .text-zinc-300 {
+  color: #0f172a !important;
+}
+
+html.light .bg-zinc-950 .text-zinc-400,
+html.light .bg-zinc-800 .text-zinc-400,
+html:not(.dark) .bg-zinc-950 .text-zinc-400,
+html:not(.dark) .bg-zinc-800 .text-zinc-400 {
+  color: #1e293b !important;
+}
+
+html.light .bg-zinc-950 .text-zinc-500,
+html.light .bg-zinc-800 .text-zinc-500,
+html:not(.dark) .bg-zinc-950 .text-zinc-500,
+html:not(.dark) .bg-zinc-800 .text-zinc-500 {
+  color: #334155 !important;
 }
 
 /* Headings and generic typography with text-white */
@@ -196,7 +252,19 @@ html.light input::placeholder,
 html.light textarea::placeholder,
 html:not(.dark) input::placeholder,
 html:not(.dark) textarea::placeholder {
-  color: #94a3b8 !important;
+  color: #64748b !important;
+}
+
+/* Disabled inputs / controls in light mode */
+html.light input:disabled,
+html.light textarea:disabled,
+html.light select:disabled,
+html:not(.dark) input:disabled,
+html:not(.dark) textarea:disabled,
+html:not(.dark) select:disabled {
+  background-color: #f1f5f9 !important;
+  color: #334155 !important;
+  border-color: #cbd5e1 !important;
 }
 
 /* Dialogs, dropdown menus */
@@ -207,6 +275,47 @@ html:not(.dark) [role="menu"] {
   background-color: #ffffff !important;
   border-color: #e2e8f0 !important;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+}
+
+/* Color accents in light mode */
+html.light .text-indigo-300,
+html:not(.dark) .text-indigo-300 {
+  color: #4338ca !important;
+}
+
+html.light .text-indigo-400,
+html:not(.dark) .text-indigo-400 {
+  color: #4f46e5 !important;
+}
+
+html.light .text-emerald-300,
+html:not(.dark) .text-emerald-300 {
+  color: #047857 !important;
+}
+
+html.light .text-emerald-400,
+html:not(.dark) .text-emerald-400 {
+  color: #059669 !important;
+}
+
+html.light .text-amber-300,
+html:not(.dark) .text-amber-300 {
+  color: #b45309 !important;
+}
+
+html.light .text-amber-400,
+html:not(.dark) .text-amber-400 {
+  color: #d97706 !important;
+}
+
+html.light .text-rose-300,
+html:not(.dark) .text-rose-300 {
+  color: #be123c !important;
+}
+
+html.light .text-rose-400,
+html:not(.dark) .text-rose-400 {
+  color: #e11d48 !important;
 }
 
 /* Semantic Badges in light mode */
