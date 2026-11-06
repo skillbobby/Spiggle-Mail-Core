@@ -8,6 +8,7 @@ interface SignInProps {
     readonly devCode?: string;
     readonly initialEmail?: string;
     readonly email?: string;
+    readonly operatorEmail?: string;
     readonly isLocal?: boolean;
     readonly isSingleUse?: boolean;
     readonly flash?: {
@@ -21,12 +22,14 @@ export default function SignIn({
     devCode: propDevCode,
     initialEmail,
     email: propEmail,
+    operatorEmail,
     isLocal = true,
     isSingleUse = false,
     flash,
 }: SignInProps) {
     const activeInitialCode = propDevCode || initialDevCode || null;
-    const activeInitialEmail = propEmail || initialEmail || '';
+    const resolvedOperatorEmail = operatorEmail || (isSingleUse ? 'admin@example.com' : 'admin@spiggle-mail.local');
+    const activeInitialEmail = propEmail || initialEmail || resolvedOperatorEmail;
 
     const {
         email,
@@ -146,7 +149,7 @@ export default function SignIn({
                                     <div className="grid grid-cols-1 gap-2">
                                         <button
                                             type="button"
-                                            onClick={() => quickFillAndSend('admin@spiggle-mail.local')}
+                                            onClick={() => quickFillAndSend(resolvedOperatorEmail)}
                                             disabled={isSending}
                                             className="p-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-indigo-500/50 hover:bg-zinc-800/60 text-left transition text-xs group"
                                         >
@@ -157,7 +160,7 @@ export default function SignIn({
                                                 </span>
                                             </div>
                                             <div className="text-[11px] text-zinc-400 truncate mt-0.5 font-mono">
-                                                admin@spiggle-mail.local
+                                                {resolvedOperatorEmail}
                                             </div>
                                         </button>
                                     </div>

@@ -61,7 +61,16 @@ $isSingleUseEmailAllowed = function (string $email): bool {
 
     $configuredOwner = strtolower(trim((string) config('spiggle.owner_email', '')));
     if ($configuredOwner !== '') {
-        return hash_equals($configuredOwner, $email);
+        if (hash_equals($configuredOwner, $email)) {
+            return true;
+        }
+
+        // If running locally with default dev credentials, accept both dev aliases
+        if (app()->environment('local') && in_array($configuredOwner, ['admin@example.com', 'admin@spiggle-mail.local'], true)) {
+            return in_array($email, ['admin@example.com', 'admin@spiggle-mail.local'], true);
+        }
+
+        return false;
     }
 
     $existingUsersCount = User::count();
@@ -77,12 +86,17 @@ Route::get('/signin', function (Request $request) {
         return redirect('/dashboard');
     }
 
+    $configuredOwner = strtolower(trim((string) config('spiggle.owner_email', '')));
+    $operatorEmail = $configuredOwner !== ''
+        ? $configuredOwner
+        : (User::where('id', 2)->value('email') ?? User::first()?->email ?? 'admin@example.com');
+
     $devCode = null;
     $devEmail = null;
     if (app()->environment('local', 'testing')) {
         if ($request->filled('code')) {
             $devCode = (string) $request->query('code');
-            $devEmail = (string) $request->query('email', 'admin@spiggle-mail.local');
+            $devEmail = (string) $request->query('email', $operatorEmail);
         } else {
             $recentOtp = DB::table('login_otps')
                 ->where('expires_at', '>', now())
@@ -99,6 +113,7 @@ Route::get('/signin', function (Request $request) {
     return Inertia::render('Auth/SignIn', [
         'isLocal' => app()->environment('local', 'testing'),
         'isSingleUse' => config('spiggle.edition') === 'core',
+        'operatorEmail' => $operatorEmail,
         'devCode' => $devCode,
         'initialDevCode' => $devCode,
         'initialEmail' => $devEmail,
