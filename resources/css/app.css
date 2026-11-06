@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --background: 240 10% 3.9%;
@@ -22,4 +24,214 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
   }
+
+  html.light,
+  html:not(.dark) {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+  }
+}
+
+/* Light Mode Overrides */
+html.light,
+html:not(.dark) {
+  color-scheme: light;
+}
+
+html.light body,
+html:not(.dark) body {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* Page canvas & layout containers */
+html.light .bg-zinc-950,
+html:not(.dark) .bg-zinc-950,
+html.light .bg-zinc-950\/40,
+html:not(.dark) .bg-zinc-950\/40 {
+  background-color: #f8fafc !important;
+}
+
+/* Sidebar */
+html.light aside,
+html:not(.dark) aside {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Cards, containers, tables, modals */
+html.light .bg-zinc-900,
+html.light .bg-zinc-900\/40,
+html.light .bg-zinc-900\/50,
+html.light .bg-zinc-900\/60,
+html.light .bg-zinc-900\/70,
+html.light .bg-zinc-900\/80,
+html.light .bg-zinc-900\/90,
+html.light .bg-zinc-900\/95,
+html:not(.dark) .bg-zinc-900,
+html:not(.dark) .bg-zinc-900\/40,
+html:not(.dark) .bg-zinc-900\/50,
+html:not(.dark) .bg-zinc-900\/60,
+html:not(.dark) .bg-zinc-900\/70,
+html:not(.dark) .bg-zinc-900\/80,
+html:not(.dark) .bg-zinc-900\/90,
+html:not(.dark) .bg-zinc-900\/95 {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Subtle secondary chips / table headers / muted blocks */
+html.light .bg-zinc-800,
+html.light .bg-zinc-800\/30,
+html.light .bg-zinc-800\/40,
+html.light .bg-zinc-800\/50,
+html.light .bg-zinc-800\/60,
+html.light .bg-zinc-800\/80,
+html:not(.dark) .bg-zinc-800,
+html:not(.dark) .bg-zinc-800\/30,
+html:not(.dark) .bg-zinc-800\/40,
+html:not(.dark) .bg-zinc-800\/50,
+html:not(.dark) .bg-zinc-800\/60,
+html:not(.dark) .bg-zinc-800\/80 {
+  background-color: #f1f5f9 !important;
+}
+
+/* Hover highlights */
+html.light .hover\:bg-zinc-800:hover,
+html.light .hover\:bg-zinc-800\/40:hover,
+html.light .hover\:bg-zinc-800\/50:hover,
+html.light .hover\:bg-zinc-800\/60:hover,
+html.light .hover\:bg-zinc-800\/80:hover,
+html.light .hover\:bg-zinc-900:hover,
+html.light .hover\:bg-zinc-900\/60:hover,
+html.light .hover\:bg-zinc-900\/80:hover,
+html:not(.dark) .hover\:bg-zinc-800:hover,
+html:not(.dark) .hover\:bg-zinc-800\/40:hover,
+html:not(.dark) .hover\:bg-zinc-800\/50:hover,
+html:not(.dark) .hover\:bg-zinc-800\/60:hover,
+html:not(.dark) .hover\:bg-zinc-800\/80:hover,
+html:not(.dark) .hover\:bg-zinc-900:hover,
+html:not(.dark) .hover\:bg-zinc-900\/60:hover,
+html:not(.dark) .hover\:bg-zinc-900\/80:hover {
+  background-color: #e2e8f0 !important;
+}
+
+/* Borders */
+html.light .border-zinc-800,
+html.light .border-zinc-800\/30,
+html.light .border-zinc-800\/40,
+html.light .border-zinc-800\/50,
+html.light .border-zinc-800\/60,
+html.light .border-zinc-800\/80,
+html.light .border-zinc-700,
+html.light .border-zinc-700\/80,
+html:not(.dark) .border-zinc-800,
+html:not(.dark) .border-zinc-800\/30,
+html:not(.dark) .border-zinc-800\/40,
+html:not(.dark) .border-zinc-800\/50,
+html:not(.dark) .border-zinc-800\/60,
+html:not(.dark) .border-zinc-800\/80,
+html:not(.dark) .border-zinc-700,
+html:not(.dark) .border-zinc-700\/80 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Primary text */
+html.light .text-zinc-100,
+html.light .text-zinc-200,
+html:not(.dark) .text-zinc-100,
+html:not(.dark) .text-zinc-200 {
+  color: #0f172a !important;
+}
+
+/* Muted secondary text */
+html.light .text-zinc-400,
+html.light .text-zinc-500,
+html:not(.dark) .text-zinc-400,
+html:not(.dark) .text-zinc-500 {
+  color: #64748b !important;
+}
+
+/* Headings and generic typography with text-white */
+html.light h1.text-white,
+html.light h2.text-white,
+html.light h3.text-white,
+html.light h4.text-white,
+html.light p.text-white,
+html.light td.text-white,
+html.light th.text-white,
+html.light label.text-white,
+html.light span.text-white:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-amber"]),
+html:not(.dark) h1.text-white,
+html:not(.dark) h2.text-white,
+html:not(.dark) h3.text-white,
+html:not(.dark) h4.text-white,
+html:not(.dark) p.text-white,
+html:not(.dark) td.text-white,
+html:not(.dark) th.text-white,
+html:not(.dark) label.text-white,
+html:not(.dark) span.text-white:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-amber"]) {
+  color: #0f172a !important;
+}
+
+/* Form inputs & controls */
+html.light input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html.light textarea,
+html.light select,
+html:not(.dark) input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html:not(.dark) textarea,
+html:not(.dark) select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder,
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Dialogs, dropdown menus */
+html.light [role="dialog"],
+html.light [role="menu"],
+html:not(.dark) [role="dialog"],
+html:not(.dark) [role="menu"] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+}
+
+/* Semantic Badges in light mode */
+html.light [class*="bg-emerald-950"],
+html:not(.dark) [class*="bg-emerald-950"] {
+  background-color: #ecfdf5 !important;
+  color: #047857 !important;
+  border-color: #a7f3d0 !important;
+}
+
+html.light [class*="bg-amber-950"],
+html:not(.dark) [class*="bg-amber-950"] {
+  background-color: #fffbeb !important;
+  color: #b45309 !important;
+  border-color: #fde68a !important;
+}
+
+html.light [class*="bg-rose-950"],
+html:not(.dark) [class*="bg-rose-950"] {
+  background-color: #fff1f2 !important;
+  color: #be123c !important;
+  border-color: #fecdd3 !important;
+}
+
+html.light [class*="bg-indigo-950"],
+html:not(.dark) [class*="bg-indigo-950"] {
+  background-color: #eef2ff !important;
+  color: #4338ca !important;
+  border-color: #c7d2fe !important;
 }

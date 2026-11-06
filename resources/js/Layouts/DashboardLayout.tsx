@@ -18,9 +18,12 @@ import {
   Check,
   AlertTriangle,
   X,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import type { Newsletter, User, AccountAlert } from '@/types';
 import { GetStartedPanel, type GetStartedData } from '@/Components/GetStartedPanel';
+import { useTheme } from '@/hooks/useTheme';
 
 interface DashboardLayoutProps {
   readonly children: React.ReactNode;
@@ -66,6 +69,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   const isSuperAdmin = Boolean(user?.isSuperAdmin);
   const accountAlert = props.accountAlert;
   const [isAlertDismissed, setIsAlertDismissed] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const availableNewsletters = props.newsletters && props.newsletters.length > 0
     ? props.newsletters
@@ -248,16 +252,32 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               </div>
             </Link>
 
-            <Link
-              href="/logout"
-              method="post"
-              as="button"
-              aria-label="Sign out"
-              className="text-zinc-400 hover:text-white p-1.5 rounded-lg hover:bg-zinc-900 transition shrink-0"
-              title="Sign out"
-            >
-              <LogOut className="w-4 h-4" aria-hidden="true" />
-            </Link>
+            <div className="flex items-center gap-1 shrink-0">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                className="text-zinc-400 hover:text-white p-1.5 rounded-lg hover:bg-zinc-800/60 transition"
+              >
+                {theme === 'dark' ? (
+                  <Sun className="w-4 h-4 text-amber-400" aria-hidden="true" />
+                ) : (
+                  <Moon className="w-4 h-4 text-indigo-500" aria-hidden="true" />
+                )}
+              </button>
+
+              <Link
+                href="/logout"
+                method="post"
+                as="button"
+                aria-label="Sign out"
+                className="text-zinc-400 hover:text-white p-1.5 rounded-lg hover:bg-zinc-800/60 transition"
+                title="Sign out"
+              >
+                <LogOut className="w-4 h-4" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </div>
       </aside>
