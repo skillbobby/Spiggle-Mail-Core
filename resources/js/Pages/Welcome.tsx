@@ -31,9 +31,9 @@ const FEATURES: readonly FeatureCardProps[] = [
   },
   {
     icon: <BarChart2 className="w-6 h-6 text-amber-400" aria-hidden="true" />,
-    title: 'Single-Operator Self-Hosted',
+    title: 'Self-Hosted Architecture',
     description:
-      'Locked down for your personal or company newsletter with zero public signups, AES-256 encrypted credentials at rest, REST API v1, and MCP server for AI agents.',
+      'Engineered for maximum reliability with zero external SaaS dependencies, AES-256 encrypted credentials, REST API v1, and MCP server for AI agents.',
   },
 ];
 
@@ -75,7 +75,7 @@ export default function Welcome(): React.JSX.Element {
       {/* Hero Section */}
       <main className="max-w-5xl mx-auto px-6 py-20 text-center flex-1 flex flex-col items-center justify-center">
         <aside className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium mb-6">
-          <Zap className="w-3.5 h-3.5" aria-hidden="true" /> Self-Hosted Single-Operator Edition (MIT)
+          <Zap className="w-3.5 h-3.5" aria-hidden="true" /> High-Performance Email Engine
         </aside>
 
         <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white max-w-3xl leading-tight">
@@ -83,7 +83,7 @@ export default function Welcome(): React.JSX.Element {
         </h1>
 
         <p className="mt-6 text-lg text-zinc-400 max-w-2xl">
-          A self-hosted newsletter &amp; broadcast engine built with Laravel 12, React 19, and Amazon SES v2. Locked to a single operator out of the box with automated bounce/complaint protection.
+          A high-deliverability newsletter &amp; broadcast engine built with Laravel 12, React 19, and Amazon SES v2 with automated bounce/complaint protection.
         </p>
 
         <div className="mt-8 flex items-center gap-3">
@@ -116,7 +116,7 @@ export default function Welcome(): React.JSX.Element {
 
       {/* Footer */}
       <footer className="border-t border-zinc-900 py-6 text-center text-xs text-zinc-500">
-        SpiggleMail Core (Community Edition) &bull; Single-Operator Mode &bull; MIT License
+        SpiggleMail Core &bull; Open Source Newsletter Engine &bull; MIT License
       </footer>
     </div>
   );

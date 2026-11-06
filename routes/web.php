@@ -114,7 +114,7 @@ Route::post('/signin/send-otp', function (Request $request) use ($isSingleUseEma
 
     if (! $isSingleUseEmailAllowed($email)) {
         return back()->withErrors([
-            'email' => 'Public signups are disabled on this single-operator instance.',
+            'email' => 'Sign in is only permitted for registered administrators.',
         ]);
     }
 
@@ -178,7 +178,7 @@ Route::post('/signin/verify-otp', function (Request $request) use ($isSingleUseE
 
     if (! $isSingleUseEmailAllowed($email)) {
         return back()->withErrors([
-            'code' => 'Public signups are disabled on this single-operator instance.',
+            'code' => 'Sign in is only permitted for registered administrators.',
         ]);
     }
 

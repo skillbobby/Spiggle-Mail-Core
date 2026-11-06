@@ -79,15 +79,9 @@ export default function SignIn({
                         </h1>
                         <p className="text-xs text-zinc-400">
                             {step === 'email'
-                                ? 'Passwordless authentication with single-use 6-digit verification code.'
+                                ? 'Passwordless authentication with a 6-digit verification code.'
                                 : `We sent a 6-digit confirmation code to ${email}`}
                         </p>
-                        {isSingleUse && (
-                            <p className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] text-zinc-300 mt-2">
-                                <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" aria-hidden="true" />
-                                Single-Operator Instance — Public Signups Disabled
-                            </p>
-                        )}
                     </div>
 
                     {/* Flash messages or errors */}
