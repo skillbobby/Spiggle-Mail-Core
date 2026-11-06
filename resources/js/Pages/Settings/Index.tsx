@@ -275,7 +275,7 @@ export default function SettingsIndex({
                                 </label>
                             </div>
 
-                            <div className={`space-y-4 pt-4 border-t border-zinc-800 ${formData.sesDriver === 'mock' ? 'opacity-80 dark:opacity-60' : ''}`}>
+                            <div className="space-y-4 pt-4 border-t border-zinc-800">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-400">
                                         <Key className="w-4 h-4" aria-hidden="true" />
@@ -578,7 +578,7 @@ export default function SettingsIndex({
                     </div>
 
                     {/* Parameters Grid */}
-                    <div className={`space-y-4 transition ${formData.tickitdexEnabled ? 'opacity-100' : 'opacity-80 dark:opacity-60'}`}>
+                    <div className="space-y-4 transition">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-xs font-medium text-zinc-300 mb-1.5">

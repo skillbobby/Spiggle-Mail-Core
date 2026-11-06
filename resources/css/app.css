@@ -179,6 +179,17 @@ html:not(.dark) .app-workspace-card select {
   border-color: #cbd5e1 !important;
 }
 
+html.light .app-workspace-card select option,
+html:not(.dark) .app-workspace-card select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+html.light .app-workspace-card hr,
+html:not(.dark) .app-workspace-card hr {
+  border-color: #e2e8f0 !important;
+}
+
 html.light .app-workspace-card input:focus,
 html.light .app-workspace-card textarea:focus,
 html.light .app-workspace-card select:focus,

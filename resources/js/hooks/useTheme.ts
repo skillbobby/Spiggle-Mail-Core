@@ -6,17 +6,17 @@ export const THEME_STORAGE_KEY = 'spiggle_theme';
 
 export function getInitialTheme(): Theme {
   if (typeof window === 'undefined') {
-    return 'dark';
+    return 'light';
   }
   try {
     const saved = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
-    if (saved === 'light') {
-      return 'light';
+    if (saved === 'dark') {
+      return 'dark';
     }
   } catch {
     // ignore
   }
-  return 'dark';
+  return 'light';
 }
 
 export function applyTheme(theme: Theme): void {

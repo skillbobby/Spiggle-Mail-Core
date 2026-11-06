@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,12 +8,12 @@
             (function() {
                 try {
                     var saved = localStorage.getItem('spiggle_theme');
-                    if (saved === 'light') {
-                        document.documentElement.classList.remove('dark');
-                        document.documentElement.classList.add('light');
-                    } else {
+                    if (saved === 'dark') {
                         document.documentElement.classList.add('dark');
                         document.documentElement.classList.remove('light');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        document.documentElement.classList.add('light');
                     }
                 } catch (e) {}
             })();
