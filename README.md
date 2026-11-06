@@ -8,8 +8,20 @@ SpiggleMail Core gives independent creators, developers, and companies complete 
 
 ---
 
+## ⚡ Video Preview
+
+Check out the high-energy product launch video showcasing SpiggleMail's modern 3-column newsletter studio, real-time analytics, and Amazon SES deliverability engine:
+
+▶️ **[Watch the SpiggleMail Intro Promo Video (1080p MP4)](docs/media/spigglemail_intro_promo.mp4)**
+
+![SpiggleMail Command Center](docs/media/promo_preview_scene2.png)
+
+---
+
 ## Key Features
 
+- **Modern 3-Column Content Studio & Real-Time Composer**
+  - **Distraction-Free Newsletters**: Interactive high-contrast personalization pills (`{{ contact.name }}`, `{{ unsubscribe_url }}`), unified Content Studio toolbar, embedded drag-and-drop image uploader, and instant Gmail 102KB clip-size alerts.
 - **Locked-Down Single-Operator Mode (`SPIGGLE_EDITION=core`)**
   - **Zero Public Signups**: Passwordless 6-digit OTP sign-in is strictly restricted to `OWNER_EMAIL` (or the initial operator who claims a fresh database). Unrecognized emails cannot create accounts or request OTPs.
 - **First-Class AWS SES Reputation Protection**
