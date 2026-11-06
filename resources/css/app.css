@@ -165,6 +165,7 @@ html.light p.text-white,
 html.light td.text-white,
 html.light th.text-white,
 html.light label.text-white,
+html.light a.text-white:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-amber"]),
 html.light span.text-white:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-amber"]),
 html:not(.dark) h1.text-white,
 html:not(.dark) h2.text-white,
@@ -174,6 +175,7 @@ html:not(.dark) p.text-white,
 html:not(.dark) td.text-white,
 html:not(.dark) th.text-white,
 html:not(.dark) label.text-white,
+html:not(.dark) a.text-white:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-amber"]),
 html:not(.dark) span.text-white:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-amber"]) {
   color: #0f172a !important;
 }
