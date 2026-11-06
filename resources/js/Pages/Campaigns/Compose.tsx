@@ -389,41 +389,44 @@ export default function ComposeCampaign({
               </div>
             </div>
 
-            {/* Shortcodes & Assets Palette */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
-              <ShortcodeBar shortcodes={shortcodes} onInsert={insertShortcode} />
+            {/* Editor Action Toolbar (Shortcodes & Image Upload) */}
+            <div className="rounded-2xl border border-slate-200 dark:border-zinc-800 bg-slate-50/80 dark:bg-zinc-900/60 p-3 shadow-xs">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <ShortcodeBar shortcodes={shortcodes} onInsert={insertShortcode} />
 
-              <div className="flex items-center gap-2 shrink-0">
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/png,image/jpeg,image/gif,image/webp"
-                  className="hidden"
-                  onChange={(e) => {
-                    if (e.target.files && e.target.files[0]) {
-                      uploadAndInsertImage(e.target.files[0]);
-                    }
-                  }}
-                />
-                <button
-                  type="button"
-                  disabled={isUploadingImage}
-                  onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-300 hover:text-white hover:border-zinc-700 transition"
-                  title="Upload an image (PNG, JPEG, GIF, WebP up to 4MB) or paste directly"
-                >
-                  {isUploadingImage ? (
-                    <>
-                      <Loader2 className="w-3.5 h-3.5 animate-spin text-indigo-400" aria-hidden="true" />
-                      <span>Uploading...</span>
-                    </>
-                  ) : (
-                    <>
-                      <ImageIcon className="w-3.5 h-3.5 text-indigo-400" aria-hidden="true" />
-                      <span>Add Image</span>
-                    </>
-                  )}
-                </button>
+                {/* Prominent Media Upload Area */}
+                <div className="flex items-center gap-2 shrink-0 border-t md:border-t-0 md:border-l border-slate-200 dark:border-zinc-800 pt-2.5 md:pt-0 md:pl-3">
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/png,image/jpeg,image/gif,image/webp"
+                    className="hidden"
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files[0]) {
+                        uploadAndInsertImage(e.target.files[0]);
+                      }
+                    }}
+                  />
+                  <button
+                    type="button"
+                    disabled={isUploadingImage}
+                    onClick={() => fileInputRef.current?.click()}
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-xs hover:shadow-indigo-500/20 active:scale-[0.98] transition disabled:opacity-50 whitespace-nowrap cursor-pointer"
+                    title="Upload an image (PNG, JPEG, GIF, WebP up to 4MB) or paste directly into the editor"
+                  >
+                    {isUploadingImage ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin text-white" aria-hidden="true" />
+                        <span>Uploading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <ImageIcon className="w-3.5 h-3.5 text-white" aria-hidden="true" />
+                        <span>Upload Image</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -441,34 +444,36 @@ export default function ComposeCampaign({
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
             >
-              <div className="flex items-center justify-between mb-1.5">
-                <label htmlFor="body-input" className="block text-xs font-semibold uppercase tracking-wider text-zinc-400">
+              <div className="flex items-center justify-between mb-2">
+                <label htmlFor="body-input" className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300">
                   Email Content (HTML / Markdown)
                 </label>
-                <div className="flex items-center gap-2 text-[11px] text-zinc-500">
-                  <span className="hidden sm:inline">Drag &amp; drop or paste (Ctrl+V) images</span>
+                <div className="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-zinc-400">
+                  <span className="hidden sm:inline">Drag &amp; drop or paste (Ctrl+V) images directly</span>
                   <span className="hidden sm:inline">&middot;</span>
-                  <span>Gmail 102KB Clip Safe</span>
+                  <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 font-mono text-[11px] border border-slate-200 dark:border-zinc-700">
+                    Gmail 102KB Safe
+                  </span>
                 </div>
               </div>
 
               <div className="relative">
                 <textarea
                   id="body-input"
-                  rows={14}
+                  rows={15}
                   value={state.htmlContent}
                   onChange={(e) => setHtmlContent(e.target.value)}
                   onPaste={handlePaste}
                   placeholder="Write your email body here or select a prebuilt template..."
-                  className={`w-full p-4 rounded-xl bg-zinc-900 border text-zinc-200 placeholder-zinc-600 focus:outline-none font-mono text-sm leading-relaxed transition ${
+                  className={`w-full p-4 rounded-2xl bg-white dark:bg-[#12141a] border text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-600 focus:outline-none font-mono text-sm leading-relaxed transition shadow-2xs ${
                     isDraggingOver
-                      ? 'border-indigo-500 ring-2 ring-indigo-500/30 bg-zinc-900/90'
-                      : 'border-zinc-800 focus:border-indigo-500'
+                      ? 'border-indigo-500 ring-2 ring-indigo-500/30 bg-indigo-50/20'
+                      : 'border-slate-300 dark:border-zinc-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20'
                   }`}
                 />
 
                 {isDraggingOver && (
-                  <div className="absolute inset-0 rounded-xl bg-indigo-950/70 border-2 border-dashed border-indigo-400 flex flex-col items-center justify-center pointer-events-none text-indigo-200 space-y-2 backdrop-blur-xs">
+                  <div className="absolute inset-0 rounded-2xl bg-indigo-950/70 border-2 border-dashed border-indigo-400 flex flex-col items-center justify-center pointer-events-none text-indigo-200 space-y-2 backdrop-blur-xs">
                     <UploadCloud className="w-8 h-8 text-indigo-400 animate-bounce" aria-hidden="true" />
                     <span className="text-sm font-semibold">Drop image to upload &amp; embed</span>
                     <span className="text-xs text-indigo-300/80">Supports PNG, JPEG, GIF, WebP up to 4MB</span>
@@ -478,38 +483,39 @@ export default function ComposeCampaign({
             </div>
 
             {/* Proceed Bar */}
-            <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
+            <div className="flex items-center justify-between pt-5 border-t border-slate-200 dark:border-zinc-800">
               <button
                 type="button"
                 onClick={() => setStep('templates')}
-                className="text-xs font-semibold text-zinc-400 hover:text-white transition"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition py-2"
               >
-                &larr; Back to Templates
+                <ArrowLeft className="w-3.5 h-3.5" />
+                <span>Back to Templates</span>
               </button>
 
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-3">
                 <button
                   type="button"
                   disabled={!canProceedFromWrite || isSubmitting}
                   onClick={() => submitCampaign(true)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition disabled:opacity-50"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-200 hover:bg-slate-50 dark:hover:bg-zinc-700 transition shadow-xs disabled:opacity-40"
                 >
-                  <Save className="w-3.5 h-3.5" aria-hidden="true" />
-                  Save Draft
+                  <Save className="w-3.5 h-3.5 text-slate-500 dark:text-zinc-400" aria-hidden="true" />
+                  <span>Save Draft</span>
                 </button>
 
                 <button
                   type="button"
                   disabled={!canProceedFromWrite}
                   onClick={() => setStep('review')}
-                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition ${
+                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition shadow-sm ${
                     canProceedFromWrite
-                      ? 'bg-indigo-600 hover:bg-indigo-500 shadow-sm shadow-indigo-600/20'
-                      : 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                      ? 'bg-indigo-600 hover:bg-indigo-500 shadow-indigo-500/20 active:scale-[0.98]'
+                      : 'bg-slate-300 dark:bg-zinc-800 text-slate-500 dark:text-zinc-500 cursor-not-allowed'
                   }`}
                 >
-                  Proceed to Review
-                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                  <span>Proceed to Review</span>
+                  <ArrowRight className="w-4 h-4 text-white" aria-hidden="true" />
                 </button>
               </div>
             </div>

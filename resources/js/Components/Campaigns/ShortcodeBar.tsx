@@ -9,20 +9,20 @@ interface ShortcodeBarProps {
 
 export const ShortcodeBar: React.FC<ShortcodeBarProps> = ({ shortcodes, onInsert }) => {
   return (
-    <div className="flex items-center gap-2 flex-wrap p-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
-      <div className="flex items-center gap-1.5 text-xs font-semibold text-zinc-400 pl-1 mr-1 shrink-0">
-        <Tag className="w-3.5 h-3.5 text-indigo-400" aria-hidden="true" />
-        <span>Insert Shortcode:</span>
+    <div className="flex items-center gap-2 flex-wrap min-w-0">
+      <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 pr-1 shrink-0">
+        <Tag className="w-3.5 h-3.5 text-indigo-500" aria-hidden="true" />
+        <span>Personalize:</span>
       </div>
       {shortcodes.map((item) => (
         <button
           key={item.tag}
           type="button"
           onClick={() => onInsert(item.tag)}
-          title={`Example: ${item.example}`}
-          className="px-2.5 py-1 text-xs font-mono rounded-md bg-zinc-800/80 hover:bg-indigo-600 hover:text-white text-zinc-300 border border-zinc-700/60 transition"
+          title={`Insert ${item.tag} (e.g. ${item.example})`}
+          className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-mono font-medium rounded-lg bg-white dark:bg-zinc-800 text-slate-800 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 hover:border-indigo-400 dark:hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-300 shadow-2xs hover:shadow-xs transition active:scale-[0.98] cursor-pointer"
         >
-          {item.tag}
+          <span>{item.tag}</span>
         </button>
       ))}
     </div>

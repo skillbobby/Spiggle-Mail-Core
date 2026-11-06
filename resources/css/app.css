@@ -233,6 +233,31 @@ html:not(.dark) .app-workspace-card textarea::placeholder {
   color: #94a3b8 !important;
 }
 
+/* Shortcode Personalization Pills */
+html.light .app-workspace-card [title*="Insert {{"],
+html:not(.dark) .app-workspace-card [title*="Insert {{"] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light .app-workspace-card [title*="Insert {{"] span,
+html:not(.dark) .app-workspace-card [title*="Insert {{"] span {
+  color: #0f172a !important;
+}
+
+html.light .app-workspace-card [title*="Insert {{"]:hover,
+html:not(.dark) .app-workspace-card [title*="Insert {{"]:hover {
+  background-color: #eef2ff !important;
+  color: #4f46e5 !important;
+  border-color: #818cf8 !important;
+}
+
+html.light .app-workspace-card [title*="Insert {{"]:hover span,
+html:not(.dark) .app-workspace-card [title*="Insert {{"]:hover span {
+  color: #4f46e5 !important;
+}
+
 /* 6. Tables */
 html.light .app-workspace-card thead,
 html:not(.dark) .app-workspace-card thead {
