@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --background: 240 10% 3.9%;
@@ -57,8 +59,22 @@
    LIGHT / TWO-TONE WORKSPACE CARD (Default Modern Template)
    Eliminates all dark/black blotches and guarantees high-contrast, clean UI.
    ========================================================================== */
+html.light .app-workspace-frame,
+html:not(.dark) .app-workspace-frame {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+html.light .app-workspace-topbar,
+html:not(.dark) .app-workspace-topbar {
+  background-color: #ffffff !important;
+  border-color: #edf0f5 !important;
+  color: #0f172a !important;
+}
+
 html.light .app-workspace-card,
 html:not(.dark) .app-workspace-card {
+  background-color: #ffffff !important;
   color: #0f172a;
 }
 
@@ -128,12 +144,22 @@ html:not(.dark) .app-workspace-card .bg-zinc-900\/90 {
 
 /* 3. Inset Wells, Pre/Code Blocks, Filter Bars & Table Containers */
 html.light .app-workspace-card .bg-zinc-950:not(body),
+html.light .app-workspace-card .bg-zinc-950\/30,
+html.light .app-workspace-card .bg-zinc-950\/40,
+html.light .app-workspace-card .bg-zinc-950\/50,
+html.light .app-workspace-card .bg-zinc-950\/60,
+html.light .app-workspace-card .bg-zinc-950\/80,
 html.light .app-workspace-card .bg-zinc-800\/30,
 html.light .app-workspace-card .bg-zinc-800\/40,
 html.light .app-workspace-card .bg-zinc-800\/50,
 html.light .app-workspace-card .bg-zinc-800\/60,
 html.light .app-workspace-card .bg-zinc-800\/80,
 html:not(.dark) .app-workspace-card .bg-zinc-950:not(body),
+html:not(.dark) .app-workspace-card .bg-zinc-950\/30,
+html:not(.dark) .app-workspace-card .bg-zinc-950\/40,
+html:not(.dark) .app-workspace-card .bg-zinc-950\/50,
+html:not(.dark) .app-workspace-card .bg-zinc-950\/60,
+html:not(.dark) .app-workspace-card .bg-zinc-950\/80,
 html:not(.dark) .app-workspace-card .bg-zinc-800\/30,
 html:not(.dark) .app-workspace-card .bg-zinc-800\/40,
 html:not(.dark) .app-workspace-card .bg-zinc-800\/50,
@@ -314,8 +340,20 @@ html:not(.dark) .app-workspace-card a[class*="bg-emerald"] {
    FULL DARK MODE OVERRIDES (When user explicitly toggles Moon / Dark)
    Seamless graphite workspace with flawless contrast and zero blotches.
    ========================================================================== */
+html.dark .app-workspace-frame {
+  background-color: #161820 !important;
+  color: #f8fafc !important;
+}
+
+html.dark .app-workspace-topbar {
+  background-color: #161820 !important;
+  border-color: #272c3d !important;
+  color: #f8fafc !important;
+}
+
 html.dark .app-workspace-card {
-  color: #f8fafc;
+  background-color: #161820 !important;
+  color: #f8fafc !important;
 }
 
 html.dark .app-workspace-card h1,

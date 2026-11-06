@@ -136,37 +136,37 @@ export default function DomainsIndex({
     <DashboardLayout currentNewsletter={currentNewsletter}>
       <div className="space-y-8">
         {/* Header */}
-        <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <header className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
-              <ShieldCheck className="w-7 h-7 text-indigo-400" aria-hidden="true" />
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
+              <ShieldCheck className="w-7 h-7 text-indigo-500" aria-hidden="true" />
               Domain Authentication &amp; Deliverability
             </h1>
-            <p className="text-sm text-zinc-400 mt-1">
+            <p className="text-sm text-slate-500 dark:text-zinc-400 mt-1">
               Configure SPF, all 3 Easy DKIM CNAMEs, DMARC, and custom MAIL FROM to guarantee inbox delivery and protect against spoofing.
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3 shrink-0 flex-nowrap">
             <button
               type="button"
               onClick={() => {
                 setFormError(null);
                 setIsAddModalOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg text-sm font-semibold transition"
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-900 dark:bg-zinc-800 hover:bg-slate-800 dark:hover:bg-zinc-700 text-white rounded-xl text-sm font-semibold transition-all shadow-sm hover:shadow active:scale-[0.98] whitespace-nowrap shrink-0"
             >
-              <Plus className="w-4 h-4" />
-              Add Domain
+              <Plus className="w-4 h-4 shrink-0" />
+              <span>Add Domain</span>
             </button>
             <button
               type="button"
               onClick={handleVerifyNow}
               disabled={isVerifying}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm font-semibold transition disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-semibold transition-all shadow-sm hover:shadow-indigo-500/25 active:scale-[0.98] whitespace-nowrap shrink-0 disabled:opacity-50"
             >
-              <RefreshCw className={`w-4 h-4 ${isVerifying ? 'animate-spin' : ''}`} aria-hidden="true" />
-              {isVerifying ? 'Verifying DNS...' : 'Recheck DNS Records'}
+              <RefreshCw className={`w-4 h-4 shrink-0 ${isVerifying ? 'animate-spin' : ''}`} aria-hidden="true" />
+              <span>{isVerifying ? 'Verifying DNS...' : 'Recheck DNS Records'}</span>
             </button>
           </div>
         </header>
@@ -202,28 +202,28 @@ export default function DomainsIndex({
         )}
 
         {/* Active Domain Status Banner */}
-        <section className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 flex items-center justify-between">
+        <section className="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center border border-zinc-700">
-              <Globe className="w-6 h-6 text-zinc-200" aria-hidden="true" />
+            <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-zinc-800 flex items-center justify-center border border-indigo-100 dark:border-zinc-700 text-indigo-600 dark:text-zinc-200 shadow-xs shrink-0">
+              <Globe className="w-6 h-6" aria-hidden="true" />
             </div>
             <div>
-              <div className="flex items-center gap-3">
-                <h2 className="text-base font-semibold text-white">{domain.domain}</h2>
+              <div className="flex flex-wrap items-center gap-3">
+                <h2 className="text-base font-bold text-slate-900 dark:text-white">{domain.domain}</h2>
                 {domain.status === 'verified' ? (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <CheckCircle2 className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 shadow-xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
                     Verified
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                    <Clock className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60 shadow-xs">
+                    <Clock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" aria-hidden="true" />
                     Pending DNS Propagation
                   </span>
                 )}
               </div>
-              <p className="text-xs text-zinc-400 mt-0.5">
-                Custom MAIL FROM: <span className="font-mono text-zinc-300">{domain.mailFromDomain}</span>
+              <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1 font-medium">
+                Custom MAIL FROM: <span className="font-mono text-slate-800 dark:text-zinc-200 font-semibold">{domain.mailFromDomain}</span>
               </p>
             </div>
           </div>
@@ -426,11 +426,11 @@ export default function DomainsIndex({
         </div>
 
         {/* Deliverability Checklist Note */}
-        <aside className="bg-indigo-950/20 border border-indigo-900/40 rounded-xl p-5 flex items-start gap-3.5">
-          <ShieldCheck className="w-5 h-5 text-indigo-400 mt-0.5 shrink-0" aria-hidden="true" />
+        <aside className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900/50 rounded-2xl p-5 flex items-start gap-3.5 shadow-xs">
+          <ShieldCheck className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" aria-hidden="true" />
           <div>
-            <h4 className="text-sm font-semibold text-indigo-300">Google &amp; Yahoo Bulk Sender Compliance</h4>
-            <p className="text-xs text-indigo-200/80 mt-1 leading-relaxed">
+            <h4 className="text-sm font-bold text-indigo-950 dark:text-indigo-200">Google &amp; Yahoo Bulk Sender Compliance</h4>
+            <p className="text-xs text-indigo-900/80 dark:text-indigo-300 mt-1 leading-relaxed font-normal">
               SpiggleMail automatically applies RFC 8058 one-click list-unsubscribe headers, multipart text/plain alternatives, and strict Return-Path DKIM alignment to protect your AWS SES reputation.
             </p>
           </div>

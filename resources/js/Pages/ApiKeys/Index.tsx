@@ -165,16 +165,18 @@ export default function ApiKeysIndex({ currentNewsletter, apiKeys, newlyCreatedK
                 )}
 
                 {/* Keys list */}
-                <section className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
-                    <header className="p-4 bg-zinc-950/60 border-b border-zinc-800 flex items-center justify-between">
-                        <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                <section className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-xs">
+                    <header className="p-4 bg-slate-50 dark:bg-zinc-950/80 border-b border-slate-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300">
                             Active Keys ({apiKeys.length})
                         </span>
-                        <span className="text-xs text-zinc-500">Bearer Token Header: `Authorization: Bearer spm_...`</span>
+                        <span className="text-xs font-mono text-slate-500 dark:text-zinc-400">
+                            Bearer Token Header: <code className="text-indigo-600 dark:text-indigo-400 font-semibold bg-indigo-50 dark:bg-indigo-950/60 px-1.5 py-0.5 rounded border border-indigo-200 dark:border-indigo-800/60">Authorization: Bearer spm_...</code>
+                        </span>
                     </header>
 
                     {apiKeys.length === 0 ? (
-                        <div className="text-center py-12 text-zinc-500 text-sm">
+                        <div className="text-center py-12 text-slate-500 dark:text-zinc-400 text-sm font-medium">
                             No API keys generated yet. Click &quot;Create New API Key&quot; to begin.
                         </div>
                     ) : (

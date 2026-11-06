@@ -21,20 +21,20 @@ interface MetricCardProps {
 }
 
 const MetricCard: React.FC<MetricCardProps> = ({ title, value, change, icon, helper }) => (
-  <div className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800/80">
-    <div className="flex items-center justify-between text-zinc-400">
-      <span className="text-xs font-semibold uppercase tracking-wider">{title}</span>
-      <div className="p-2 rounded-lg bg-zinc-800/80 text-zinc-300">{icon}</div>
+  <div className="p-5 rounded-2xl bg-white dark:bg-[#1a1d26] border border-slate-200 dark:border-[#262c3b] shadow-xs">
+    <div className="flex items-center justify-between text-slate-500 dark:text-zinc-400">
+      <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-zinc-400">{title}</span>
+      <div className="p-2 rounded-xl bg-indigo-50 dark:bg-zinc-800/80 text-indigo-600 dark:text-zinc-300 border border-indigo-100/80 dark:border-zinc-700/60">{icon}</div>
     </div>
     <div className="mt-3 flex items-baseline gap-2">
-      <p className="text-2xl font-bold text-white tracking-tight">{value}</p>
+      <p className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{value}</p>
       {change && (
-        <span className="text-xs font-semibold text-emerald-400 flex items-center">
+        <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center">
           {change}
         </span>
       )}
     </div>
-    {helper && <p className="mt-1 text-xs text-zinc-400">{helper}</p>}
+    {helper && <p className="mt-1 text-xs text-slate-500 dark:text-zinc-400">{helper}</p>}
   </div>
 );
 
@@ -60,26 +60,26 @@ export default function Overview({
       <Head title="Overview Dashboard" />
 
       {/* Top Header & Quick Actions */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-8 border-b border-zinc-800/80">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-8 border-b border-slate-200 dark:border-zinc-800/80">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
             {currentNewsletter?.name || 'Publication Overview'}
           </h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <p className="text-sm text-slate-500 dark:text-zinc-400 mt-1">
             Performance metrics, list growth, and deliverability health for the last 30 days.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           <Link
             href="/contacts"
-            className="px-4 py-2 text-sm font-medium rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-200 transition"
+            className="px-4 py-2 text-sm font-semibold rounded-xl bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 hover:bg-slate-50 dark:hover:bg-zinc-700 text-slate-800 dark:text-zinc-200 transition shadow-xs whitespace-nowrap"
           >
             Manage Contacts
           </Link>
           <Link
             href="/campaigns/new"
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-sm shadow-indigo-600/20"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-sm shadow-indigo-600/20 whitespace-nowrap"
           >
             <Plus className="w-4 h-4" aria-hidden="true" />
             New Campaign
@@ -133,17 +133,17 @@ export default function Overview({
         </div>
 
         {recentCampaigns.length === 0 ? (
-          <div className="p-12 text-center rounded-2xl bg-zinc-900/30 border border-zinc-800/60">
-            <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center mx-auto text-zinc-400 mb-4">
+          <div className="p-12 text-center rounded-2xl bg-slate-50 dark:bg-zinc-900/50 border border-slate-200 dark:border-zinc-800/60 shadow-xs">
+            <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center justify-center mx-auto text-indigo-600 dark:text-zinc-400 mb-4 shadow-xs">
               <Send className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-base font-semibold text-white">No campaigns sent yet</h3>
-            <p className="text-sm text-zinc-400 mt-1 max-w-sm mx-auto">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">No campaigns sent yet</h3>
+            <p className="text-sm text-slate-600 dark:text-zinc-400 mt-1 max-w-sm mx-auto">
               Ready to publish your first issue? Compose in our rich editor, verify deliverability, and send.
             </p>
             <Link
               href="/campaigns/new"
-              className="inline-flex items-center gap-2 mt-6 px-4 py-2 text-sm font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-sm"
+              className="inline-flex items-center gap-2 mt-6 px-4 py-2.5 text-sm font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-sm"
             >
               <Plus className="w-4 h-4" aria-hidden="true" />
               Write First Issue

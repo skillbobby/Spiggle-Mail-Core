@@ -206,15 +206,24 @@ export default function AccountIndex({
           </div>
 
           <div className="p-6 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-lg border border-zinc-800 bg-zinc-850 p-4">
-              <span className="text-xs font-medium text-zinc-400">Active Plan</span>
-              <p className="text-lg font-bold text-white mt-1">
-                {account?.plan ?? 'Self-Hosted Pro'}
-              </p>
-              <p className="text-xs text-emerald-400 mt-1 flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-                Unlimited sending (Rate limited by SMTP driver)
-              </p>
+            <div className="rounded-lg border border-zinc-800 bg-zinc-850 p-4 flex flex-col justify-between">
+              <div>
+                <span className="text-xs font-medium text-zinc-400">Active Plan</span>
+                <p className="text-lg font-bold text-white mt-1">
+                  {account?.plan ?? 'Starter Plan'}
+                </p>
+                <p className="text-xs text-indigo-400 mt-1">
+                  Self-service Lemon Squeezy billing
+                </p>
+              </div>
+              <div className="pt-3">
+                <a
+                  href="/billing"
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 px-3 py-1.5 text-xs font-semibold text-white transition"
+                >
+                  <span>Manage Plan & Billing</span>
+                </a>
+              </div>
             </div>
 
             <div className="rounded-lg border border-zinc-800 bg-zinc-850 p-4">
@@ -301,13 +310,13 @@ export default function AccountIndex({
         </div>
 
         {/* 6. Danger Zone / Delete Account Safeguard Card */}
-        <div className="rounded-xl border border-rose-900/50 bg-zinc-900 shadow-sm overflow-hidden">
-          <div className="border-b border-rose-900/50 bg-rose-950/20 px-6 py-4">
-            <h2 className="text-sm font-semibold text-rose-300 flex items-center gap-2">
-              <AlertTriangle className="h-4 w-4 text-rose-400" />
+        <div className="rounded-2xl border border-rose-200 dark:border-rose-900/60 bg-white dark:bg-zinc-900 shadow-xs overflow-hidden">
+          <div className="border-b border-rose-200 dark:border-rose-900/60 bg-rose-50 dark:bg-rose-950/30 px-6 py-4">
+            <h2 className="text-sm font-bold text-rose-900 dark:text-rose-200 flex items-center gap-2">
+              <AlertTriangle className="h-4 w-4 text-rose-600 dark:text-rose-400" />
               Danger Zone
             </h2>
-            <p className="text-xs text-rose-300/80 mt-0.5">
+            <p className="text-xs text-rose-700 dark:text-rose-300 mt-0.5 font-medium">
               Permanently pause or delete your account, newsletters, and reader callsets.
             </p>
           </div>

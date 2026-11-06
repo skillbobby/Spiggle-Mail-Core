@@ -493,10 +493,10 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         {/* ====================================================================
             3 & 4. UNIFIED SINGLE ROUNDED CONTAINER CARD (MAIN WORKSPACE)
             ==================================================================== */}
-        <div className="flex-1 bg-white dark:bg-[#161820] rounded-[24px] sm:rounded-[30px] flex flex-col overflow-hidden shadow-xl relative text-slate-900 dark:text-zinc-100">
+        <div className="flex-1 app-workspace-frame bg-white dark:bg-[#161820] rounded-[24px] sm:rounded-[30px] flex flex-col overflow-hidden shadow-xl relative text-slate-900 dark:text-zinc-100">
 
           {/* Card Top Header / Action Toolbar */}
-          <header className="px-5 sm:px-8 py-3.5 border-b border-[#edf0f5] dark:border-zinc-800/80 flex items-center justify-between shrink-0 bg-white dark:bg-[#161820] z-20">
+          <header className="app-workspace-topbar px-5 sm:px-8 py-3.5 border-b border-[#edf0f5] dark:border-zinc-800/80 flex items-center justify-between shrink-0 bg-white dark:bg-[#161820] z-20">
             <div className="flex items-center gap-3">
               {/* Mobile Hamburger Menu Toggle */}
               <button
