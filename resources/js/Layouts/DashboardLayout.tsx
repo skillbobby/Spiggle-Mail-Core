@@ -22,6 +22,9 @@ import {
   HelpCircle,
   Menu,
   Edit3,
+  Check,
+  Activity,
+  CheckCircle2,
 } from 'lucide-react';
 import type { Newsletter, User, AccountAlert } from '@/types';
 import { GetStartedPanel, type GetStartedData } from '@/Components/GetStartedPanel';
@@ -42,12 +45,12 @@ interface NavItem {
 
 const NEWSLETTER_NAV: readonly NavItem[] = [
   { href: '/dashboard', label: 'Overview', icon: LayoutGrid },
-  { href: '/campaigns', label: 'Campaigns', icon: Send, getBadge: () => 'All' },
+  { href: '/campaigns', label: 'Campaigns', icon: Send, getBadge: () => 'Issues' },
   {
     href: '/contacts',
     label: 'Contacts',
     icon: Users,
-    getBadge: (nl) => (nl?.subscriberCount ? String(nl.subscriberCount) : '0'),
+    getBadge: (nl) => (nl?.subscriberCount !== undefined ? String(nl.subscriberCount) : '0'),
   },
   { href: '/widgets', label: 'Embed Widgets', icon: Layers },
   { href: '/settings', label: 'Settings', icon: Settings },
@@ -79,7 +82,12 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   const [isAlertDismissed, setIsAlertDismissed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [isPubSwitcherOpen, setIsPubSwitcherOpen] = useState(false);
+  const [isFoldersOpen, setIsFoldersOpen] = useState(true);
+  const [isStatusOpen, setIsStatusOpen] = useState(true);
+
   const notifRef = useRef<HTMLDivElement>(null);
+  const pubSwitcherRef = useRef<HTMLDivElement>(null);
   const { theme, toggleTheme } = useTheme();
 
   const availableNewsletters = props.newsletters && props.newsletters.length > 0
@@ -92,6 +100,9 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
     function handleClickOutside(e: MouseEvent) {
       if (notifRef.current && !notifRef.current.contains(e.target as Node)) {
         setIsNotificationsOpen(false);
+      }
+      if (pubSwitcherRef.current && !pubSwitcherRef.current.contains(e.target as Node)) {
+        setIsPubSwitcherOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -115,7 +126,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           className="hidden lg:flex w-[72px] shrink-0 flex-col items-center py-4 justify-between border-r border-[#20242e]/60"
         >
           <div className="flex flex-col items-center gap-4 w-full">
-            {/* Logo Yellow 'M' / Brand Square */}
+            {/* Logo Yellow Brand Square */}
             <Link
               href="/dashboard"
               title="SpiggleMail Home"
@@ -130,7 +141,11 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                 type="button"
                 onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
                 title="System Notifications & SES Health"
-                className="w-11 h-11 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 flex items-center justify-center transition-all relative shrink-0"
+                className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all relative shrink-0 ${
+                  isNotificationsOpen
+                    ? 'bg-white/10 text-white'
+                    : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                }`}
               >
                 <Bell className="w-5 h-5" aria-hidden="true" />
                 <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-[#121318]" />
@@ -138,25 +153,36 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 
               {/* Notification Popover Dropdown */}
               {isNotificationsOpen && (
-                <div className="absolute top-0 left-full ml-3 w-72 rounded-2xl bg-[#171a22] border border-[#262c3b] p-3 shadow-2xl z-50 text-xs">
-                  <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-800">
-                    <span className="font-bold text-white text-xs">SES Dispatch & Health</span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 font-medium border border-emerald-800/60">Live</span>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="p-2 rounded-xl bg-zinc-900/60 border border-zinc-800/80">
-                      <div className="flex items-center justify-between text-zinc-300 font-medium">
-                        <span>Mail Dispatch Engine</span>
-                        <span className="text-emerald-400 font-semibold">Active</span>
-                      </div>
-                      <p className="text-[11px] text-zinc-500 mt-0.5">Compliant with RFC 8058 one-click unsubscribes.</p>
+                <div className="absolute top-0 left-full ml-3 w-80 rounded-2xl bg-[#171a22] border border-[#262c3b] p-4 shadow-2xl z-50 text-xs animate-in fade-in zoom-in-95 duration-100">
+                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-zinc-800">
+                    <div className="flex items-center gap-2">
+                      <Activity className="w-4 h-4 text-emerald-400" />
+                      <span className="font-bold text-white text-sm">System & SES Health</span>
                     </div>
-                    <div className="p-2 rounded-xl bg-zinc-900/60 border border-zinc-800/80">
-                      <div className="flex items-center justify-between text-zinc-300 font-medium">
-                        <span>Domain DNS Status</span>
-                        <span className="text-sky-400 font-semibold">Protected</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 font-semibold border border-emerald-800/60">
+                      Healthy
+                    </span>
+                  </div>
+                  <div className="space-y-2.5">
+                    <div className="p-2.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
+                      <div className="flex items-center justify-between text-zinc-200 font-semibold">
+                        <span>Mail Dispatch Engine</span>
+                        <span className="text-emerald-400 flex items-center gap-1 font-mono text-[11px]">
+                          <CheckCircle2 className="w-3.5 h-3.5" /> Ready
+                        </span>
                       </div>
-                      <p className="text-[11px] text-zinc-500 mt-0.5">Automated SPF, DKIM &amp; DMARC monitoring.</p>
+                      <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed">
+                        Enforces RFC 8058 one-click list unsubscribes and auto-pauses on bounce threshold.
+                      </p>
+                    </div>
+                    <div className="p-2.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
+                      <div className="flex items-center justify-between text-zinc-200 font-semibold">
+                        <span>DNS Deliverability</span>
+                        <span className="text-sky-400 font-mono text-[11px]">SPF / DKIM OK</span>
+                      </div>
+                      <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed">
+                        Automatic DNS alignment checks prevent domain blacklisting and spam filtering.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -175,7 +201,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                     key={nl.id}
                     type="button"
                     onClick={() => handleSelectNewsletter(nl.id)}
-                    title={nl.name}
+                    title={`Switch to: ${nl.name}`}
                     className={`relative group shrink-0 w-11 h-11 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
                       isSelected
                         ? 'bg-indigo-600 text-white ring-2 ring-[#fee358] shadow-md shadow-yellow-500/20'
@@ -245,7 +271,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         </aside>
 
         {/* ====================================================================
-            2. SECONDARY DARK SIDEBAR (FOLDERS & LABELS) (235px)
+            2. SECONDARY DARK SIDEBAR (FOLDERS & LABELS) (240px)
             ==================================================================== */}
         <aside
           aria-label="Navigation Sidebar"
@@ -255,33 +281,47 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         >
           <div className="flex flex-col gap-6">
             {/* User Profile Card */}
-            <Link
-              href="/account"
-              className="flex items-center gap-3 px-1 py-1 rounded-2xl hover:bg-white/5 transition group cursor-pointer"
-              title="Manage Account Profile"
-            >
-              <div className="relative shrink-0">
-                <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white flex items-center justify-center font-bold text-sm ring-2 ring-white/10 group-hover:ring-[#fee358] transition-all">
-                  {user?.name?.charAt(0) ?? 'A'}
+            <div className="flex items-center justify-between">
+              <Link
+                href="/account"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-3 px-1 py-1 rounded-2xl hover:bg-white/5 transition group cursor-pointer flex-1 min-w-0 mr-1"
+                title="Manage Account Profile"
+              >
+                <div className="relative shrink-0">
+                  <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white flex items-center justify-center font-bold text-sm ring-2 ring-white/10 group-hover:ring-[#fee358] transition-all">
+                    {user?.name?.charAt(0) ?? 'A'}
+                  </div>
+                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 rounded-full ring-2 ring-[#14161d]" />
                 </div>
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 rounded-full ring-2 ring-[#14161d]" />
-              </div>
-              <div className="flex flex-col min-w-0">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[14px] font-semibold text-white tracking-tight truncate whitespace-nowrap">
-                    {user?.name ?? 'Admin Operator'}
-                  </span>
-                  {isSuperAdmin && (
-                    <span className="inline-flex items-center rounded-sm bg-amber-950/80 px-1 py-0.2 text-[9px] font-bold text-amber-400 uppercase tracking-wider border border-amber-800/50">
-                      Super
+                <div className="flex flex-col min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[14px] font-semibold text-white tracking-tight truncate whitespace-nowrap">
+                      {user?.name ?? 'Admin Operator'}
                     </span>
-                  )}
+                    {isSuperAdmin && (
+                      <span className="inline-flex items-center rounded-sm bg-amber-950/80 px-1 py-0.2 text-[9px] font-bold text-amber-400 uppercase tracking-wider border border-amber-800/50">
+                        Super
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-xs text-zinc-400 truncate whitespace-nowrap">
+                    {user?.email ?? 'admin@example.com'}
+                  </span>
                 </div>
-                <span className="text-xs text-zinc-400 truncate whitespace-nowrap">
-                  {user?.email ?? 'admin@example.com'}
-                </span>
-              </div>
-            </Link>
+              </Link>
+
+              {/* Close Button on Mobile Drawer */}
+              {isMobileMenuOpen && (
+                <button
+                  type="button"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="lg:hidden p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-white/10"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
 
             {/* Main Navigation Links */}
             <nav className="flex flex-col gap-1.5" aria-label="Main Menu">
@@ -292,6 +332,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                   <Link
                     key={href}
                     href={href}
+                    onClick={() => setIsMobileMenuOpen(false)}
                     className={`flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-sm font-medium transition-colors whitespace-nowrap ${
                       isActive
                         ? 'bg-[#aab8f8] text-slate-900 font-semibold shadow-sm'
@@ -320,6 +361,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               {isSuperAdmin && (
                 <Link
                   href="/admin"
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className={`flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-sm font-medium transition-colors whitespace-nowrap ${
                     url.startsWith('/admin')
                       ? 'bg-amber-400 text-slate-900 font-semibold shadow-sm'
@@ -337,72 +379,93 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               )}
             </nav>
 
-            {/* Folders Section (Infrastructure) */}
+            {/* Folders Section (Infrastructure) - Fully Interactive Collapsible */}
             <div>
-              <div className="flex items-center justify-between px-2 text-zinc-400 mb-2">
-                <div className="flex items-center gap-1.5 cursor-pointer whitespace-nowrap">
-                  <ChevronDown className="w-3.5 h-3.5" aria-hidden="true" />
-                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-300">
+              <button
+                type="button"
+                onClick={() => setIsFoldersOpen(!isFoldersOpen)}
+                className="w-full flex items-center justify-between px-2 text-zinc-400 hover:text-white transition-colors py-1 group mb-1.5"
+              >
+                <div className="flex items-center gap-1.5 whitespace-nowrap">
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isFoldersOpen ? '' : '-rotate-90'}`} />
+                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-300 group-hover:text-white">
                     Infrastructure
                   </span>
                 </div>
-              </div>
-              <div className="flex flex-col gap-1">
-                {ACCOUNT_NAV.map(({ href, label, icon: Icon }) => {
-                  const isActive = url.startsWith(href);
-                  return (
-                    <Link
-                      key={href}
-                      href={href}
-                      className={`flex items-center justify-between px-3 py-2 rounded-xl text-[13px] transition-colors whitespace-nowrap ${
-                        isActive
-                          ? 'bg-zinc-800 text-white font-semibold'
-                          : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <Icon className="w-4 h-4 shrink-0" aria-hidden="true" />
-                        <span className="whitespace-nowrap">{label}</span>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
+                <span className="text-[10px] text-zinc-500 font-mono font-medium group-hover:text-zinc-300">
+                  {ACCOUNT_NAV.length}
+                </span>
+              </button>
+
+              {isFoldersOpen && (
+                <div className="flex flex-col gap-1 animate-in fade-in duration-150">
+                  {ACCOUNT_NAV.map(({ href, label, icon: Icon }) => {
+                    const isActive = url.startsWith(href);
+                    return (
+                      <Link
+                        key={href}
+                        href={href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`flex items-center justify-between px-3 py-2 rounded-xl text-[13px] transition-colors whitespace-nowrap ${
+                          isActive
+                            ? 'bg-zinc-800 text-white font-semibold'
+                            : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <Icon className="w-4 h-4 shrink-0" aria-hidden="true" />
+                          <span className="whitespace-nowrap">{label}</span>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
-            {/* Labels Section (System Status Indicators) */}
+            {/* Labels Section (System Status Indicators) - Fully Interactive Collapsible */}
             <div>
-              <div className="flex items-center justify-between px-2 text-zinc-400 mb-2">
-                <div className="flex items-center gap-1.5 cursor-pointer whitespace-nowrap">
-                  <ChevronDown className="w-3.5 h-3.5" aria-hidden="true" />
-                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-300">
+              <button
+                type="button"
+                onClick={() => setIsStatusOpen(!isStatusOpen)}
+                className="w-full flex items-center justify-between px-2 text-zinc-400 hover:text-white transition-colors py-1 group mb-1.5"
+              >
+                <div className="flex items-center gap-1.5 whitespace-nowrap">
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isStatusOpen ? '' : '-rotate-90'}`} />
+                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-300 group-hover:text-white">
                     Deliverability
                   </span>
                 </div>
-              </div>
-              <div className="flex flex-col gap-1 text-[13px]">
-                <div className="flex items-center justify-between px-3 py-1.5 text-zinc-400">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-2.5 h-2.5 rounded-full border-2 border-emerald-500 shrink-0" />
-                    <span>SES Dispatch</span>
+                <span className="text-[10px] text-emerald-400 font-mono font-bold">
+                  Live
+                </span>
+              </button>
+
+              {isStatusOpen && (
+                <div className="flex flex-col gap-1 text-[13px] animate-in fade-in duration-150">
+                  <div className="flex items-center justify-between px-3 py-1.5 text-zinc-400 hover:text-zinc-200 rounded-lg hover:bg-white/5 transition">
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-2.5 h-2.5 rounded-full border-2 border-emerald-500 shrink-0" />
+                      <span>SES Engine</span>
+                    </div>
+                    <span className="text-[11px] text-emerald-400 font-semibold font-mono">Connected</span>
                   </div>
-                  <span className="text-[11px] text-emerald-400 font-semibold font-mono">OK</span>
-                </div>
-                <div className="flex items-center justify-between px-3 py-1.5 text-zinc-400">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-2.5 h-2.5 rounded-full border-2 border-sky-400 shrink-0" />
-                    <span>SPF / DKIM</span>
+                  <div className="flex items-center justify-between px-3 py-1.5 text-zinc-400 hover:text-zinc-200 rounded-lg hover:bg-white/5 transition">
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-2.5 h-2.5 rounded-full border-2 border-sky-400 shrink-0" />
+                      <span>SPF &amp; DKIM</span>
+                    </div>
+                    <span className="text-[11px] text-sky-400 font-semibold font-mono">Protected</span>
                   </div>
-                  <span className="text-[11px] text-sky-400 font-semibold font-mono">Active</span>
-                </div>
-                <div className="flex items-center justify-between px-3 py-1.5 text-zinc-400">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-2.5 h-2.5 rounded-full border-2 border-amber-500 shrink-0" />
-                    <span>Bounce Guard</span>
+                  <div className="flex items-center justify-between px-3 py-1.5 text-zinc-400 hover:text-zinc-200 rounded-lg hover:bg-white/5 transition">
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-2.5 h-2.5 rounded-full border-2 border-amber-500 shrink-0" />
+                      <span>Bounce Guard</span>
+                    </div>
+                    <span className="text-[11px] text-amber-400 font-semibold font-mono">0.0%</span>
                   </div>
-                  <span className="text-[11px] text-amber-400 font-semibold font-mono">0.0%</span>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 
@@ -410,6 +473,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           <div className="pt-4 border-t border-[#1f242e]/60">
             <Link
               href="/campaigns/new"
+              onClick={() => setIsMobileMenuOpen(false)}
               className="w-full py-3 bg-[#faea78] hover:bg-[#fae459] active:scale-[0.99] text-slate-900 font-bold rounded-2xl flex items-center justify-center gap-2 shadow-sm transition-all whitespace-nowrap"
             >
               <Edit3 className="w-4 h-4 font-bold" aria-hidden="true" />
@@ -432,7 +496,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         <div className="flex-1 bg-white dark:bg-[#161820] rounded-[24px] sm:rounded-[30px] flex flex-col overflow-hidden shadow-xl relative text-slate-900 dark:text-zinc-100">
 
           {/* Card Top Header / Action Toolbar */}
-          <header className="px-5 sm:px-8 py-3.5 border-b border-[#edf0f5] dark:border-zinc-800/80 flex items-center justify-between shrink-0 bg-white dark:bg-[#161820]">
+          <header className="px-5 sm:px-8 py-3.5 border-b border-[#edf0f5] dark:border-zinc-800/80 flex items-center justify-between shrink-0 bg-white dark:bg-[#161820] z-20">
             <div className="flex items-center gap-3">
               {/* Mobile Hamburger Menu Toggle */}
               <button
@@ -444,18 +508,68 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                 <Menu className="w-5 h-5" />
               </button>
 
-              {/* Active Publication Pill in Header */}
-              <div className="flex items-center gap-2">
-                <span className="px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200/80 dark:border-purple-800/50 text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0">
+              {/* Interactive Active Publication Switcher Dropdown in Header */}
+              <div className="relative" ref={pubSwitcherRef}>
+                <button
+                  type="button"
+                  onClick={() => setIsPubSwitcherOpen(!isPubSwitcherOpen)}
+                  className="px-3.5 py-1.5 rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200/80 dark:border-purple-800/50 text-xs font-semibold flex items-center gap-2 hover:bg-purple-100 dark:hover:bg-purple-900/40 transition shrink-0"
+                  title="Click to Switch Publication"
+                >
                   <span className="w-2 h-2 rounded-full border-2 border-purple-500 shrink-0" />
-                  {activeNewsletter?.name || 'Primary Publication'}
-                </span>
+                  <span className="truncate max-w-[140px] sm:max-w-[220px]">
+                    {activeNewsletter?.name || 'Primary Publication'}
+                  </span>
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-150 ${isPubSwitcherOpen ? 'rotate-180' : ''}`} />
+                </button>
 
-                <span className="hidden sm:inline-flex px-3 py-1 rounded-full bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 text-xs font-semibold items-center gap-1.5 whitespace-nowrap shrink-0">
-                  <Users className="w-3.5 h-3.5" />
-                  {activeNewsletter?.subscriberCount ?? 0} Subscribers
-                </span>
+                {isPubSwitcherOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-72 rounded-2xl bg-white dark:bg-[#171a22] border border-slate-200 dark:border-zinc-800 shadow-2xl p-2 z-50 text-xs animate-in fade-in zoom-in-95 duration-100">
+                    <div className="px-3 py-1.5 text-[10px] uppercase font-bold text-slate-400 dark:text-zinc-500 tracking-wider">
+                      Switch Publication
+                    </div>
+                    <div className="space-y-0.5 max-h-48 overflow-y-auto custom-scrollbar">
+                      {availableNewsletters.map((nl) => {
+                        const isSelected = nl.id === activeNewsletter?.id;
+                        return (
+                          <button
+                            key={nl.id}
+                            type="button"
+                            onClick={() => {
+                              handleSelectNewsletter(nl.id);
+                              setIsPubSwitcherOpen(false);
+                            }}
+                            className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition ${
+                              isSelected
+                                ? 'bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 font-semibold'
+                                : 'text-slate-700 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-zinc-800'
+                            }`}
+                          >
+                            <span className="truncate">{nl.name}</span>
+                            {isSelected && <Check className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 shrink-0" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <div className="mt-2 pt-2 border-t border-slate-100 dark:border-zinc-800">
+                      <Link
+                        href="/settings"
+                        onClick={() => setIsPubSwitcherOpen(false)}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition"
+                      >
+                        <Plus className="w-3.5 h-3.5 text-indigo-500" />
+                        <span>Manage publications</span>
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </div>
+
+              {/* Subscriber Badge */}
+              <span className="hidden sm:inline-flex px-3 py-1 rounded-full bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 text-xs font-semibold items-center gap-1.5 whitespace-nowrap shrink-0">
+                <Users className="w-3.5 h-3.5" />
+                {activeNewsletter?.subscriberCount ?? 0} Subscribers
+              </span>
             </div>
 
             {/* Quick Header Utilities */}

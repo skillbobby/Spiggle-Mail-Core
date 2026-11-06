@@ -54,103 +54,254 @@
 }
 
 /* ==========================================================================
-   Modern Workspace Card Interior Styling (Hybrid Two-Tone Mode)
-   When the workspace container is white, map text, wells, tables & inputs cleanly.
+   LIGHT / TWO-TONE WORKSPACE CARD (Default Modern Template)
+   Eliminates all dark/black blotches and guarantees high-contrast, clean UI.
    ========================================================================== */
-.app-workspace-card {
+html.light .app-workspace-card,
+html:not(.dark) .app-workspace-card {
   color: #0f172a;
 }
 
-.app-workspace-card h1,
-.app-workspace-card h2,
-.app-workspace-card h3,
-.app-workspace-card h4,
-.app-workspace-card .text-white:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-amber"]):not([class*="bg-slate-900"]):not([class*="bg-black"]) {
+/* 1. Typography */
+html.light .app-workspace-card h1,
+html.light .app-workspace-card h2,
+html.light .app-workspace-card h3,
+html.light .app-workspace-card h4,
+html.light .app-workspace-card h5,
+html:not(.dark) .app-workspace-card h1,
+html:not(.dark) .app-workspace-card h2,
+html:not(.dark) .app-workspace-card h3,
+html:not(.dark) .app-workspace-card h4,
+html:not(.dark) .app-workspace-card h5 {
+  color: #0f172a !important; /* deep slate-900 */
+}
+
+html.light .app-workspace-card .text-white:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-amber"]):not([class*="bg-slate-900"]):not([class*="bg-zinc-800"]):not([class*="bg-zinc-900"]),
+html:not(.dark) .app-workspace-card .text-white:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-amber"]):not([class*="bg-slate-900"]):not([class*="bg-zinc-800"]):not([class*="bg-zinc-900"]) {
   color: #0f172a !important;
 }
 
-.app-workspace-card .text-zinc-100,
-.app-workspace-card .text-zinc-200 {
-  color: #1e293b !important;
+html.light .app-workspace-card .text-zinc-100,
+html.light .app-workspace-card .text-zinc-200,
+html:not(.dark) .app-workspace-card .text-zinc-100,
+html:not(.dark) .app-workspace-card .text-zinc-200 {
+  color: #0f172a !important;
 }
 
-.app-workspace-card .text-zinc-300 {
-  color: #334155 !important;
+html.light .app-workspace-card .text-zinc-300,
+html.light .app-workspace-card label,
+html:not(.dark) .app-workspace-card .text-zinc-300,
+html:not(.dark) .app-workspace-card label {
+  color: #1e293b !important; /* high-contrast slate-800 labels */
+  font-weight: 500;
 }
 
-.app-workspace-card .text-zinc-400 {
-  color: #64748b !important;
+html.light .app-workspace-card .text-zinc-400,
+html:not(.dark) .app-workspace-card .text-zinc-400 {
+  color: #475569 !important; /* legible slate-600 */
 }
 
-.app-workspace-card .text-zinc-500 {
-  color: #94a3b8 !important;
+html.light .app-workspace-card .text-zinc-500,
+html:not(.dark) .app-workspace-card .text-zinc-500 {
+  color: #64748b !important; /* slate-500 */
 }
 
-.app-workspace-card .bg-zinc-950:not(body),
-.app-workspace-card .bg-zinc-900,
-.app-workspace-card .bg-zinc-900\/30,
-.app-workspace-card .bg-zinc-900\/40,
-.app-workspace-card .bg-zinc-900\/50,
-.app-workspace-card .bg-zinc-900\/60,
-.app-workspace-card .bg-zinc-900\/80 {
-  background-color: #f8fafc !important;
+/* 2. Containers, Cards, Panels & Modals */
+html.light .app-workspace-card .bg-zinc-900,
+html.light .app-workspace-card .bg-zinc-900\/30,
+html.light .app-workspace-card .bg-zinc-900\/40,
+html.light .app-workspace-card .bg-zinc-900\/50,
+html.light .app-workspace-card .bg-zinc-900\/60,
+html.light .app-workspace-card .bg-zinc-900\/80,
+html.light .app-workspace-card .bg-zinc-900\/90,
+html:not(.dark) .app-workspace-card .bg-zinc-900,
+html:not(.dark) .app-workspace-card .bg-zinc-900\/30,
+html:not(.dark) .app-workspace-card .bg-zinc-900\/40,
+html:not(.dark) .app-workspace-card .bg-zinc-900\/50,
+html:not(.dark) .app-workspace-card .bg-zinc-900\/60,
+html:not(.dark) .app-workspace-card .bg-zinc-900\/80,
+html:not(.dark) .app-workspace-card .bg-zinc-900\/90 {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04) !important;
+}
+
+/* 3. Inset Wells, Pre/Code Blocks, Filter Bars & Table Containers */
+html.light .app-workspace-card .bg-zinc-950:not(body),
+html.light .app-workspace-card .bg-zinc-800\/30,
+html.light .app-workspace-card .bg-zinc-800\/40,
+html.light .app-workspace-card .bg-zinc-800\/50,
+html.light .app-workspace-card .bg-zinc-800\/60,
+html.light .app-workspace-card .bg-zinc-800\/80,
+html:not(.dark) .app-workspace-card .bg-zinc-950:not(body),
+html:not(.dark) .app-workspace-card .bg-zinc-800\/30,
+html:not(.dark) .app-workspace-card .bg-zinc-800\/40,
+html:not(.dark) .app-workspace-card .bg-zinc-800\/50,
+html:not(.dark) .app-workspace-card .bg-zinc-800\/60,
+html:not(.dark) .app-workspace-card .bg-zinc-800\/80 {
+  background-color: #f8fafc !important; /* crisp slate-50 */
   border-color: #e2e8f0 !important;
 }
 
-.app-workspace-card .bg-zinc-800,
-.app-workspace-card .bg-zinc-800\/40,
-.app-workspace-card .bg-zinc-800\/60,
-.app-workspace-card .bg-zinc-800\/80 {
-  background-color: #f1f5f9 !important;
-  border-color: #cbd5e1 !important;
+/* Inset Code, Webhook & Preview Blocks text contrast */
+html.light .app-workspace-card .bg-zinc-950 code,
+html.light .app-workspace-card .bg-zinc-950 span,
+html.light .app-workspace-card .bg-zinc-950 p,
+html:not(.dark) .app-workspace-card .bg-zinc-950 code,
+html:not(.dark) .app-workspace-card .bg-zinc-950 span,
+html:not(.dark) .app-workspace-card .bg-zinc-950 p {
+  color: #0f172a !important;
 }
 
-.app-workspace-card .border-zinc-800,
-.app-workspace-card .border-zinc-800\/80,
-.app-workspace-card .border-zinc-800\/60,
-.app-workspace-card .border-zinc-700 {
-  border-color: #e2e8f0 !important;
+/* 4. Borders */
+html.light .app-workspace-card .border-zinc-800,
+html.light .app-workspace-card .border-zinc-800\/60,
+html.light .app-workspace-card .border-zinc-800\/80,
+html.light .app-workspace-card .border-zinc-700,
+html.light .app-workspace-card .border-zinc-700\/60,
+html:not(.dark) .app-workspace-card .border-zinc-800,
+html:not(.dark) .app-workspace-card .border-zinc-800\/60,
+html:not(.dark) .app-workspace-card .border-zinc-800\/80,
+html:not(.dark) .app-workspace-card .border-zinc-700,
+html:not(.dark) .app-workspace-card .border-zinc-700\/60 {
+  border-color: #e2e8f0 !important; /* soft slate-200 */
 }
 
-.app-workspace-card thead {
-  background-color: #f1f5f9 !important;
-  border-color: #e2e8f0 !important;
-  color: #475569 !important;
-}
-
-.app-workspace-card table {
-  color: #334155 !important;
-}
-
-.app-workspace-card tr:hover {
-  background-color: #f8fafc !important;
-}
-
-.app-workspace-card input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
-.app-workspace-card textarea,
-.app-workspace-card select {
+/* 5. Form Inputs, Textareas & Selects */
+html.light .app-workspace-card input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html.light .app-workspace-card textarea,
+html.light .app-workspace-card select,
+html:not(.dark) .app-workspace-card input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html:not(.dark) .app-workspace-card textarea,
+html:not(.dark) .app-workspace-card select {
   background-color: #ffffff !important;
   color: #0f172a !important;
   border-color: #cbd5e1 !important;
 }
 
-.app-workspace-card input::placeholder,
-.app-workspace-card textarea::placeholder {
+html.light .app-workspace-card input:focus,
+html.light .app-workspace-card textarea:focus,
+html.light .app-workspace-card select:focus,
+html:not(.dark) .app-workspace-card input:focus,
+html:not(.dark) .app-workspace-card textarea:focus,
+html:not(.dark) .app-workspace-card select:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12) !important;
+}
+
+html.light .app-workspace-card input::placeholder,
+html.light .app-workspace-card textarea::placeholder,
+html:not(.dark) .app-workspace-card input::placeholder,
+html:not(.dark) .app-workspace-card textarea::placeholder {
   color: #94a3b8 !important;
 }
 
-/* Ensure buttons keep their white text inside workspace card */
-.app-workspace-card button[class*="bg-indigo"],
-.app-workspace-card a[class*="bg-indigo"],
-.app-workspace-card button[class*="bg-rose"],
-.app-workspace-card a[class*="bg-rose"],
-.app-workspace-card button[class*="bg-emerald"],
-.app-workspace-card a[class*="bg-emerald"] {
+/* 6. Tables */
+html.light .app-workspace-card thead,
+html:not(.dark) .app-workspace-card thead {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light .app-workspace-card thead th,
+html:not(.dark) .app-workspace-card thead th {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+html.light .app-workspace-card table tbody tr,
+html:not(.dark) .app-workspace-card table tbody tr {
+  border-color: #f1f5f9 !important;
+}
+
+html.light .app-workspace-card table tbody tr:hover,
+html:not(.dark) .app-workspace-card table tbody tr:hover {
+  background-color: #f8fafc !important;
+}
+
+html.light .app-workspace-card table tbody td,
+html:not(.dark) .app-workspace-card table tbody td {
+  color: #334155 !important;
+}
+
+/* 7. Radio & Feature Options in Settings */
+html.light .app-workspace-card .bg-indigo-950\/20,
+html:not(.dark) .app-workspace-card .bg-indigo-950\/20 {
+  background-color: #eef2ff !important;
+  border-color: #6366f1 !important;
+  color: #312e81 !important;
+}
+
+html.light .app-workspace-card label.bg-zinc-950,
+html:not(.dark) .app-workspace-card label.bg-zinc-950 {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light .app-workspace-card label.bg-zinc-950:hover,
+html:not(.dark) .app-workspace-card label.bg-zinc-950:hover {
+  border-color: #cbd5e1 !important;
+  background-color: #f8fafc !important;
+}
+
+/* 8. Filter Tabs (Campaigns & Contacts) */
+html.light .app-workspace-card .border-b button.bg-zinc-800,
+html:not(.dark) .app-workspace-card .border-b button.bg-zinc-800 {
+  background-color: #0f172a !important; /* solid slate-900 active pill */
+  color: #ffffff !important;
+  border-color: #0f172a !important;
+}
+
+html.light .app-workspace-card .border-b button.bg-zinc-800 span,
+html:not(.dark) .app-workspace-card .border-b button.bg-zinc-800 span {
+  color: #ffffff !important;
+}
+
+html.light .app-workspace-card .border-b button:not(.bg-zinc-800),
+html:not(.dark) .app-workspace-card .border-b button:not(.bg-zinc-800) {
+  background-color: #f1f5f9 !important;
+  color: #475569 !important;
+}
+
+html.light .app-workspace-card .border-b button:not(.bg-zinc-800) span:last-child,
+html:not(.dark) .app-workspace-card .border-b button:not(.bg-zinc-800) span:last-child {
+  background-color: #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+/* 9. Metric Cards in Overview */
+html.light .app-workspace-card .p-2.rounded-lg.bg-zinc-800\/80,
+html:not(.dark) .app-workspace-card .p-2.rounded-lg.bg-zinc-800\/80 {
+  background-color: #eef2ff !important;
+  color: #4f46e5 !important;
+}
+
+html.light .app-workspace-card a.bg-zinc-900.border-zinc-800,
+html:not(.dark) .app-workspace-card a.bg-zinc-900.border-zinc-800 {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+}
+
+/* 10. Buttons & Color Pills: white text MUST stay white */
+html.light .app-workspace-card button[class*="bg-indigo"],
+html.light .app-workspace-card a[class*="bg-indigo"],
+html.light .app-workspace-card button[class*="bg-rose"],
+html.light .app-workspace-card a[class*="bg-rose"],
+html.light .app-workspace-card button[class*="bg-emerald"],
+html.light .app-workspace-card a[class*="bg-emerald"],
+html:not(.dark) .app-workspace-card button[class*="bg-indigo"],
+html:not(.dark) .app-workspace-card a[class*="bg-indigo"],
+html:not(.dark) .app-workspace-card button[class*="bg-rose"],
+html:not(.dark) .app-workspace-card a[class*="bg-rose"],
+html:not(.dark) .app-workspace-card button[class*="bg-emerald"],
+html:not(.dark) .app-workspace-card a[class*="bg-emerald"] {
   color: #ffffff !important;
 }
 
 /* ==========================================================================
-   Full Dark Mode Overrides for Workspace Card (when user toggles to dark)
+   FULL DARK MODE OVERRIDES (When user explicitly toggles Moon / Dark)
+   Seamless graphite workspace with flawless contrast and zero blotches.
    ========================================================================== */
 html.dark .app-workspace-card {
   color: #f8fafc;
@@ -160,13 +311,18 @@ html.dark .app-workspace-card h1,
 html.dark .app-workspace-card h2,
 html.dark .app-workspace-card h3,
 html.dark .app-workspace-card h4,
+html.dark .app-workspace-card h5,
 html.dark .app-workspace-card .text-white {
   color: #ffffff !important;
 }
 
 html.dark .app-workspace-card .text-zinc-100 { color: #f4f4f5 !important; }
 html.dark .app-workspace-card .text-zinc-200 { color: #e4e4e7 !important; }
-html.dark .app-workspace-card .text-zinc-300 { color: #d4d4d8 !important; }
+html.dark .app-workspace-card .text-zinc-300,
+html.dark .app-workspace-card label {
+  color: #d4d4d8 !important;
+}
+
 html.dark .app-workspace-card .text-zinc-400 { color: #a1a1aa !important; }
 html.dark .app-workspace-card .text-zinc-500 { color: #71717a !important; }
 
@@ -206,6 +362,10 @@ html.dark .app-workspace-card thead {
   color: #a1a1aa !important;
 }
 
+html.dark .app-workspace-card table tbody tr {
+  border-color: #262c3b !important;
+}
+
 html.dark .app-workspace-card tr:hover {
   background-color: #202431 !important;
 }
@@ -221,4 +381,15 @@ html.dark .app-workspace-card select {
 html.dark .app-workspace-card input::placeholder,
 html.dark .app-workspace-card textarea::placeholder {
   color: #64748b !important;
+}
+
+html.dark .app-workspace-card .bg-indigo-950\/20 {
+  background-color: #1e1b4b !important;
+  border-color: #6366f1 !important;
+  color: #e0e7ff !important;
+}
+
+html.dark .app-workspace-card .p-2.rounded-lg.bg-zinc-800\/80 {
+  background-color: #232838 !important;
+  color: #818cf8 !important;
 }
