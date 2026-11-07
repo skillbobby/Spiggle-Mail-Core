@@ -1,5 +1,21 @@
 # SpiggleMail Core
 
+<p align="left">
+  <a href="https://github.com/skillbobby/Spiggle-Mail-Core/releases"><img src="https://img.shields.io/badge/Release-v1.1.0-4F46E5.svg?style=flat-square&logo=git" alt="Release v1.1.0" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-FACC15.svg?style=flat-square" alt="License MIT" /></a>
+  <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-13.x-FF2D20.svg?style=flat-square&logo=laravel&logoColor=white" alt="Laravel 13.x" /></a>
+  <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-%5E8.3%20%7C%208.5-777BB4.svg?style=flat-square&logo=php&logoColor=white" alt="PHP ^8.3" /></a>
+  <a href="https://react.dev"><img src="https://img.shields.io/badge/React-19.x-61DAFB.svg?style=flat-square&logo=react&logoColor=black" alt="React 19.x" /></a>
+  <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript-7.x-3178C6.svg?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript 7.x" /></a>
+  <a href="https://inertiajs.com"><img src="https://img.shields.io/badge/Inertia.js-3.x-9553E9.svg?style=flat-square&logo=inertia&logoColor=white" alt="Inertia.js 3.x" /></a>
+  <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4.svg?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS v4" /></a>
+  <a href="https://vitejs.dev"><img src="https://img.shields.io/badge/Vite-8.x-646CFF.svg?style=flat-square&logo=vite&logoColor=white" alt="Vite 8.x" /></a>
+  <a href="https://aws.amazon.com/ses/"><img src="https://img.shields.io/badge/Amazon_SES-SDK_v3-FF9900.svg?style=flat-square&logo=amazonaws&logoColor=white" alt="Amazon SES SDK v3" /></a>
+  <a href="https://tiptap.dev"><img src="https://img.shields.io/badge/Editor-TipTap_3.x-25D366.svg?style=flat-square" alt="TipTap Editor" /></a>
+  <a href="https://phpunit.de"><img src="https://img.shields.io/badge/Tests-94_Passing-10B981.svg?style=flat-square" alt="PHPUnit Tests" /></a>
+  <a href="https://laravel.com/docs/pint"><img src="https://img.shields.io/badge/Code_Style-Laravel_Pint-000000.svg?style=flat-square" alt="Laravel Pint" /></a>
+</p>
+
 **Self-hosted, single-operator newsletter & AWS SES broadcast platform (Community Edition — MIT License).**
 
 SpiggleMail Core gives independent creators, developers, and companies complete ownership over their email subscriber list, web archive, and Amazon SES sender reputation—without per-subscriber SaaS markups or public multi-tenant attack surface.
@@ -45,6 +61,28 @@ SpiggleMail Core gives independent creators, developers, and companies complete 
   - Rich HTML/Markdown composer, A/B subject-line split testing, 5% warm-up pilot slices, open & per-URL click analytics (with corporate link-scanner filtering), sanitized public web archive (`/archive/{slug}`), RSS 2.0 feed, and XML sitemap.
 - **Developer REST API v1 & Model Context Protocol (MCP) Server**
   - Role-scoped Bearer API keys (`full_access`, `send_only`, `read_only`), OpenAPI 3.0 spec (`/api/v1/openapi.json`), `llms.txt`, and built-in JSON-RPC 2.0 MCP server (`/api/mcp`) for Claude, Cursor, and autonomous agents.
+
+---
+
+## 🛠️ Technologies & Stack Versions
+
+| Layer | Technology | Version | Purpose |
+|:---|:---|:---:|:---|
+| **Backend Framework** | [Laravel](https://laravel.com) | `13.x` (`13.40.0`) | Application core, queue workers, job dispatchers, and security middleware |
+| **Backend Language** | [PHP](https://www.php.net) | `^8.3` (tested on `8.5`) | Strict typed engine, OpenSSL cryptography, and native Ulid generation |
+| **Frontend UI** | [React](https://react.dev) | `19.x` (`19.3.1`) | High-performance interactive dashboard, wizards, and content studio |
+| **Type System** | [TypeScript](https://www.typescriptlang.org) | `7.x` (`7.0.2`) | Strict type checking with comprehensive data contracts across all views |
+| **SPA Bridge** | [Inertia.js](https://inertiajs.com) | `3.x` | Monolith modern routing with zero client-side state boilerplate |
+| **Design System** | [Tailwind CSS](https://tailwindcss.com) | `v4.x` (`4.3.4`) | High-contrast design system with `@custom-variant dark` theme support |
+| **Bundler & HMR** | [Vite](https://vitejs.dev) | `8.x` (`8.0.0`) | Sub-second frontend HMR and optimized production asset minification |
+| **SES Dispatch SDK** | [Amazon SES PHP SDK](https://aws.amazon.com/ses/) | `v3.x` (`^3.402`) | Official AWS SDK for Easy DKIM, custom MAIL FROM, and batch sending |
+| **Content Studio** | [TipTap](https://tiptap.dev) | `3.x` (`3.32.2`) | Headless rich-text editor for markdown/HTML with dynamic shortcodes |
+| **Iconography** | [Lucide React](https://lucide.dev) | `1.x` (`1.68.0`) | Semantic, accessible SVG icon library |
+| **Data Importer** | [PapaParse](https://www.papaparse.com/) | `5.x` (`5.7.0`) | High-speed client-side chunked CSV streaming & header mapping |
+| **Code Style** | [Laravel Pint](https://laravel.com/docs/pint) | `1.x` (`1.27.0`) | Automated PSR-12 code style enforcer |
+| **Testing** | [PHPUnit](https://phpunit.de) | `12.x` (`12.5.12`) | 94 automated feature tests covering deliverability, auth, and SES APIs |
+| **Database** | SQLite / MySQL / PostgreSQL / MariaDB | Any | Zero-config SQLite default with seamless enterprise database switching |
+| **Cache & Queue** | Database / Redis ([Predis](https://github.com/predis/predis)) | `3.x` (`3.7.0`) | High-throughput asynchronous batch workers and rate limiting |
 
 ---
 
