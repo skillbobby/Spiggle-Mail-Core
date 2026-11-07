@@ -8,16 +8,6 @@ SpiggleMail Core gives independent creators, developers, and companies complete 
 
 ---
 
-## ⚡ Video Preview
-
-Check out the high-energy product launch video showcasing SpiggleMail's modern 3-column newsletter studio, real-time analytics, and Amazon SES deliverability engine:
-
-▶️ **[Watch the SpiggleMail Intro Promo Video (1080p MP4)](docs/media/spigglemail_intro_promo.mp4)**
-
-![SpiggleMail Command Center](docs/media/promo_preview_scene2.png)
-
----
-
 ## Key Features
 
 - **Modern 3-Column Content Studio & Real-Time Composer**
