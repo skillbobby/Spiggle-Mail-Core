@@ -21,7 +21,7 @@ final class CsvSanitizer
 
             $first = $cell[0];
             if (in_array($first, ['=', '+', '-', '@', "\t", "\r"], true)) {
-                return "'" . $cell;
+                return "'".$cell;
             }
 
             return $cell;

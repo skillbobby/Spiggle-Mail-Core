@@ -2,15 +2,15 @@
 
 namespace Tests\Feature;
 
+use App\Jobs\SendCampaignBatchJob;
+use App\Jobs\SendWelcomeEmailJob;
 use App\Models\Account;
 use App\Models\Campaign;
 use App\Models\Contact;
 use App\Models\Newsletter;
 use App\Models\Suppression;
 use App\Models\User;
-use App\Jobs\SendWelcomeEmailJob;
-use App\Jobs\SendConfirmationEmailJob;
-use App\Jobs\SendCampaignBatchJob;
+use App\Services\Campaign\ShortcodeParserService;
 use App\Services\Email\EmailProviderInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -22,7 +22,9 @@ class AutomationsAndLifecycleTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     private Account $account;
+
     private Newsletter $newsletter;
 
     protected function setUp(): void
@@ -167,7 +169,7 @@ class AutomationsAndLifecycleTest extends TestCase
                 'bounce' => [
                     'bounceSubType' => 'General',
                     'bouncedRecipients' => [
-                        ['emailAddress' => 'bad.address@example.com']
+                        ['emailAddress' => 'bad.address@example.com'],
                     ],
                 ],
             ]),
@@ -225,7 +227,7 @@ class AutomationsAndLifecycleTest extends TestCase
         ]);
 
         $job = new SendCampaignBatchJob($campaign->id, 50);
-        $job->handle(app(EmailProviderInterface::class), app(\App\Services\Campaign\ShortcodeParserService::class));
+        $job->handle(app(EmailProviderInterface::class), app(ShortcodeParserService::class));
 
         $campaign->refresh();
         $this->assertEquals('paused', $campaign->status);
@@ -254,7 +256,7 @@ class AutomationsAndLifecycleTest extends TestCase
         }
 
         $job = new SendCampaignBatchJob($campaign->id, 50);
-        $job->handle(app(EmailProviderInterface::class), app(\App\Services\Campaign\ShortcodeParserService::class));
+        $job->handle(app(EmailProviderInterface::class), app(ShortcodeParserService::class));
 
         $campaign->refresh();
 

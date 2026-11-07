@@ -8,6 +8,26 @@ SpiggleMail Core gives independent creators, developers, and companies complete 
 
 ---
 
+## Screenshots
+
+| **Command Center & Overview** | **Campaigns & Newsletters** |
+|:---:|:---:|
+| <img src="docs/images/overview-dark.png" width="100%" alt="Overview Dashboard" /> | <img src="docs/images/campaigns-dark.png" width="100%" alt="Campaigns and Newsletters" /> |
+| **Deliverability & Reputation Guard** | **Account & Operator Security** |
+| <img src="docs/images/deliverability-dark.jpg" width="100%" alt="Deliverability and Telemetry" /> | <img src="docs/images/account-security-dark.png" width="100%" alt="Account and Security" /> |
+
+<details>
+<summary>☀️ <b>View Light Theme Screenshot</b></summary>
+<br />
+
+| **Command Center (Light Mode)** |
+|:---:|
+| <img src="docs/images/overview-light.png" width="100%" alt="Overview Light Mode" /> |
+
+</details>
+
+---
+
 ## Key Features
 
 - **Modern 3-Column Content Studio & Real-Time Composer**

@@ -33,13 +33,15 @@ class TestTickitDexWebhookCommand extends Command
     {
         $this->info('Testing TickitDex webhook integration...');
 
-        if (!$service->isEnabled()) {
+        if (! $service->isEnabled()) {
             $this->warn('TickitDex integration is currently DISABLED. (Set TICKITDEX_ENABLED=true in .env)');
+
             return 1;
         }
 
-        if (!$service->isConfigured()) {
+        if (! $service->isConfigured()) {
             $this->error('TickitDex token is missing. (Set TICKITDEX_TOKEN in .env)');
+
             return 1;
         }
 
@@ -63,13 +65,15 @@ class TestTickitDexWebhookCommand extends Command
 
         if ($result['success']) {
             $this->info("Ticket dispatched successfully! Status: {$result['status_code']}");
-            if (!empty($result['ticket_id'])) {
+            if (! empty($result['ticket_id'])) {
                 $this->line("Ticket ID: {$result['ticket_id']}");
             }
+
             return 0;
         }
 
-        $this->error("Dispatch failed: " . ($result['error'] ?? 'Unknown error'));
+        $this->error('Dispatch failed: '.($result['error'] ?? 'Unknown error'));
+
         return 1;
     }
 }

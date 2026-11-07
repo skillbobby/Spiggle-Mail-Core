@@ -127,7 +127,7 @@ class UploadController extends Controller
         $extension = self::ALLOWED_MIMES[$detectedMime];
         $baseName = Str::slug(pathinfo($originalName, PATHINFO_FILENAME)) ?: 'image';
 
-        $filename = "{$baseName}-" . Str::lower(Str::random(10)) . ".{$extension}";
+        $filename = "{$baseName}-".Str::lower(Str::random(10)).".{$extension}";
         $yearMonth = date('Y/m');
         $storagePath = "uploads/{$yearMonth}/{$filename}";
 

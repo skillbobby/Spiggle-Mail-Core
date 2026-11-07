@@ -9,7 +9,6 @@ use App\Models\Contact;
 use App\Models\Message;
 use App\Models\Newsletter;
 use App\Models\User;
-use App\Services\Alerting\AlertDispatcherService;
 use App\Services\Alerting\TickitDexWebhookService;
 use App\Services\Deliverability\TrackingTokenService;
 use Illuminate\Foundation\Testing\RefreshDatabase;

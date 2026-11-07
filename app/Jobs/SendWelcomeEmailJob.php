@@ -26,13 +26,14 @@ class SendWelcomeEmailJob implements ShouldQueue
     public function handle(EmailProviderInterface $emailProvider): void
     {
         $contact = Contact::with('newsletter')->find($this->contactId);
-        if (!$contact || $contact->status !== 'subscribed') {
+        if (! $contact || $contact->status !== 'subscribed') {
             Log::info("SendWelcomeEmailJob: Contact {$this->contactId} not in subscribed state.");
+
             return;
         }
 
         $newsletter = $contact->newsletter;
-        if (!$newsletter || !$newsletter->welcome_enabled) {
+        if (! $newsletter || ! $newsletter->welcome_enabled) {
             return;
         }
 

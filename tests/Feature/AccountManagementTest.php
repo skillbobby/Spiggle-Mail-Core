@@ -31,7 +31,7 @@ class AccountManagementTest extends TestCase
         $newsletter = Newsletter::create([
             'account_id' => $account->id,
             'name' => 'Founders Journal',
-            'slug' => 'founders-journal-' . Str::random(4),
+            'slug' => 'founders-journal-'.Str::random(4),
             'from_name' => 'Jane',
             'from_email' => 'jane@example.com',
             'postal_address' => '100 Market St',

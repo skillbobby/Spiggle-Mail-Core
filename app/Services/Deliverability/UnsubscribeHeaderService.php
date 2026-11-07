@@ -30,7 +30,7 @@ final class UnsubscribeHeaderService
         $payload = json_encode(['c' => $contactId, 's' => $newsletterSlug]) ?: '{}';
         $sig = hash_hmac('sha256', $payload, self::signingKey());
 
-        return rtrim(strtr(base64_encode($payload . '|' . $sig), '+/', '-_'), '=');
+        return rtrim(strtr(base64_encode($payload.'|'.$sig), '+/', '-_'), '=');
     }
 
     /**

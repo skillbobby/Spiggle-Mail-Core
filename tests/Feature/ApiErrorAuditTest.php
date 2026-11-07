@@ -19,9 +19,13 @@ class ApiErrorAuditTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     private Account $account;
+
     private Newsletter $newsletter;
+
     private string $rawApiKey;
+
     private ApiKey $apiKey;
 
     protected function setUp(): void
@@ -46,7 +50,7 @@ class ApiErrorAuditTest extends TestCase
             'postal_address' => '123 Tech Lane, San Francisco, CA 94107',
         ]);
 
-        $this->rawApiKey = 'spm_' . Str::random(32);
+        $this->rawApiKey = 'spm_'.Str::random(32);
         $this->apiKey = ApiKey::create([
             'id' => (string) Str::ulid(),
             'account_id' => $this->account->id,

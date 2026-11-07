@@ -19,7 +19,9 @@ class Sprint1FunctionalIntegrityTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     private Account $account;
+
     private Newsletter $newsletter;
 
     protected function setUp(): void
@@ -104,9 +106,9 @@ class Sprint1FunctionalIntegrityTest extends TestCase
         session(['authenticated_user_id' => $this->user->id]);
 
         $csvContent = "Email Address,Subscription Status,Signup Date\n"
-            . "alice@company.org,active,2026-01-15\n"
-            . "bob@agency.dev,unsubscribed,2026-02-10\n"
-            . "carol@domain.net,subscribed,2026-03-01\n";
+            ."alice@company.org,active,2026-01-15\n"
+            ."bob@agency.dev,unsubscribed,2026-02-10\n"
+            ."carol@domain.net,subscribed,2026-03-01\n";
 
         $file = UploadedFile::fake()->createWithContent('subscribers.csv', $csvContent);
 

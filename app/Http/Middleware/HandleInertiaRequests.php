@@ -2,6 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\ApiKey;
+use App\Models\Campaign;
+use App\Models\Contact;
+use App\Models\Domain;
+use App\Models\Newsletter;
 use App\Support\CurrentWorkspace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
@@ -60,7 +65,7 @@ class HandleInertiaRequests extends Middleware
                             'actionLabel' => 'Inspect Deliverability & Health',
                         ];
                     } elseif (Schema::hasTable('campaigns')) {
-                        $pausedCampaign = \App\Models\Campaign::whereHas('newsletter', fn ($q) => $q->where('account_id', $account->id))
+                        $pausedCampaign = Campaign::whereHas('newsletter', fn ($q) => $q->where('account_id', $account->id))
                             ->where('status', 'paused')
                             ->latest('updated_at')
                             ->first();
@@ -69,7 +74,7 @@ class HandleInertiaRequests extends Middleware
                             $accountAlert = [
                                 'type' => 'warning',
                                 'title' => 'Campaign Dispatching Paused',
-                                'message' => "Campaign \"{$pausedCampaign->subject}\" is paused: " . ($pausedCampaign->pause_reason ?? 'Awaiting operator review.'),
+                                'message' => "Campaign \"{$pausedCampaign->subject}\" is paused: ".($pausedCampaign->pause_reason ?? 'Awaiting operator review.'),
                                 'pausedBy' => $pausedCampaign->pause_code ?? 'operator',
                                 'pausedAt' => $pausedCampaign->updated_at?->toIso8601String(),
                                 'actionUrl' => "/campaigns/{$pausedCampaign->id}",
@@ -78,7 +83,7 @@ class HandleInertiaRequests extends Middleware
                         }
                     }
 
-                    $newsletters = \App\Models\Newsletter::where('account_id', $account->id)->get()->map(fn ($n) => [
+                    $newsletters = Newsletter::where('account_id', $account->id)->get()->map(fn ($n) => [
                         'id' => $n->id,
                         'name' => $n->name,
                         'slug' => $n->slug,
@@ -92,11 +97,11 @@ class HandleInertiaRequests extends Middleware
                     $currentNewsletter = collect($newsletters)->firstWhere('id', $selectedId) ?? ($newsletters[0] ?? null);
 
                     if (Schema::hasTable('campaigns')) {
-                        $hasCampaign = \App\Models\Campaign::whereHas('newsletter', fn ($q) => $q->where('account_id', $account->id))->exists();
-                        $hasSentCampaign = \App\Models\Campaign::whereHas('newsletter', fn ($q) => $q->where('account_id', $account->id))->whereIn('status', ['scheduled', 'sending', 'sent', 'paused'])->exists();
-                        $hasContacts = \App\Models\Contact::whereHas('newsletter', fn ($q) => $q->where('account_id', $account->id))->exists();
-                        $hasDomain = \App\Models\Domain::where('account_id', $account->id)->where('status', 'verified')->exists();
-                        $hasApiKey = \App\Models\ApiKey::where('account_id', $account->id)->exists();
+                        $hasCampaign = Campaign::whereHas('newsletter', fn ($q) => $q->where('account_id', $account->id))->exists();
+                        $hasSentCampaign = Campaign::whereHas('newsletter', fn ($q) => $q->where('account_id', $account->id))->whereIn('status', ['scheduled', 'sending', 'sent', 'paused'])->exists();
+                        $hasContacts = Contact::whereHas('newsletter', fn ($q) => $q->where('account_id', $account->id))->exists();
+                        $hasDomain = Domain::where('account_id', $account->id)->where('status', 'verified')->exists();
+                        $hasApiKey = ApiKey::where('account_id', $account->id)->exists();
 
                         $steps = [
                             [

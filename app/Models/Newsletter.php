@@ -49,6 +49,7 @@ class Newsletter extends Model
     public function getDefaultWelcomeMarkdown(): string
     {
         $desc = $this->description ? " {$this->description}" : '';
+
         return "Thanks for joining {$this->name}.{$desc}\n\nThe next issue lands in your inbox. Hit reply to say hi.";
     }
 

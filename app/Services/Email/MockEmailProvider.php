@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 final class MockEmailProvider implements EmailProviderInterface
 {
     private string $mailpitHost;
+
     private int $mailpitPort;
 
     public function __construct(string $mailpitHost = '127.0.0.1', int $mailpitPort = 1025)
@@ -44,7 +45,7 @@ final class MockEmailProvider implements EmailProviderInterface
         array $headers = [],
         ?string $plainText = null
     ): array {
-        $messageId = 'mock-ses-' . Str::uuid()->toString() . '@spiggle-mail.local';
+        $messageId = 'mock-ses-'.Str::uuid()->toString().'@spiggle-mail.local';
         $textBody = $plainText ?? HtmlSanitizer::toPlainText($html);
 
         // Try delivering to local Mailpit SMTP if available (skip socket wait in PHPUnit unless configured)
@@ -82,22 +83,22 @@ final class MockEmailProvider implements EmailProviderInterface
             }
 
             fgets($socket, 512);
-            fputs($socket, "HELO spiggle-mail.local\r\n");
+            fwrite($socket, "HELO spiggle-mail.local\r\n");
             fgets($socket, 512);
 
             preg_match('/<([^>]+)>/', $from, $matches);
             $cleanFrom = $matches[1] ?? $from;
 
-            fputs($socket, "MAIL FROM:<{$cleanFrom}>\r\n");
+            fwrite($socket, "MAIL FROM:<{$cleanFrom}>\r\n");
             fgets($socket, 512);
 
-            fputs($socket, "RCPT TO:<{$to}>\r\n");
+            fwrite($socket, "RCPT TO:<{$to}>\r\n");
             fgets($socket, 512);
 
-            fputs($socket, "DATA\r\n");
+            fwrite($socket, "DATA\r\n");
             fgets($socket, 512);
 
-            $boundary = '=_spiggle_' . Str::random(20);
+            $boundary = '=_spiggle_'.Str::random(20);
             $msg = "From: {$from}\r\n";
             $msg .= "To: <{$to}>\r\n";
             $msg .= "Subject: {$subject}\r\n";
@@ -111,21 +112,21 @@ final class MockEmailProvider implements EmailProviderInterface
 
             $msg .= "\r\n--{$boundary}\r\n";
             $msg .= "Content-Type: text/plain; charset=UTF-8\r\n\r\n";
-            $msg .= $text . "\r\n";
+            $msg .= $text."\r\n";
             $msg .= "--{$boundary}\r\n";
             $msg .= "Content-Type: text/html; charset=UTF-8\r\n\r\n";
-            $msg .= $html . "\r\n";
+            $msg .= $html."\r\n";
             $msg .= "--{$boundary}--\r\n.\r\n";
 
-            fputs($socket, $msg);
+            fwrite($socket, $msg);
             fgets($socket, 512);
 
-            fputs($socket, "QUIT\r\n");
+            fwrite($socket, "QUIT\r\n");
             fclose($socket);
 
             return true;
         } catch (\Throwable $e) {
-            Log::warning('Mailpit socket transmission skipped: ' . $e->getMessage());
+            Log::warning('Mailpit socket transmission skipped: '.$e->getMessage());
 
             return false;
         }
@@ -139,11 +140,11 @@ final class MockEmailProvider implements EmailProviderInterface
             'domain' => $clean,
             'status' => app()->environment('local', 'testing') ? 'verified' : 'pending',
             'dkim_tokens' => [
-                'mocktoken1' . substr(md5($clean), 0, 8),
-                'mocktoken2' . substr(md5($clean), 8, 8),
-                'mocktoken3' . substr(md5($clean), 16, 8),
+                'mocktoken1'.substr(md5($clean), 0, 8),
+                'mocktoken2'.substr(md5($clean), 8, 8),
+                'mocktoken3'.substr(md5($clean), 16, 8),
             ],
-            'mail_from' => 'mail.' . $clean,
+            'mail_from' => 'mail.'.$clean,
         ];
     }
 

@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Services\Deliverability\TrackingTokenService;
-use App\Services\Deliverability\UnsubscribeHeaderService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;

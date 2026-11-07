@@ -19,6 +19,7 @@ use App\Services\Deliverability\TrackingTokenService;
 use App\Services\Deliverability\UnsubscribeHeaderService;
 use App\Services\Email\AmazonSesEmailProvider;
 use App\Services\Email\EmailProviderInterface;
+use App\Services\Email\MockEmailProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -98,7 +99,7 @@ class SesReputationAndSecurityAuditTest extends TestCase
             ->assertStatus(403);
 
         // API key belonging to Tenant B cannot add contacts to Tenant A's newsletter
-        $rawKeyB = 'spm_' . Str::random(32);
+        $rawKeyB = 'spm_'.Str::random(32);
         ApiKey::create([
             'id' => (string) Str::ulid(),
             'account_id' => $tenantBAccount->id,
@@ -310,7 +311,7 @@ class SesReputationAndSecurityAuditTest extends TestCase
             'status' => 'verified',
             'verified_at' => now(),
         ]);
-        $this->app->bind(EmailProviderInterface::class, fn () => new \App\Services\Email\MockEmailProvider);
+        $this->app->bind(EmailProviderInterface::class, fn () => new MockEmailProvider);
 
         $okRes = $this->actingAs($user)->post('/campaigns', [
             'subject' => 'Clean Empty Audience Send',
@@ -362,7 +363,7 @@ class SesReputationAndSecurityAuditTest extends TestCase
         ]);
 
         (new SendCampaignBatchJob($campaign->id, 50))->handle(
-            new \App\Services\Email\MockEmailProvider,
+            new MockEmailProvider,
             app(ShortcodeParserService::class)
         );
 

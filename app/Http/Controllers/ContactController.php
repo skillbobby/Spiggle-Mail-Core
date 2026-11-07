@@ -7,9 +7,9 @@ use App\Jobs\SendWelcomeEmailJob;
 use App\Models\Contact;
 use App\Models\Newsletter;
 use App\Models\Suppression;
-use App\Models\User;
 use App\Services\Contact\ContactCsvImportService;
 use App\Services\Deliverability\EmailHygieneService;
+use App\Support\CurrentWorkspace;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -21,7 +21,7 @@ class ContactController extends Controller
     public function index(Request $request): Response|RedirectResponse
     {
         $newsletter = $this->getActiveNewsletter($request);
-        if (!$newsletter) {
+        if (! $newsletter) {
             return redirect('/dashboard')->with('error', 'Please configure a newsletter publication first.');
         }
 
@@ -95,7 +95,7 @@ class ContactController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $newsletter = $this->getActiveNewsletter($request);
-        if (!$newsletter) {
+        if (! $newsletter) {
             return back()->withErrors(['email' => 'No active newsletter publication found.']);
         }
 
@@ -127,6 +127,7 @@ class ContactController extends Controller
                 return back()->withErrors(['email' => "Cannot re-subscribe a contact whose status is '{$existing->status}'."]);
             }
             $existing->update(['status' => 'subscribed', 'subscribed_at' => now()]);
+
             return back()->with('success', 'Subscriber status updated to subscribed.');
         }
 
@@ -144,6 +145,7 @@ class ContactController extends Controller
 
         if ($newsletter->double_opt_in) {
             SendConfirmationEmailJob::dispatch($contact->id);
+
             return back()->with('success', 'Subscriber added as pending; confirmation email sent.');
         }
 
@@ -157,7 +159,7 @@ class ContactController extends Controller
     public function import(Request $request, ContactCsvImportService $importService): RedirectResponse
     {
         $newsletter = $this->getActiveNewsletter($request);
-        if (!$newsletter) {
+        if (! $newsletter) {
             return back()->withErrors(['file' => 'No active newsletter publication found.']);
         }
 
@@ -168,7 +170,7 @@ class ContactController extends Controller
         $file = $request->file('file');
         $result = $importService->import($newsletter, $file);
 
-        if (!empty($result['errors'])) {
+        if (! empty($result['errors'])) {
             return back()->withErrors(['file' => implode(' ', $result['errors'])]);
         }
 
@@ -178,12 +180,12 @@ class ContactController extends Controller
     public function destroy(Request $request, string $id): RedirectResponse
     {
         $newsletter = $this->getActiveNewsletter($request);
-        if (!$newsletter) {
+        if (! $newsletter) {
             return back()->with('error', 'No active newsletter found.');
         }
 
         $contact = Contact::where('newsletter_id', $newsletter->id)->where('id', $id)->first();
-        if (!$contact) {
+        if (! $contact) {
             return back()->with('error', 'Subscriber not found.');
         }
 
@@ -194,6 +196,6 @@ class ContactController extends Controller
 
     private function getActiveNewsletter(Request $request): ?Newsletter
     {
-        return \App\Support\CurrentWorkspace::newsletter($request);
+        return CurrentWorkspace::newsletter($request);
     }
 }

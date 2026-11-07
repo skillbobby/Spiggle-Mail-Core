@@ -119,7 +119,7 @@ final class AmazonSesEmailProvider implements EmailProviderInterface
                 'message_id' => $messageId,
             ];
         } catch (Throwable $e) {
-            Log::error('Amazon SES sending error: ' . $e->getMessage(), [
+            Log::error('Amazon SES sending error: '.$e->getMessage(), [
                 'to' => $payload['to'] ?? null,
                 'subject' => $payload['subject'] ?? null,
             ]);
@@ -145,7 +145,7 @@ final class AmazonSesEmailProvider implements EmailProviderInterface
     public function getOrCreateDomainIdentity(string $domain): array
     {
         $domain = strtolower(trim($domain));
-        $mailFrom = 'mail.' . $domain;
+        $mailFrom = 'mail.'.$domain;
         $client = $this->getClient();
 
         try {
@@ -165,7 +165,7 @@ final class AmazonSesEmailProvider implements EmailProviderInterface
                 ]);
             }
         } catch (Throwable $e) {
-            Log::warning("Unable to configure SES custom MAIL FROM for {$domain}: " . $e->getMessage());
+            Log::warning("Unable to configure SES custom MAIL FROM for {$domain}: ".$e->getMessage());
         }
 
         $dkim = $identity->get('DkimAttributes') ?? [];

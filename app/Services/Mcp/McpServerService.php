@@ -57,7 +57,7 @@ class McpServerService
                     ],
                     'instructions' => 'SpiggleMail MCP Server is active and operational. Send JSON-RPC 2.0 POST requests with methods: initialize, tools/list, tools/call.',
                     'toolsCount' => count($this->getToolDefinitions()),
-                    'capabilities' => ['tools' => new \stdClass()],
+                    'capabilities' => ['tools' => new \stdClass],
                 ],
             ]);
         }
@@ -69,7 +69,7 @@ class McpServerService
                     'id' => $id,
                     'result' => [
                         'protocolVersion' => '2024-11-05',
-                        'capabilities' => ['tools' => new \stdClass()],
+                        'capabilities' => ['tools' => new \stdClass],
                         'serverInfo' => [
                             'name' => 'spiggle-mail',
                             'title' => 'SpiggleMail MCP Server',
@@ -187,7 +187,7 @@ class McpServerService
                 'description' => 'Retrieves deliverability health scores, bounce and complaint rates, and safety status.',
                 'inputSchema' => [
                     'type' => 'object',
-                    'properties' => new \stdClass(),
+                    'properties' => new \stdClass,
                 ],
             ],
             [
@@ -208,7 +208,7 @@ class McpServerService
                 'description' => 'Lists all publications under the authenticated account.',
                 'inputSchema' => [
                     'type' => 'object',
-                    'properties' => new \stdClass(),
+                    'properties' => new \stdClass,
                 ],
             ],
         ];
@@ -380,8 +380,8 @@ class McpServerService
                 }
                 $emailProvider = app(EmailProviderInterface::class);
                 $from = "{$newsletter->from_name} <{$newsletter->from_email}>";
-                $testSubject = '[TEST] ' . ($args['subject'] ?? 'Test Newsletter');
-                $testHtml = ($args['html'] ?? '<p>Test issue content.</p>') . '<div style="margin-top:20px;padding:10px;background:#f3f4f6;color:#6b7280;font-size:11px;text-align:center;">This is a test preview sent via SpiggleMail MCP.</div>';
+                $testSubject = '[TEST] '.($args['subject'] ?? 'Test Newsletter');
+                $testHtml = ($args['html'] ?? '<p>Test issue content.</p>').'<div style="margin-top:20px;padding:10px;background:#f3f4f6;color:#6b7280;font-size:11px;text-align:center;">This is a test preview sent via SpiggleMail MCP.</div>';
                 $emailProvider->sendRaw($recipient, $from, $testSubject, $testHtml, ['X-Spiggle-Test' => 'true']);
 
                 return [

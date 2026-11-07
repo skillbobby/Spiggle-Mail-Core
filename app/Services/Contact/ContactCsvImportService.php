@@ -7,7 +7,6 @@ use App\Models\Newsletter;
 use App\Models\Suppression;
 use App\Services\Deliverability\EmailHygieneService;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ContactCsvImportService
@@ -58,21 +57,23 @@ class ContactCsvImportService
     {
         $path = $file->getRealPath();
         $handle = fopen($path, 'r');
-        if (!$handle) {
+        if (! $handle) {
             return ['imported' => 0, 'skipped' => 0, 'errors' => ['Could not open CSV file.']];
         }
 
         // Read header row
         $headers = fgetcsv($handle);
-        if (!$headers) {
+        if (! $headers) {
             fclose($handle);
+
             return ['imported' => 0, 'skipped' => 0, 'errors' => ['Empty CSV file.']];
         }
 
         // Map column indices
         $mappedIndices = $this->resolveColumnMap($headers);
-        if (!isset($mappedIndices['email'])) {
+        if (! isset($mappedIndices['email'])) {
             fclose($handle);
+
             return ['imported' => 0, 'skipped' => 0, 'errors' => ['No email column detected in CSV header.']];
         }
 
@@ -88,8 +89,9 @@ class ContactCsvImportService
 
             $rawEmail = $row[$mappedIndices['email']] ?? null;
             $email = strtolower(trim((string) $rawEmail));
-            if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            if (! $email || ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $skipped++;
+
                 continue;
             }
 
@@ -97,6 +99,7 @@ class ContactCsvImportService
             $hygieneReason = EmailHygieneService::checkEmail($email);
             if ($hygieneReason !== null) {
                 $skipped++;
+
                 continue;
             }
 
@@ -104,23 +107,24 @@ class ContactCsvImportService
             $emailHash = hash_hmac('sha256', $email, config('app.key'));
             if (Suppression::where('email_hash', $emailHash)->exists()) {
                 $skipped++;
+
                 continue;
             }
 
             // Determine status
             $status = 'subscribed';
-            if (isset($mappedIndices['status']) && !empty($row[$mappedIndices['status']])) {
+            if (isset($mappedIndices['status']) && ! empty($row[$mappedIndices['status']])) {
                 $rawStatus = strtolower(trim(preg_replace('/[^a-z0-9]/', '', $row[$mappedIndices['status']])));
                 $status = self::STATUS_ALIASES[$rawStatus] ?? 'subscribed';
-            } elseif (isset($mappedIndices['unsubscribed_at']) && !empty($row[$mappedIndices['unsubscribed_at']])) {
+            } elseif (isset($mappedIndices['unsubscribed_at']) && ! empty($row[$mappedIndices['unsubscribed_at']])) {
                 $status = 'unsubscribed';
-            } elseif (isset($mappedIndices['cleaned_at']) && !empty($row[$mappedIndices['cleaned_at']])) {
+            } elseif (isset($mappedIndices['cleaned_at']) && ! empty($row[$mappedIndices['cleaned_at']])) {
                 $status = 'bounced';
             }
 
             // Subscribed date
             $subscribedAt = now();
-            if (isset($mappedIndices['subscribed_at']) && !empty($row[$mappedIndices['subscribed_at']])) {
+            if (isset($mappedIndices['subscribed_at']) && ! empty($row[$mappedIndices['subscribed_at']])) {
                 try {
                     $parsed = strtotime($row[$mappedIndices['subscribed_at']]);
                     if ($parsed) {
@@ -147,7 +151,7 @@ class ContactCsvImportService
 
         fclose($handle);
 
-        if (!empty($batch)) {
+        if (! empty($batch)) {
             $imported += $this->flushBatch($newsletter, $batch);
         }
 
@@ -189,7 +193,7 @@ class ContactCsvImportService
             $insertedCount++;
         }
 
-        if (!empty($toInsert)) {
+        if (! empty($toInsert)) {
             Contact::insert($toInsert);
         }
 
@@ -202,12 +206,13 @@ class ContactCsvImportService
         foreach ($headers as $index => $header) {
             $normalized = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', (string) $header));
             foreach (self::COLUMN_ALIASES as $key => $aliases) {
-                if (!isset($map[$key]) && in_array($normalized, $aliases, true)) {
+                if (! isset($map[$key]) && in_array($normalized, $aliases, true)) {
                     $map[$key] = $index;
                     break;
                 }
             }
         }
+
         return $map;
     }
 }

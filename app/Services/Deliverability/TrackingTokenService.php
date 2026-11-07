@@ -46,7 +46,7 @@ final class TrackingTokenService
         $payload = json_encode(['m' => $messageId, 't' => time()]) ?: '{}';
         $sig = hash_hmac('sha256', $payload, self::signingKey());
 
-        return rtrim(strtr(base64_encode($payload . '|' . $sig), '+/', '-_'), '=');
+        return rtrim(strtr(base64_encode($payload.'|'.$sig), '+/', '-_'), '=');
     }
 
     /**
@@ -77,7 +77,7 @@ final class TrackingTokenService
         $payload = json_encode(['m' => $messageId, 'u' => $targetUrl, 't' => time()]) ?: '{}';
         $sig = hash_hmac('sha256', $payload, self::signingKey());
 
-        return rtrim(strtr(base64_encode($payload . '|' . $sig), '+/', '-_'), '=');
+        return rtrim(strtr(base64_encode($payload.'|'.$sig), '+/', '-_'), '=');
     }
 
     /**
@@ -124,7 +124,7 @@ final class TrackingTokenService
         ]) ?: '{}';
         $sig = hash_hmac('sha256', $payload, self::signingKey());
 
-        return rtrim(strtr(base64_encode($payload . '|' . $sig), '+/', '-_'), '=');
+        return rtrim(strtr(base64_encode($payload.'|'.$sig), '+/', '-_'), '=');
     }
 
     /**

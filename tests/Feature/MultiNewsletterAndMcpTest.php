@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Account;
 use App\Models\ApiKey;
 use App\Models\Campaign;
-use App\Models\Contact;
 use App\Models\Newsletter;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,7 +16,9 @@ class MultiNewsletterAndMcpTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     private Account $account;
+
     private Newsletter $primaryNewsletter;
 
     protected function setUp(): void
@@ -93,7 +94,7 @@ class MultiNewsletterAndMcpTest extends TestCase
 
     public function test_mcp_initialize_and_tools_list(): void
     {
-        $rawKey = 'spm_' . Str::random(32);
+        $rawKey = 'spm_'.Str::random(32);
         ApiKey::create([
             'id' => (string) Str::ulid(),
             'account_id' => $this->account->id,
@@ -137,7 +138,7 @@ class MultiNewsletterAndMcpTest extends TestCase
 
     public function test_mcp_tool_execution(): void
     {
-        $rawKey = 'spm_' . Str::random(32);
+        $rawKey = 'spm_'.Str::random(32);
         ApiKey::create([
             'id' => (string) Str::ulid(),
             'account_id' => $this->account->id,

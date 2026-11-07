@@ -58,19 +58,21 @@ class Contact extends Model
 
     public function ensureConfirmationToken(): string
     {
-        if (!$this->confirmation_token) {
+        if (! $this->confirmation_token) {
             $this->confirmation_token = Str::random(48);
             $this->save();
         }
+
         return $this->confirmation_token;
     }
 
     public function ensureKeepToken(): string
     {
-        if (!$this->keep_token) {
+        if (! $this->keep_token) {
             $this->keep_token = Str::random(48);
             $this->save();
         }
+
         return $this->keep_token;
     }
 

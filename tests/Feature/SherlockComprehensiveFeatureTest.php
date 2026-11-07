@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Account;
 use App\Models\ApiKey;
-use App\Models\Campaign;
 use App\Models\Domain;
 use App\Models\Newsletter;
 use App\Models\Suppression;
@@ -19,7 +18,9 @@ class SherlockComprehensiveFeatureTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     private Account $account;
+
     private Newsletter $newsletter;
 
     protected function setUp(): void
@@ -146,7 +147,7 @@ class SherlockComprehensiveFeatureTest extends TestCase
 
     public function test_mcp_send_test_email_tool(): void
     {
-        $rawKey = 'spm_' . Str::random(32);
+        $rawKey = 'spm_'.Str::random(32);
         ApiKey::create([
             'id' => (string) Str::ulid(),
             'account_id' => $this->account->id,

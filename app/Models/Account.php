@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\EncryptedOrPlainArray;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +18,7 @@ class Account extends Model
     protected function casts(): array
     {
         return [
-            'settings' => \App\Casts\EncryptedOrPlainArray::class,
+            'settings' => EncryptedOrPlainArray::class,
             'paused_at' => 'datetime',
             'blocked_at' => 'datetime',
         ];

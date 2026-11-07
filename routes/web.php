@@ -24,6 +24,7 @@ use App\Services\Deliverability\TrackingTokenService;
 use App\Services\Deliverability\UnsubscribeHeaderService;
 use App\Services\Email\AmazonSesEmailProvider;
 use App\Services\Email\EmailProviderInterface;
+use App\Services\Email\MockEmailProvider;
 use App\Support\CsvSanitizer;
 use App\Support\CurrentWorkspace;
 use App\Support\HtmlSanitizer;
@@ -239,7 +240,7 @@ Route::post('/signin/verify-otp', function (Request $request) use ($isSingleUseE
         ['user_id' => $user->id],
         [
             'id' => (string) Str::ulid(),
-            'name' => ($user->name ?: 'Operator') . "'s Workspace",
+            'name' => ($user->name ?: 'Operator')."'s Workspace",
             'status' => 'active',
         ]
     );
@@ -286,7 +287,7 @@ Route::middleware(['auth.spiggle'])->group(function () {
         $baseSlug = Str::slug($validated['name']) ?: 'publication';
         $slug = $baseSlug;
         if (Newsletter::where('slug', $slug)->exists()) {
-            $slug = $baseSlug . '-' . strtolower(Str::random(4));
+            $slug = $baseSlug.'-'.strtolower(Str::random(4));
         }
 
         $newsletter = Newsletter::create([
@@ -489,7 +490,7 @@ Route::middleware(['auth.spiggle'])->group(function () {
 
         $campaignId = $existingDraft?->id ?? (string) Str::ulid();
         $archiveSlug = $existingDraft?->archive_slug
-            ?: (Str::slug($validated['subject']) . '-' . strtolower(Str::random(5)));
+            ?: (Str::slug($validated['subject']).'-'.strtolower(Str::random(5)));
 
         $attributes = [
             'newsletter_id' => $newsletter->id,
@@ -521,7 +522,7 @@ Route::middleware(['auth.spiggle'])->group(function () {
 
         ActivityLog::record(
             action: $saveAsDraft ? 'campaign.draft_saved' : ($isScheduled ? 'campaign.scheduled' : 'campaign.dispatched'),
-            description: ($saveAsDraft ? 'Saved draft' : ($isScheduled ? 'Scheduled' : 'Dispatched')) . " campaign \"{$validated['subject']}\"" . (! empty($validated['subjectB']) ? " with A/B variant \"{$validated['subjectB']}\"" : ''),
+            description: ($saveAsDraft ? 'Saved draft' : ($isScheduled ? 'Scheduled' : 'Dispatched'))." campaign \"{$validated['subject']}\"".(! empty($validated['subjectB']) ? " with A/B variant \"{$validated['subjectB']}\"" : ''),
             accountId: $newsletter->account_id,
             properties: [
                 'campaign_id' => $campaignId,
@@ -564,8 +565,8 @@ Route::middleware(['auth.spiggle'])->group(function () {
         $emailProvider = app(EmailProviderInterface::class);
         $from = "{$newsletter->from_name} <{$newsletter->from_email}>";
 
-        $testSubject = '[TEST] ' . $validated['subject'];
-        $testHtml = $validated['html'] . '<div style="margin-top: 30px; padding: 12px; background: #f3f4f6; color: #6b7280; font-size: 11px; text-align: center; border-radius: 6px;">This is a test preview sent from SpiggleMail.</div>';
+        $testSubject = '[TEST] '.$validated['subject'];
+        $testHtml = $validated['html'].'<div style="margin-top: 30px; padding: 12px; background: #f3f4f6; color: #6b7280; font-size: 11px; text-align: center; border-radius: 6px;">This is a test preview sent from SpiggleMail.</div>';
 
         $result = $emailProvider->send([
             'to' => $validated['recipient'],
@@ -577,7 +578,7 @@ Route::middleware(['auth.spiggle'])->group(function () {
         ]);
 
         if (($result['status'] ?? 'success') === 'failed') {
-            return back()->withErrors(['recipient' => 'Test email failed: ' . ($result['error'] ?? 'SES error')]);
+            return back()->withErrors(['recipient' => 'Test email failed: '.($result['error'] ?? 'SES error')]);
         }
 
         return back()->with('success', "Test email sent to {$validated['recipient']}!");
@@ -851,9 +852,9 @@ Route::middleware(['auth.spiggle'])->group(function () {
             'first_send_slice', 'first_send_held', 'first_send_check_at', 'first_send_checked_at', 'ab_winner', 'variant_a_opens', 'variant_b_opens',
         ]);
         $newCampaign->id = (string) Str::ulid();
-        $newCampaign->subject = '[Duplicate] ' . $campaign->subject;
+        $newCampaign->subject = '[Duplicate] '.$campaign->subject;
         $newCampaign->status = 'draft';
-        $newCampaign->archive_slug = Str::slug($newCampaign->subject) . '-' . strtolower(Str::random(5));
+        $newCampaign->archive_slug = Str::slug($newCampaign->subject).'-'.strtolower(Str::random(5));
         $newCampaign->save();
 
         return redirect("/campaigns/{$newCampaign->id}")->with('success', 'Campaign duplicated successfully.');
@@ -955,7 +956,7 @@ Route::middleware(['auth.spiggle'])->group(function () {
         if (! empty($validated['tickitdexWebhookUrl'])) {
             try {
                 UrlSafetyValidator::assertSafeHttpsUrl($validated['tickitdexWebhookUrl']);
-            } catch (\InvalidArgumentException $e) {
+            } catch (InvalidArgumentException $e) {
                 return back()->withErrors(['tickitdexWebhookUrl' => $e->getMessage()]);
             }
         }
@@ -1038,7 +1039,7 @@ Route::middleware(['auth.spiggle'])->group(function () {
 
         $driver = $validated['sesDriver'] ?? ($account?->settings['ses_driver'] ?? config('services.ses.driver', 'mock'));
         if ($driver === 'mock') {
-            return response()->json((new \App\Services\Email\MockEmailProvider)->getAccountQuota());
+            return response()->json((new MockEmailProvider)->getAccountQuota());
         }
 
         $accSettings = $account?->settings ?? [];
@@ -1081,7 +1082,7 @@ Route::middleware(['auth.spiggle'])->group(function () {
 
         try {
             UrlSafetyValidator::assertSafeHttpsUrl($url);
-        } catch (\InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             return response()->json([
                 'success' => false,
                 'error' => $e->getMessage(),
@@ -1210,7 +1211,7 @@ Route::middleware(['auth.spiggle'])->group(function () {
             'role' => 'required|in:full_access,send_only,read_only',
         ]);
 
-        $rawSecret = 'spm_' . Str::random(32);
+        $rawSecret = 'spm_'.Str::random(32);
         $prefix = substr($rawSecret, 0, 8);
         $hashed = hash('sha256', $rawSecret);
 
@@ -1371,7 +1372,7 @@ Route::middleware(['auth.spiggle'])->group(function () {
             'activity_logs' => $activity,
         ];
 
-        $filename = 'spigglemail-account-export-' . substr($account->id, 0, 8) . '-' . date('Y-m-d') . '.json';
+        $filename = 'spigglemail-account-export-'.substr($account->id, 0, 8).'-'.date('Y-m-d').'.json';
 
         ActivityLog::record(
             action: 'account.exported',
@@ -1943,7 +1944,7 @@ Route::post('/embed/subscribe', function (Request $request) {
 
     $dropReason = EmailHygieneService::checkEmail($validated['email']);
     if ($dropReason !== null) {
-        return $respond($request, false, 'Invalid or disposable email address (' . $dropReason . ').', 422);
+        return $respond($request, false, 'Invalid or disposable email address ('.$dropReason.').', 422);
     }
 
     $cleanEmail = strtolower(trim($validated['email']));
@@ -2073,17 +2074,17 @@ Route::get('/llms-full.txt', function () {
         '## REST API Reference',
         '',
         '### Contacts',
-        "`GET /api/v1/contacts`: Paginated list of subscribers.",
-        "`POST /api/v1/contacts`: Add or update a subscriber with hygiene and suppression checks.",
-        "`GET /api/v1/contacts/export.csv`: Export contacts as CSV.",
+        '`GET /api/v1/contacts`: Paginated list of subscribers.',
+        '`POST /api/v1/contacts`: Add or update a subscriber with hygiene and suppression checks.',
+        '`GET /api/v1/contacts/export.csv`: Export contacts as CSV.',
         '',
         '### Deliverability & Webhooks',
-        "`POST /api/webhooks/ses`: Inbound AWS SES bounce, complaint, and delivery SNS notifications.",
-        "`POST /api/webhooks/postmark`: Inbound Postmark delivery event receiver.",
+        '`POST /api/webhooks/ses`: Inbound AWS SES bounce, complaint, and delivery SNS notifications.',
+        '`POST /api/webhooks/postmark`: Inbound Postmark delivery event receiver.',
         '',
         '### Syndication',
-        "`GET /archive/{slug}/feed.xml`: RSS 2.0 public newsletter feed.",
-        "`GET /archive/{slug}/sitemap.xml`: XML search engine sitemap.",
+        '`GET /archive/{slug}/feed.xml`: RSS 2.0 public newsletter feed.',
+        '`GET /archive/{slug}/sitemap.xml`: XML search engine sitemap.',
     ]);
 
     return response($content, 200, ['Content-Type' => 'text/plain; charset=utf-8']);

@@ -16,8 +16,11 @@ class ImageUploadTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     private Account $account;
+
     private string $rawApiKey;
+
     private ApiKey $apiKey;
 
     protected function setUp(): void
@@ -33,7 +36,7 @@ class ImageUploadTest extends TestCase
             'status' => 'active',
         ]);
 
-        $this->rawApiKey = 'spm_' . Str::random(32);
+        $this->rawApiKey = 'spm_'.Str::random(32);
         $this->apiKey = ApiKey::create([
             'id' => (string) Str::ulid(),
             'account_id' => $this->account->id,
@@ -122,7 +125,7 @@ class ImageUploadTest extends TestCase
 
     public function test_read_only_api_key_cannot_upload(): void
     {
-        $readOnlySecret = 'spm_readonly_' . Str::random(24);
+        $readOnlySecret = 'spm_readonly_'.Str::random(24);
         ApiKey::create([
             'id' => (string) Str::ulid(),
             'account_id' => $this->account->id,

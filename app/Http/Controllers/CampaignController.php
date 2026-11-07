@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Campaign;
 use App\Models\Newsletter;
-use App\Models\User;
+use App\Support\CurrentWorkspace;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -16,7 +15,7 @@ class CampaignController extends Controller
     public function index(Request $request): Response|RedirectResponse
     {
         $newsletter = $this->getActiveNewsletter($request);
-        if (!$newsletter) {
+        if (! $newsletter) {
             return redirect('/dashboard')->with('error', 'Please configure a newsletter publication first.');
         }
 
@@ -90,12 +89,12 @@ class CampaignController extends Controller
     public function destroy(Request $request, string $id): RedirectResponse
     {
         $newsletter = $this->getActiveNewsletter($request);
-        if (!$newsletter) {
+        if (! $newsletter) {
             return back()->with('error', 'No active newsletter found.');
         }
 
         $campaign = Campaign::where('newsletter_id', $newsletter->id)->where('id', $id)->first();
-        if (!$campaign) {
+        if (! $campaign) {
             return back()->with('error', 'Campaign not found.');
         }
 
@@ -110,6 +109,6 @@ class CampaignController extends Controller
 
     private function getActiveNewsletter(Request $request): ?Newsletter
     {
-        return \App\Support\CurrentWorkspace::newsletter($request);
+        return CurrentWorkspace::newsletter($request);
     }
 }

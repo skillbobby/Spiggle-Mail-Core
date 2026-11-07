@@ -3,6 +3,8 @@
 use App\Http\Controllers\Api\OpenApiController;
 use App\Http\Controllers\Api\SnsWebhookController;
 use App\Http\Controllers\Api\UploadController;
+use App\Jobs\SendConfirmationEmailJob;
+use App\Jobs\SendWelcomeEmailJob;
 use App\Models\ApiKey;
 use App\Models\Campaign;
 use App\Models\Contact;
@@ -157,12 +159,12 @@ Route::middleware(['throttle:api'])->group(function () use ($authenticateApiKey,
             }
 
             if ($request->filled('search')) {
-                $query->where('email', 'like', $request->query('search') . '%');
+                $query->where('email', 'like', $request->query('search').'%');
             }
 
             $headers = [
                 'Content-Type' => 'text/csv; charset=utf-8',
-                'Content-Disposition' => 'attachment; filename="contacts-' . now()->toDateString() . '.csv"',
+                'Content-Disposition' => 'attachment; filename="contacts-'.now()->toDateString().'.csv"',
                 'Cache-Control' => 'no-store, no-cache',
             ];
 
@@ -203,7 +205,7 @@ Route::middleware(['throttle:api'])->group(function () use ($authenticateApiKey,
             }
 
             if ($request->filled('search')) {
-                $query->where('email', 'like', '%' . $request->query('search') . '%');
+                $query->where('email', 'like', '%'.$request->query('search').'%');
             }
 
             $perPage = min(100, max(5, (int) $request->query('per_page', 25)));
@@ -315,9 +317,9 @@ Route::middleware(['throttle:api'])->group(function () use ($authenticateApiKey,
             );
 
             if ($status === 'pending') {
-                \App\Jobs\SendConfirmationEmailJob::dispatch($contact->id);
+                SendConfirmationEmailJob::dispatch($contact->id);
             } elseif ($status === 'subscribed' && $newsletter->welcome_enabled) {
-                \App\Jobs\SendWelcomeEmailJob::dispatch($contact->id);
+                SendWelcomeEmailJob::dispatch($contact->id);
             }
 
             return response()->json([

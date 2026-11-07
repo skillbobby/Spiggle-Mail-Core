@@ -27,15 +27,15 @@ final class ShortcodeParserService
         $currentYear = (string) date('Y');
 
         $replacements = [
-            '{{ contact.name }}'       => htmlspecialchars($contactName, ENT_QUOTES, 'UTF-8'),
-            '{{ contact.email }}'      => htmlspecialchars($contactEmail, ENT_QUOTES, 'UTF-8'),
-            '{{ newsletter.name }}'    => htmlspecialchars($newsletterName, ENT_QUOTES, 'UTF-8'),
-            '{{ unsubscribe_url }}'    => htmlspecialchars($unsubscribeUrl, ENT_QUOTES, 'UTF-8'),
-            '{{ current_year }}'       => $currentYear,
+            '{{ contact.name }}' => htmlspecialchars($contactName, ENT_QUOTES, 'UTF-8'),
+            '{{ contact.email }}' => htmlspecialchars($contactEmail, ENT_QUOTES, 'UTF-8'),
+            '{{ newsletter.name }}' => htmlspecialchars($newsletterName, ENT_QUOTES, 'UTF-8'),
+            '{{ unsubscribe_url }}' => htmlspecialchars($unsubscribeUrl, ENT_QUOTES, 'UTF-8'),
+            '{{ current_year }}' => $currentYear,
             // Fallback shortcodes
-            '{{first_name}}'           => htmlspecialchars($contactName, ENT_QUOTES, 'UTF-8'),
-            '{{email}}'                => htmlspecialchars($contactEmail, ENT_QUOTES, 'UTF-8'),
-            '{{unsubscribe}}'          => htmlspecialchars($unsubscribeUrl, ENT_QUOTES, 'UTF-8'),
+            '{{first_name}}' => htmlspecialchars($contactName, ENT_QUOTES, 'UTF-8'),
+            '{{email}}' => htmlspecialchars($contactEmail, ENT_QUOTES, 'UTF-8'),
+            '{{unsubscribe}}' => htmlspecialchars($unsubscribeUrl, ENT_QUOTES, 'UTF-8'),
         ];
 
         return str_replace(array_keys($replacements), array_values($replacements), $content);

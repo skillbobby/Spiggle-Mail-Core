@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Alerting;
 
 use App\Models\Account;
+use App\Support\UrlSafetyValidator;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -32,8 +33,8 @@ class TickitDexWebhookService
 
         return [
             'enabled' => (bool) ($accountTickit['enabled'] ?? config('services.tickitdex.enabled', false)),
-            'token' => !empty($accountTickit['token']) ? (string) $accountTickit['token'] : config('services.tickitdex.token'),
-            'webhook_url' => !empty($accountTickit['webhook_url']) ? (string) $accountTickit['webhook_url'] : (config('services.tickitdex.webhook_url') ?: self::DEFAULT_ENDPOINT),
+            'token' => ! empty($accountTickit['token']) ? (string) $accountTickit['token'] : config('services.tickitdex.token'),
+            'webhook_url' => ! empty($accountTickit['webhook_url']) ? (string) $accountTickit['webhook_url'] : (config('services.tickitdex.webhook_url') ?: self::DEFAULT_ENDPOINT),
             'default_category' => (string) ($accountTickit['default_category'] ?? config('services.tickitdex.default_category', 'deliverability')),
             'customer_email' => $accountTickit['customer_email'] ?? config('services.tickitdex.customer_email'),
             'min_priority' => (string) ($accountTickit['min_priority'] ?? 'warning'),
@@ -55,7 +56,8 @@ class TickitDexWebhookService
     public function isConfigured(?Account $account = null): bool
     {
         $settings = $this->getSettings($account);
-        return $settings['enabled'] && !empty($settings['token']);
+
+        return $settings['enabled'] && ! empty($settings['token']);
     }
 
     /**
@@ -91,8 +93,7 @@ class TickitDexWebhookService
     /**
      * Dispatch a ticket creation request to TickitDex via webhook.
      *
-     * @param array<string, mixed> $data
-     * @param Account|null $account
+     * @param  array<string, mixed>  $data
      * @return array<string, mixed>
      */
     public function createTicket(array $data, ?Account $account = null): array
@@ -103,9 +104,9 @@ class TickitDexWebhookService
         $url = (string) ($data['override_url'] ?? $settings['webhook_url']);
 
         // Allow test pings if an override token is passed even if disabled
-        $isTestPing = !empty($data['override_token']);
+        $isTestPing = ! empty($data['override_token']);
 
-        if (!$isTestPing && !$settings['enabled']) {
+        if (! $isTestPing && ! $settings['enabled']) {
             return [
                 'configured' => false,
                 'enabled' => false,
@@ -137,12 +138,12 @@ class TickitDexWebhookService
 
         // Customer / desk recipient email
         $customerEmail = $data['customer_email'] ?? $settings['customer_email'];
-        if (!empty($customerEmail)) {
+        if (! empty($customerEmail)) {
             $payload['customer_email'] = (string) $customerEmail;
         }
 
         // Idempotency key
-        if (!empty($data['client_id'])) {
+        if (! empty($data['client_id'])) {
             $payload['client_id'] = (string) $data['client_id'];
         }
 
@@ -155,18 +156,18 @@ class TickitDexWebhookService
         $payload['tags'] = $tags;
 
         // Extra Context
-        if (!empty($data['context']) && is_array($data['context'])) {
+        if (! empty($data['context']) && is_array($data['context'])) {
             $payload['context'] = $data['context'];
         }
 
         $timeout = (int) ($settings['timeout'] ?? 5);
 
         try {
-            \App\Support\UrlSafetyValidator::assertSafeHttpsUrl($url);
+            UrlSafetyValidator::assertSafeHttpsUrl($url);
 
             $response = Http::timeout($timeout)
                 ->withHeaders([
-                    'Authorization' => 'Bearer ' . $token,
+                    'Authorization' => 'Bearer '.$token,
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
                 ])

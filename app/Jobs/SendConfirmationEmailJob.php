@@ -23,14 +23,16 @@ class SendConfirmationEmailJob implements ShouldQueue
     public function handle(EmailProviderInterface $emailProvider): void
     {
         $contact = Contact::with('newsletter')->find($this->contactId);
-        if (!$contact || $contact->status !== 'pending') {
+        if (! $contact || $contact->status !== 'pending') {
             Log::info("SendConfirmationEmailJob: Contact {$this->contactId} not in pending state.");
+
             return;
         }
 
         $newsletter = $contact->newsletter;
-        if (!$newsletter) {
+        if (! $newsletter) {
             Log::error("SendConfirmationEmailJob: Newsletter not found for contact {$this->contactId}");
+
             return;
         }
 

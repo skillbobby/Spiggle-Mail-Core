@@ -107,7 +107,7 @@ class CampaignExportAndAlertTest extends TestCase
 
         $response->assertOk();
         $response->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
-        
+
         $content = $response->streamedContent();
         $this->assertStringContainsString('Recipient Email', $content);
         $this->assertStringContainsString('Message ID', $content);
@@ -188,7 +188,7 @@ class CampaignExportAndAlertTest extends TestCase
         $response = $this->actingAs($user)
             ->withSession(['authenticated_user_id' => $user->id])
             ->get('/dashboard');
-            
+
         $response->assertOk();
 
         $response->assertInertia(fn ($page) => $page

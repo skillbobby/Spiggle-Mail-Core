@@ -1,9 +1,24 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "spiggle-mail/spiggle-mail-core",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "SpiggleMail Core — Self-hosted, single-operator newsletter and AWS SES broadcast platform (MIT License).",
+    "keywords": [
+        "spiggle-mail",
+        "newsletter",
+        "email",
+        "aws-ses",
+        "deliverability",
+        "laravel",
+        "inertia",
+        "react",
+        "open-source"
+    ],
+    "homepage": "https://github.com/skillbobby/Spiggle-Mail-Core",
+    "support": {
+        "issues": "https://github.com/skillbobby/Spiggle-Mail-Core/issues",
+        "source": "https://github.com/skillbobby/Spiggle-Mail-Core"
+    },
     "license": "MIT",
     "require": {
         "php": "^8.3",

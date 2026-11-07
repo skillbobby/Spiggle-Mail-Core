@@ -39,7 +39,7 @@ class DomainController extends Controller
             $candidateDomain = $fromDomain;
             if (Domain::where('domain', $candidateDomain)->where('account_id', '!=', $account->id)->exists()) {
                 $slug = $newsletter?->slug ? Str::slug($newsletter->slug) : 'newsletter';
-                $candidateDomain = $slug . '-' . substr(strtolower($account->id), -6) . '.local';
+                $candidateDomain = $slug.'-'.substr(strtolower($account->id), -6).'.local';
             }
 
             $isLocalSynthetic = str_ends_with($candidateDomain, '.local');
@@ -49,11 +49,11 @@ class DomainController extends Controller
                     'id' => (string) Str::ulid(),
                     'status' => (app()->environment('local', 'testing') && $isLocalSynthetic) ? 'verified' : 'pending',
                     'dkim_tokens' => [
-                        'spiggle1' . substr(md5($candidateDomain), 0, 6),
-                        'spiggle2' . substr(md5($candidateDomain), 6, 6),
-                        'spiggle3' . substr(md5($candidateDomain), 12, 6),
+                        'spiggle1'.substr(md5($candidateDomain), 0, 6),
+                        'spiggle2'.substr(md5($candidateDomain), 6, 6),
+                        'spiggle3'.substr(md5($candidateDomain), 12, 6),
                     ],
-                    'mail_from_domain' => 'mail.' . $candidateDomain,
+                    'mail_from_domain' => 'mail.'.$candidateDomain,
                     'verified_at' => (app()->environment('local', 'testing') && $isLocalSynthetic) ? now() : null,
                 ]
             );
@@ -84,7 +84,7 @@ class DomainController extends Controller
             $dkimTokens
         );
 
-        $mailFromSubdomain = $activeDomain->mail_from_domain ?: ('mail.' . $activeDomain->domain);
+        $mailFromSubdomain = $activeDomain->mail_from_domain ?: ('mail.'.$activeDomain->domain);
         $mxTarget = "10 feedback-smtp.{$region}.amazonses.com";
 
         $domainRecord = [
@@ -150,7 +150,7 @@ class DomainController extends Controller
         $normalized = preg_replace('#^https?://#', '', $normalized) ?? $normalized;
         $normalized = rtrim(explode('/', $normalized)[0], '.');
 
-        if (! filter_var('test@' . $normalized, FILTER_VALIDATE_EMAIL) || str_ends_with($normalized, '.local')) {
+        if (! filter_var('test@'.$normalized, FILTER_VALIDATE_EMAIL) || str_ends_with($normalized, '.local')) {
             return back()->withErrors(['domain' => 'Please provide a valid public domain or subdomain (e.g., example.com or news.example.com).']);
         }
 
@@ -162,15 +162,15 @@ class DomainController extends Controller
         try {
             $identity = $emailProvider->getOrCreateDomainIdentity($normalized);
         } catch (Throwable $e) {
-            return back()->withErrors(['domain' => 'AWS SES identity registration failed: ' . $e->getMessage()]);
+            return back()->withErrors(['domain' => 'AWS SES identity registration failed: '.$e->getMessage()]);
         }
 
         $tokens = ! empty($identity['dkim_tokens'])
             ? $identity['dkim_tokens']
             : [
-                substr(md5($normalized . '1'), 0, 16),
-                substr(md5($normalized . '2'), 0, 16),
-                substr(md5($normalized . '3'), 0, 16),
+                substr(md5($normalized.'1'), 0, 16),
+                substr(md5($normalized.'2'), 0, 16),
+                substr(md5($normalized.'3'), 0, 16),
             ];
 
         $domain = Domain::create([
@@ -179,7 +179,7 @@ class DomainController extends Controller
             'domain' => $normalized,
             'status' => 'pending',
             'dkim_tokens' => $tokens,
-            'mail_from_domain' => $identity['mail_from'] ?? ('mail.' . $normalized),
+            'mail_from_domain' => $identity['mail_from'] ?? ('mail.'.$normalized),
             'verified_at' => null,
         ]);
 
@@ -213,7 +213,7 @@ class DomainController extends Controller
                 }
                 $sesVerified = ($identity['status'] ?? 'pending') === 'verified';
             } catch (Throwable $e) {
-                return back()->with('error', 'AWS SES verification check failed: ' . $e->getMessage());
+                return back()->with('error', 'AWS SES verification check failed: '.$e->getMessage());
             }
         }
 
@@ -242,7 +242,7 @@ class DomainController extends Controller
             ! $dnsCheck['dmarc']['valid'] ? $dnsCheck['dmarc']['message'] : null,
         ]);
 
-        return back()->with('error', 'DNS verification incomplete: ' . implode(' ', $reasons));
+        return back()->with('error', 'DNS verification incomplete: '.implode(' ', $reasons));
     }
 
     public function destroy(Request $request, string $id): RedirectResponse

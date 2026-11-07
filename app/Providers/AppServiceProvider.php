@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Account;
 use App\Services\Email\AmazonSesEmailProvider;
 use App\Services\Email\EmailProviderInterface;
 use App\Services\Email\MockEmailProvider;
@@ -34,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
                 if (! $this->app->runningUnitTests() && Schema::hasTable('accounts')) {
                     $account = CurrentWorkspace::account();
                     if (! $account && config('spiggle.edition') === 'core') {
-                        $account = \App\Models\Account::first();
+                        $account = Account::first();
                     }
 
                     $accSettings = $account?->settings ?? [];
@@ -88,17 +89,17 @@ class AppServiceProvider extends ServiceProvider
             $email = strtolower(trim((string) $request->input('email', '')));
 
             return [
-                Limit::perMinute(5)->by('otp-ip:' . ($request->ip() ?: 'anon')),
-                Limit::perMinutes(10, 5)->by('otp-email:' . ($email ?: 'anon')),
+                Limit::perMinute(5)->by('otp-ip:'.($request->ip() ?: 'anon')),
+                Limit::perMinutes(10, 5)->by('otp-email:'.($email ?: 'anon')),
             ];
         });
 
         RateLimiter::for('otp-verify', function (Request $request) {
-            return Limit::perMinute(10)->by('otp-verify:' . ($request->ip() ?: 'anon'));
+            return Limit::perMinute(10)->by('otp-verify:'.($request->ip() ?: 'anon'));
         });
 
         RateLimiter::for('public-subscribe', function (Request $request) {
-            return Limit::perMinute(10)->by('pub-sub:' . ($request->ip() ?: 'anon'));
+            return Limit::perMinute(10)->by('pub-sub:'.($request->ip() ?: 'anon'));
         });
     }
 }

@@ -26,8 +26,9 @@ class ImportContactsJob implements ShouldQueue
     public function handle(): void
     {
         $import = DB::table('contact_imports')->where('id', $this->importId)->first();
-        if (!$import) {
+        if (! $import) {
             Log::error("Contact import record {$this->importId} not found");
+
             return;
         }
 
@@ -35,20 +36,22 @@ class ImportContactsJob implements ShouldQueue
             'status' => 'processing',
         ]);
 
-        $filePath = storage_path('app/imports/' . $import->filename);
-        if (!file_exists($filePath)) {
+        $filePath = storage_path('app/imports/'.$import->filename);
+        if (! file_exists($filePath)) {
             DB::table('contact_imports')->where('id', $this->importId)->update([
                 'status' => 'failed',
             ]);
             Log::error("Import file {$filePath} does not exist");
+
             return;
         }
 
         $handle = fopen($filePath, 'r');
-        if (!$handle) {
+        if (! $handle) {
             DB::table('contact_imports')->where('id', $this->importId)->update([
                 'status' => 'failed',
             ]);
+
             return;
         }
 
@@ -73,6 +76,7 @@ class ImportContactsJob implements ShouldQueue
             $rawEmail = trim($row[$emailColIndex] ?? '');
             if (empty($rawEmail)) {
                 $droppedCount++;
+
                 continue;
             }
 
@@ -81,6 +85,7 @@ class ImportContactsJob implements ShouldQueue
             if ($dropReason !== null) {
                 $droppedCount++;
                 $droppedReasons[$dropReason] = ($droppedReasons[$dropReason] ?? 0) + 1;
+
                 continue;
             }
 
@@ -91,6 +96,7 @@ class ImportContactsJob implements ShouldQueue
             if (DB::table('suppressions')->where('email_hash', $emailHash)->exists()) {
                 $droppedCount++;
                 $droppedReasons['suppressed'] = ($droppedReasons['suppressed'] ?? 0) + 1;
+
                 continue;
             }
 
@@ -103,6 +109,7 @@ class ImportContactsJob implements ShouldQueue
             if ($exists) {
                 $droppedCount++;
                 $droppedReasons['duplicate'] = ($droppedReasons['duplicate'] ?? 0) + 1;
+
                 continue;
             }
 

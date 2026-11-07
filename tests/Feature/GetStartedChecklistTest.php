@@ -19,7 +19,9 @@ class GetStartedChecklistTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     private Account $account;
+
     private Newsletter $newsletter;
 
     protected function setUp(): void

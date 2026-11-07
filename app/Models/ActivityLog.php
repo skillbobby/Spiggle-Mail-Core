@@ -45,7 +45,7 @@ class ActivityLog extends Model
     /**
      * Helper to quickly log an activity with contextual IP and user agent.
      *
-     * @param array<string, mixed> $properties
+     * @param  array<string, mixed>  $properties
      */
     public static function record(
         string $action,
@@ -57,12 +57,12 @@ class ActivityLog extends Model
     ): self {
         $req = $request ?? RequestFacade::instance();
 
-        if (!$accountId) {
+        if (! $accountId) {
             $user = $userId ? User::find($userId) : (auth()->user() ?? null);
             $accountId = $user?->account?->id ?? Account::first()?->id ?? '01MOCKACCOUNT0000000000000';
         }
 
-        if (!$userId) {
+        if (! $userId) {
             $userId = auth()->id() ?? session('authenticated_user_id');
         }
 

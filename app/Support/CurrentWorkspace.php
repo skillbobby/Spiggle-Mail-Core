@@ -45,7 +45,7 @@ final class CurrentWorkspace
             $account = Account::create([
                 'id' => (string) Str::ulid(),
                 'user_id' => $user->id,
-                'name' => ($user->name ?: explode('@', $user->email)[0]) . "'s Workspace",
+                'name' => ($user->name ?: explode('@', $user->email)[0])."'s Workspace",
                 'status' => 'active',
             ]);
         }

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         // 1. Create activity_logs table
-        if (!Schema::hasTable('activity_logs')) {
+        if (! Schema::hasTable('activity_logs')) {
             Schema::create('activity_logs', function (Blueprint $table) {
                 $table->char('id', 26)->primary();
                 $table->char('account_id', 26)->index();
@@ -29,22 +29,22 @@ return new class extends Migration
         // 2. Add A/B testing columns to campaigns table
         if (Schema::hasTable('campaigns')) {
             Schema::table('campaigns', function (Blueprint $table) {
-                if (!Schema::hasColumn('campaigns', 'subject_b')) {
+                if (! Schema::hasColumn('campaigns', 'subject_b')) {
                     $table->string('subject_b', 255)->nullable()->after('subject');
                 }
-                if (!Schema::hasColumn('campaigns', 'ab_test_enabled')) {
+                if (! Schema::hasColumn('campaigns', 'ab_test_enabled')) {
                     $table->boolean('ab_test_enabled')->default(false)->after('subject_b');
                 }
-                if (!Schema::hasColumn('campaigns', 'ab_winner')) {
+                if (! Schema::hasColumn('campaigns', 'ab_winner')) {
                     $table->string('ab_winner', 10)->nullable()->after('ab_test_enabled');
                 }
-                if (!Schema::hasColumn('campaigns', 'ab_split_ratio')) {
+                if (! Schema::hasColumn('campaigns', 'ab_split_ratio')) {
                     $table->unsignedInteger('ab_split_ratio')->default(50)->after('ab_winner');
                 }
-                if (!Schema::hasColumn('campaigns', 'variant_a_opens')) {
+                if (! Schema::hasColumn('campaigns', 'variant_a_opens')) {
                     $table->unsignedInteger('variant_a_opens')->default(0)->after('open_count');
                 }
-                if (!Schema::hasColumn('campaigns', 'variant_b_opens')) {
+                if (! Schema::hasColumn('campaigns', 'variant_b_opens')) {
                     $table->unsignedInteger('variant_b_opens')->default(0)->after('variant_a_opens');
                 }
             });
@@ -53,7 +53,7 @@ return new class extends Migration
         // 3. Add ab_variant to messages table
         if (Schema::hasTable('messages')) {
             Schema::table('messages', function (Blueprint $table) {
-                if (!Schema::hasColumn('messages', 'ab_variant')) {
+                if (! Schema::hasColumn('messages', 'ab_variant')) {
                     $table->string('ab_variant', 10)->nullable()->after('status');
                 }
             });

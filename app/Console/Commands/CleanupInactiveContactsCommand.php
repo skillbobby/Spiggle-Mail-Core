@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\Log;
 class CleanupInactiveContactsCommand extends Command
 {
     protected $signature = 'mail:cleanup-inactive';
+
     protected $description = 'Identifies dormant subscribers, sends re-engagement last-chance emails, and transitions unresponsive contacts to dormant';
 
     public function handle(): int
     {
-        $this->info("Starting inactive contact cleanup cycle...");
+        $this->info('Starting inactive contact cleanup cycle...');
         $newsletters = Newsletter::where('list_cleanup_enabled', true)->get();
 
         $warnedCount = 0;

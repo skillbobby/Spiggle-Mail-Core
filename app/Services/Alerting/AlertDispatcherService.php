@@ -59,7 +59,7 @@ class AlertDispatcherService
             );
             $results['activity_log'] = $act->id;
         } catch (\Throwable $e) {
-            Log::error("[Operator Alert] ActivityLog record failed: " . $e->getMessage());
+            Log::error('[Operator Alert] ActivityLog record failed: '.$e->getMessage());
         }
 
         // 2. Dispatch to TickitDex Support-Chat Webhook if configured
@@ -76,12 +76,12 @@ class AlertDispatcherService
         // 3. Dispatch to Telegram if configured
         $telegramToken = config('services.telegram.bot_token');
         $telegramChatId = config('services.telegram.chat_id');
-        if (config('services.telegram.enabled') && !empty($telegramToken) && !empty($telegramChatId)) {
+        if (config('services.telegram.enabled') && ! empty($telegramToken) && ! empty($telegramChatId)) {
             try {
-                $text = "🚨 <b>[SpiggleMail Alert]</b> " . htmlspecialchars($title) . "\n\n"
-                      . htmlspecialchars($message) . "\n"
-                      . "<b>Priority:</b> " . strtoupper($priority);
-                
+                $text = '🚨 <b>[SpiggleMail Alert]</b> '.htmlspecialchars($title)."\n\n"
+                      .htmlspecialchars($message)."\n"
+                      .'<b>Priority:</b> '.strtoupper($priority);
+
                 $res = Http::timeout(5)->post("https://api.telegram.org/bot{$telegramToken}/sendMessage", [
                     'chat_id' => $telegramChatId,
                     'text' => $text,

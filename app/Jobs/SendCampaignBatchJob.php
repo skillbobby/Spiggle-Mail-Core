@@ -26,6 +26,7 @@ class SendCampaignBatchJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public string $campaignId;
+
     public int $batchSize;
 
     public function __construct(string $campaignId, int $batchSize = 50)
@@ -58,7 +59,7 @@ class SendCampaignBatchJob implements ShouldQueue
     ): void {
         $campaign = DB::table('campaigns')->where('id', $this->campaignId)->first();
         if (! $campaign || in_array($campaign->status, ['paused', 'canceled', 'sent'], true)) {
-            Log::info("Campaign {$this->campaignId} is not in a dispatchable state: " . ($campaign->status ?? 'missing'));
+            Log::info("Campaign {$this->campaignId} is not in a dispatchable state: ".($campaign->status ?? 'missing'));
 
             return;
         }
@@ -75,7 +76,7 @@ class SendCampaignBatchJob implements ShouldQueue
         if ($account && in_array($account->status, ['paused', 'blocked'], true)) {
             DB::table('campaigns')->where('id', $campaign->id)->update([
                 'status' => 'paused',
-                'pause_reason' => 'Account is paused: ' . ($account->pause_reason ?? 'Administrative pause'),
+                'pause_reason' => 'Account is paused: '.($account->pause_reason ?? 'Administrative pause'),
             ]);
             Log::warning("Campaign {$campaign->id} paused because account {$account->id} is {$account->status}.");
 
@@ -96,7 +97,7 @@ class SendCampaignBatchJob implements ShouldQueue
         );
 
         if ($safety['action'] === 'pause' || $safety['action'] === 'block') {
-            $reason = "Auto-paused: {$safety['metric']} rate (" . round($safety['rate'] * 100, 2) . '%) exceeded threshold (' . round($safety['limit'] * 100, 2) . '%).';
+            $reason = "Auto-paused: {$safety['metric']} rate (".round($safety['rate'] * 100, 2).'%) exceeded threshold ('.round($safety['limit'] * 100, 2).'%).';
             DB::table('campaigns')->where('id', $campaign->id)->update([
                 'status' => 'paused',
                 'pause_reason' => $reason,
@@ -108,7 +109,7 @@ class SendCampaignBatchJob implements ShouldQueue
                     'status' => 'paused',
                     'paused_by' => 'rates',
                     'paused_at' => now(),
-                    'pause_reason' => "Automated circuit-breaker: {$safety['metric']} rate (" . round($safety['rate'] * 100, 2) . '%) breached safety threshold.',
+                    'pause_reason' => "Automated circuit-breaker: {$safety['metric']} rate (".round($safety['rate'] * 100, 2).'%) breached safety threshold.',
                 ]);
                 Log::critical("Account {$account->id} auto-paused by deliverability circuit-breaker.");
             }
@@ -433,7 +434,7 @@ class SendCampaignBatchJob implements ShouldQueue
     {
         return preg_replace(
             '/\bsrc=(["\'])\/storage\//i',
-            'src=$1' . $appUrl . '/storage/',
+            'src=$1'.$appUrl.'/storage/',
             $html
         ) ?? $html;
     }
@@ -460,10 +461,10 @@ class SendCampaignBatchJob implements ShouldQueue
 HTML;
 
         if (stripos($html, '</body>') !== false) {
-            return preg_replace('/<\/body>/i', $footer . '</body>', $html, 1) ?? ($html . $footer);
+            return preg_replace('/<\/body>/i', $footer.'</body>', $html, 1) ?? ($html.$footer);
         }
 
-        return $html . $footer;
+        return $html.$footer;
     }
 
     private function injectTracking(string $html, string $messageId, string $appUrl): string
@@ -498,9 +499,9 @@ HTML;
         $pixel = "<img src=\"{$appUrl}/o/{$openToken}\" width=\"1\" height=\"1\" alt=\"\" style=\"display:none;width:1px;height:1px;border:0;\" />";
 
         if (stripos($rewritten, '</body>') !== false) {
-            return preg_replace('/<\/body>/i', $pixel . '</body>', $rewritten, 1) ?? ($rewritten . $pixel);
+            return preg_replace('/<\/body>/i', $pixel.'</body>', $rewritten, 1) ?? ($rewritten.$pixel);
         }
 
-        return $rewritten . $pixel;
+        return $rewritten.$pixel;
     }
 }

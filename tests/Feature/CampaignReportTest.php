@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\Campaign;
-use App\Models\Contact;
-use App\Models\Message;
 use App\Models\Newsletter;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -16,25 +16,25 @@ class CampaignReportTest extends TestCase
 
     private function createNewsletter(string $slug): Newsletter
     {
-        $userId = \Illuminate\Support\Facades\DB::table('users')->insertGetId([
+        $userId = DB::table('users')->insertGetId([
             'name' => 'Test User',
-            'email' => 'user_' . Str::random(5) . '@example.com',
+            'email' => 'user_'.Str::random(5).'@example.com',
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         $accountId = (string) Str::ulid();
-        \Illuminate\Support\Facades\DB::table('accounts')->insert([
+        DB::table('accounts')->insert([
             'id' => $accountId,
             'user_id' => $userId,
-            'name' => 'Account ' . Str::random(4),
+            'name' => 'Account '.Str::random(4),
             'status' => 'active',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        $user = \App\Models\User::findOrFail($userId);
+        $user = User::findOrFail($userId);
         $this->actingAs($user);
 
         return Newsletter::create([
@@ -49,13 +49,13 @@ class CampaignReportTest extends TestCase
 
     public function test_can_view_campaign_report_screen(): void
     {
-        $newsletter = $this->createNewsletter('tech-pulse-' . Str::random(5));
+        $newsletter = $this->createNewsletter('tech-pulse-'.Str::random(5));
 
         $campaign = Campaign::create([
             'newsletter_id' => $newsletter->id,
             'subject' => 'The Next Era of Infrastructure',
             'preview_text' => 'Deep dive into performance',
-            'archive_slug' => 'next-era-' . Str::random(4),
+            'archive_slug' => 'next-era-'.Str::random(4),
             'archive_pinned' => false,
             'archive_listed' => true,
             'format' => 'rich',
@@ -77,7 +77,7 @@ class CampaignReportTest extends TestCase
 
     public function test_can_pause_and_resume_campaign(): void
     {
-        $newsletter = $this->createNewsletter('weekly-brief-' . Str::random(5));
+        $newsletter = $this->createNewsletter('weekly-brief-'.Str::random(5));
 
         $campaign = Campaign::create([
             'newsletter_id' => $newsletter->id,
@@ -102,7 +102,7 @@ class CampaignReportTest extends TestCase
 
     public function test_can_duplicate_campaign(): void
     {
-        $newsletter = $this->createNewsletter('weekly-brief-' . Str::random(5));
+        $newsletter = $this->createNewsletter('weekly-brief-'.Str::random(5));
 
         $campaign = Campaign::create([
             'newsletter_id' => $newsletter->id,
@@ -126,7 +126,7 @@ class CampaignReportTest extends TestCase
 
     public function test_can_toggle_archive_pin(): void
     {
-        $newsletter = $this->createNewsletter('weekly-brief-' . Str::random(5));
+        $newsletter = $this->createNewsletter('weekly-brief-'.Str::random(5));
 
         $campaign = Campaign::create([
             'newsletter_id' => $newsletter->id,

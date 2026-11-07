@@ -19,7 +19,7 @@ final class EmailTemplateSeeder extends Seeder
                 'category' => 'Weekly Digest',
                 'subject_default' => 'Issue #{{ current_year }} — Key ideas & curated reads',
                 'preview_default' => 'Here are our top insights and stories this week.',
-                'html_content' => <<<HTML
+                'html_content' => <<<'HTML'
 <h2>Hello {{ contact.name }},</h2>
 <p>Welcome to this week's edition of <strong>{{ newsletter.name }}</strong>. Here are the top three stories and technical discoveries we curated for you:</p>
 <hr style="border:0; border-top:1px solid #e4e4e7; margin:24px 0;" />
@@ -39,7 +39,7 @@ HTML,
                 'category' => 'Product Updates',
                 'subject_default' => 'Introducing our new feature on {{ newsletter.name }}',
                 'preview_default' => 'We just shipped something we think you will love.',
-                'html_content' => <<<HTML
+                'html_content' => <<<'HTML'
 <h2>Hi {{ contact.name }},</h2>
 <p>We're thrilled to announce a major update to {{ newsletter.name }}. Over the past month, our team has been focused on performance and deliverability.</p>
 <div style="background:#f4f4f5; padding:20px; border-radius:8px; margin:20px 0;">
@@ -62,7 +62,7 @@ HTML,
                 'category' => 'Welcome & Onboarding',
                 'subject_default' => 'Welcome to {{ newsletter.name }}!',
                 'preview_default' => 'Here is what you can expect in your inbox.',
-                'html_content' => <<<HTML
+                'html_content' => <<<'HTML'
 <h2>Welcome, {{ contact.name }}!</h2>
 <p>Thanks for subscribing to <strong>{{ newsletter.name }}</strong>. We're excited to have you join our reading community.</p>
 <p>Every week, we send concise, actionable dispatches directly to <code>{{ contact.email }}</code>.</p>

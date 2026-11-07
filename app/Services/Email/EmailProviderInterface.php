@@ -27,7 +27,7 @@ interface EmailProviderInterface
     /**
      * Send raw parameters directly (convenience wrapper).
      *
-     * @param array<string, string> $headers
+     * @param  array<string, string>  $headers
      * @return array{status: 'success'|'failed', message_id?: string, error?: string}
      */
     public function sendRaw(string $to, string $from, string $subject, string $html, array $headers = []): array;

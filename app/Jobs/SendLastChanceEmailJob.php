@@ -25,13 +25,14 @@ class SendLastChanceEmailJob implements ShouldQueue
     public function handle(EmailProviderInterface $emailProvider): void
     {
         $contact = Contact::with('newsletter')->find($this->contactId);
-        if (!$contact || $contact->status !== 'subscribed') {
+        if (! $contact || $contact->status !== 'subscribed') {
             Log::info("SendLastChanceEmailJob: Contact {$this->contactId} not eligible.");
+
             return;
         }
 
         $newsletter = $contact->newsletter;
-        if (!$newsletter) {
+        if (! $newsletter) {
             return;
         }
 

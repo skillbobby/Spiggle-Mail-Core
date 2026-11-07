@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 class SendScheduledCampaignsCommand extends Command
 {
     protected $signature = 'campaigns:send-scheduled';
+
     protected $description = 'Dispatches scheduled campaigns and releases held warm-up/pilot slices whose evaluation window has arrived';
 
     public function handle(): int

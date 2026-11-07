@@ -18,7 +18,7 @@ final class SecretBox
             return self::MASK_PREFIX;
         }
 
-        return self::MASK_PREFIX . substr($secret, -4);
+        return self::MASK_PREFIX.substr($secret, -4);
     }
 
     public static function isMasked(?string $input): bool

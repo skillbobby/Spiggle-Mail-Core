@@ -57,7 +57,7 @@ final class SnsWebhookController extends Controller
                 Http::timeout(5)->get($subscribeUrl);
                 Log::info('Confirmed AWS SNS subscription via SubscribeURL.');
             } catch (Throwable $e) {
-                Log::error('Failed confirming AWS SNS SubscribeURL: ' . $e->getMessage());
+                Log::error('Failed confirming AWS SNS SubscribeURL: '.$e->getMessage());
 
                 return response()->json(['error' => 'Confirmation request failed'], 502);
             }
@@ -210,6 +210,7 @@ final class SnsWebhookController extends Controller
                     ['email_hash' => hash_hmac('sha256', $email, (string) config('app.key'))],
                     ['reason' => 'bounce']
                 );
+
                 continue;
             }
 
@@ -287,6 +288,7 @@ final class SnsWebhookController extends Controller
             $contacts = Contact::with('newsletter')->where('email', $email)->get();
             if ($contacts->isEmpty()) {
                 $this->suppressEmail($email, 'complaint', null);
+
                 continue;
             }
 
@@ -368,7 +370,7 @@ final class SnsWebhookController extends Controller
                 ],
             ]);
         } catch (Throwable $e) {
-            Log::error('SNS circuit-breaker alert dispatch failed: ' . $e->getMessage());
+            Log::error('SNS circuit-breaker alert dispatch failed: '.$e->getMessage());
         }
     }
 
@@ -400,7 +402,7 @@ final class SnsWebhookController extends Controller
         }
 
         try {
-            $pem = Cache::remember('aws_sns_cert:' . sha1($certUrl), 3600, static function () use ($certUrl): string {
+            $pem = Cache::remember('aws_sns_cert:'.sha1($certUrl), 3600, static function () use ($certUrl): string {
                 $res = Http::timeout(5)->get($certUrl);
 
                 return $res->successful() ? $res->body() : '';
@@ -419,7 +421,7 @@ final class SnsWebhookController extends Controller
 
             return openssl_verify($canonical, $signature, $pubKey, $algo) === 1;
         } catch (Throwable $e) {
-            Log::error('SNS signature verification error: ' . $e->getMessage());
+            Log::error('SNS signature verification error: '.$e->getMessage());
 
             return false;
         }
@@ -435,7 +437,7 @@ final class SnsWebhookController extends Controller
         $lines = '';
         foreach ($keys as $key) {
             if (isset($payload[$key]) && $payload[$key] !== null && $payload[$key] !== '') {
-                $lines .= $key . "\n" . $payload[$key] . "\n";
+                $lines .= $key."\n".$payload[$key]."\n";
             }
         }
 

@@ -25,7 +25,7 @@ final class DnsVerificationService
             'spf' => self::checkSpf($domain),
             'dkim' => self::checkDkim($domain, $dkimTokens),
             'dmarc' => self::checkDmarc($domain),
-            'mail_from' => self::checkMailFrom('mail.' . $domain, $region),
+            'mail_from' => self::checkMailFrom('mail.'.$domain, $region),
         ];
     }
 
@@ -91,10 +91,10 @@ final class DnsVerificationService
 
         return [
             'valid' => $allValid,
-            'record' => "{$validCount}/" . count($tokens) . ' CNAME records verified',
+            'record' => "{$validCount}/".count($tokens).' CNAME records verified',
             'message' => $allValid
                 ? 'All 3 AWS SES DKIM CNAME records verified.'
-                : "Verified {$validCount} of " . count($tokens) . ' required .dkim.amazonses.com CNAME records.',
+                : "Verified {$validCount} of ".count($tokens).' required .dkim.amazonses.com CNAME records.',
         ];
     }
 
@@ -117,7 +117,7 @@ final class DnsVerificationService
                 'valid' => false,
                 'record' => null,
                 'policy' => null,
-                'message' => 'No DMARC record found at _dmarc.' . $domain . '. Gmail and Yahoo require DMARC.',
+                'message' => 'No DMARC record found at _dmarc.'.$domain.'. Gmail and Yahoo require DMARC.',
             ];
         }
 
