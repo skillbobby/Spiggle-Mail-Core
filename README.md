@@ -3,6 +3,7 @@
 <p align="left">
   <a href="https://github.com/skillbobby/Spiggle-Mail-Core/releases"><img src="https://img.shields.io/badge/Release-v1.1.0-4F46E5.svg?style=flat-square&logo=git" alt="Release v1.1.0" /></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-FACC15.svg?style=flat-square" alt="License MIT" /></a>
+  <a href="https://www.youtube.com/watch?v=SwVyRzY9VLo&t=14s"><img src="https://img.shields.io/badge/YouTube-Watch_Video_Preview-FF0000.svg?style=flat-square&logo=youtube&logoColor=white" alt="Watch Video Preview on YouTube" /></a>
   <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-13.x-FF2D20.svg?style=flat-square&logo=laravel&logoColor=white" alt="Laravel 13.x" /></a>
   <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-%5E8.3%20%7C%208.5-777BB4.svg?style=flat-square&logo=php&logoColor=white" alt="PHP ^8.3" /></a>
   <a href="https://react.dev"><img src="https://img.shields.io/badge/React-19.x-61DAFB.svg?style=flat-square&logo=react&logoColor=black" alt="React 19.x" /></a>
@@ -20,7 +21,8 @@
 
 SpiggleMail Core gives independent creators, developers, and companies complete ownership over their email subscriber list, web archive, and Amazon SES sender reputation—without per-subscriber SaaS markups or public multi-tenant attack surface.
 
-> **Looking for zero-ops managed hosting & multi-tenant workspaces?** Check out **SpiggleMail Cloud**, our managed SaaS edition with turnkey AWS SES infrastructure, multi-workspace management, and managed deliverability.
+> **Looking for zero-ops managed hosting & multi-tenant workspaces?** Check out **SpiggleMail Cloud**, our managed SaaS edition with turnkey AWS SES infrastructure, multi-workspace management, and managed deliverability.  
+> 📺 **[Watch the SpiggleMail Walkthrough & Product Demo on YouTube](https://www.youtube.com/watch?v=SwVyRzY9VLo&t=14s)**
 
 ---
 
@@ -44,23 +46,27 @@ SpiggleMail Core gives independent creators, developers, and companies complete 
 
 ---
 
-## Key Features
+## ✨ Features Overview
 
-- **Modern 3-Column Content Studio & Real-Time Composer**
-  - **Distraction-Free Newsletters**: Interactive high-contrast personalization pills (`{{ contact.name }}`, `{{ unsubscribe_url }}`), unified Content Studio toolbar, embedded drag-and-drop image uploader, and instant Gmail 102KB clip-size alerts.
-- **Locked-Down Single-Operator Mode (`SPIGGLE_EDITION=core`)**
-  - **Zero Public Signups**: Passwordless 6-digit OTP sign-in is strictly restricted to `OWNER_EMAIL` (or the initial operator who claims a fresh database). Unrecognized emails cannot create accounts or request OTPs.
-- **First-Class AWS SES Reputation Protection**
-  - **Real Easy DKIM + Custom `MAIL FROM`**: Registers sending domains directly via AWS SES v2 API (`createEmailIdentity` + `putEmailIdentityMailFromAttributes`), displaying all 3 `.dkim.amazonses.com` CNAME records, SPF, DMARC, and regional `feedback-smtp.{region}.amazonses.com` MX records.
-  - **Cryptographic AWS SNS Webhook (`POST /api/webhooks/ses`)**: Verifies AWS X.509 SNS signatures, auto-confirms `SubscribeURL` safely, deduplicates retries, distinguishes **Transient** (3-strike soft bounce) vs **Permanent** (immediate hard bounce), and suppresses spam complaints immediately.
-  - **Automated Circuit Breakers**: Pauses campaigns automatically at **2.0% bounce** or **0.08% complaint** rates and halts sending at **5.0% bounce** / **0.3% complaint** thresholds—well inside AWS SES enforcement limits.
-  - **RFC 8058 One-Click Unsubscribe & Multipart MIME**: Every broadcast includes signed `List-Unsubscribe` + `List-Unsubscribe-Post: List-Unsubscribe=One-Click` headers, automatic `text/plain` MIME generation, and CAN-SPAM physical address footers.
-- **Subscriber Hygiene & Lifecycle**
-  - Syntax, typo suggestion, disposable-domain blocklist, MX DNS verification, CSV formula-injection sanitization, double opt-in confirmation, welcome emails, and automated inactive-subscriber sunsetting (`/keep` re-engagement).
-- **Campaign Composer, Public Archive & Feeds**
-  - Rich HTML/Markdown composer, A/B subject-line split testing, 5% warm-up pilot slices, open & per-URL click analytics (with corporate link-scanner filtering), sanitized public web archive (`/archive/{slug}`), RSS 2.0 feed, and XML sitemap.
-- **Developer REST API v1 & Model Context Protocol (MCP) Server**
-  - Role-scoped Bearer API keys (`full_access`, `send_only`, `read_only`), OpenAPI 3.0 spec (`/api/v1/openapi.json`), `llms.txt`, and built-in JSON-RPC 2.0 MCP server (`/api/mcp`) for Claude, Cursor, and autonomous agents.
+<p align="center">
+  <img src="docs/images/features-grid.jpg" width="100%" alt="SpiggleMail Built-in Features Grid" />
+</p>
+
+| 🚫 **One-Click Unsubscribe** `RFC 8058` | ✉️ **Double Opt-In** |
+|:---|:---|
+| Signed `List-Unsubscribe` + `List-Unsubscribe-Post: List-Unsubscribe=One-Click` headers on every broadcast to ensure full Google & Yahoo compliance. | Automated double opt-in confirmation & branded welcome emails handled seamlessly. |
+| ✨ **Clean Lists & Deliverability** | 📊 **Honest Analytics** |
+| Automated syntax typo detection, disposable-domain blocklist sync, and real-time MX DNS record validation. | Recipient opens and per-URL click heatmaps with anti-bot link-scanner filtering. |
+| 📦 **Public Web Archive** `/archive` | 📡 **RSS 2.0 & Sitemap** |
+| SEO-friendly, sanitized public web archive for every newsletter issue you send. | An RSS 2.0 feed and auto-updating XML sitemap generated automatically. |
+| 📈 **Warm-Up Pilots** `5% Slice` | 🛡️ **Smart Bounce Handling** `AWS SNS` |
+| Domain reputation safety: test send a 5% warm-up slice first, then release the remainder. | Automated soft vs hard bounce routing and instant complaint suppression via SNS webhook. |
+| 🎨 **Modern 3-Column Studio** | 🔒 **Single-Operator Lockdown** |
+| Live split preview, dynamic personalization chips (`{{ contact.name }}`), and Gmail 102KB clip alerts. | Zero public signups. Single-operator passwordless OTP authentication locked to `OWNER_EMAIL`. |
+| ⚡ **Amazon SES Wholesale Engine** | 🤖 **REST API & Built-in MCP Server** |
+| Send 10,000 emails for $1.00 directly via AWS SES SDK v3 with Easy DKIM and custom MAIL FROM. | Bearer API keys (`full_access`, `send_only`) and native JSON-RPC 2.0 MCP server (`/api/mcp`) for AI agents. |
+
+---
 
 ---
 
