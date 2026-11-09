@@ -3,186 +3,199 @@
 <p align="left">
   <a href="https://github.com/skillbobby/Spiggle-Mail-Core/releases"><img src="https://img.shields.io/badge/Release-v1.1.0-4F46E5.svg?style=flat-square&logo=git" alt="Release v1.1.0" /></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-FACC15.svg?style=flat-square" alt="License MIT" /></a>
-  <a href="https://www.youtube.com/watch?v=SwVyRzY9VLo&t=14s"><img src="https://img.shields.io/badge/YouTube-Watch_Video_Preview-FF0000.svg?style=flat-square&logo=youtube&logoColor=white" alt="Watch Video Preview on YouTube" /></a>
+  <a href="https://spiggle-mail.com"><img src="https://img.shields.io/badge/Website-spiggle--mail.com-1c1c1e.svg?style=flat-square" alt="Website" /></a>
   <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-13.x-FF2D20.svg?style=flat-square&logo=laravel&logoColor=white" alt="Laravel 13.x" /></a>
   <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-%5E8.3%20%7C%208.5-777BB4.svg?style=flat-square&logo=php&logoColor=white" alt="PHP ^8.3" /></a>
   <a href="https://react.dev"><img src="https://img.shields.io/badge/React-19.x-61DAFB.svg?style=flat-square&logo=react&logoColor=black" alt="React 19.x" /></a>
   <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript-7.x-3178C6.svg?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript 7.x" /></a>
   <a href="https://inertiajs.com"><img src="https://img.shields.io/badge/Inertia.js-3.x-9553E9.svg?style=flat-square&logo=inertia&logoColor=white" alt="Inertia.js 3.x" /></a>
   <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4.svg?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS v4" /></a>
-  <a href="https://vitejs.dev"><img src="https://img.shields.io/badge/Vite-8.x-646CFF.svg?style=flat-square&logo=vite&logoColor=white" alt="Vite 8.x" /></a>
   <a href="https://aws.amazon.com/ses/"><img src="https://img.shields.io/badge/Amazon_SES-SDK_v3-FF9900.svg?style=flat-square&logo=amazonaws&logoColor=white" alt="Amazon SES SDK v3" /></a>
-  <a href="https://tiptap.dev"><img src="https://img.shields.io/badge/Editor-TipTap_3.x-25D366.svg?style=flat-square" alt="TipTap Editor" /></a>
   <a href="https://phpunit.de"><img src="https://img.shields.io/badge/Tests-94_Passing-10B981.svg?style=flat-square" alt="PHPUnit Tests" /></a>
-  <a href="https://laravel.com/docs/pint"><img src="https://img.shields.io/badge/Code_Style-Laravel_Pint-000000.svg?style=flat-square" alt="Laravel Pint" /></a>
 </p>
 
-**Self-hosted, single-operator newsletter & AWS SES broadcast platform (Community Edition — MIT License).**
+**SpiggleMail Core** is the free, self-hosted, MIT-licensed edition of SpiggleMail. Built with **Laravel 13**, **Inertia.js (React 19 + TypeScript)**, **MariaDB**, **Redis**, and **Amazon SES**.
 
-SpiggleMail Core gives independent creators, developers, and companies complete ownership over their email subscriber list, web archive, and Amazon SES sender reputation—without per-subscriber SaaS markups or public multi-tenant attack surface.
+It gives independent creators, developers, and businesses complete ownership over their email subscriber list, publication archive, and Amazon SES sender reputation—without per-subscriber SaaS markups or vendor lock-in.
 
-> **Looking for zero-ops managed hosting & multi-tenant workspaces?** Check out **SpiggleMail Cloud**, our managed SaaS edition with turnkey AWS SES infrastructure, multi-workspace management, and managed deliverability.  
-> 📺 **[Watch the SpiggleMail Walkthrough & Product Demo on YouTube](https://youtu.be/hnmezxkxtVE?si=23Iw-48VrmT7soaO)**
+> 🌐 **Official Website & Docs:** [spiggle-mail.com](https://spiggle-mail.com)  
+> 📺 **Video Walkthrough:** [Watch the Product Demo on YouTube](https://youtu.be/hnmezxkxtVE?si=23Iw-48VrmT7soaO)
 
 ---
 
-## Screenshots
+## Interactive Product Tour
 
-| **Command Center & Overview** | **Campaigns & Newsletters** |
+*(Click any screenshot to inspect full high-resolution detail)*
+
+| [**Command Center & Send Queue**](docs/images/overview-light.png) | [**Campaign Studio**](docs/images/campaigns-light.png) |
 |:---:|:---:|
-| <img src="docs/images/overview-dark.png" width="100%" alt="Overview Dashboard" /> | <img src="docs/images/campaigns-dark.png" width="100%" alt="Campaigns and Newsletters" /> |
-| **Deliverability & Reputation Guard** | **Account & Operator Security** |
-| <img src="docs/images/deliverability-dark.jpg" width="100%" alt="Deliverability and Telemetry" /> | <img src="docs/images/account-security-dark.png" width="100%" alt="Account and Security" /> |
+| <a href="docs/images/overview-light.png"><img src="docs/images/overview-light.png" width="100%" alt="Command Center & Overview" /></a> | <a href="docs/images/campaigns-light.png"><img src="docs/images/campaigns-light.png" width="100%" alt="Campaign Studio and Newsletters" /></a> |
+| [**Deliverability & Reputation Guard**](docs/images/deliverability-light.png) | [**Audience & Contact Hub**](docs/images/contacts-light.png) |
+| <a href="docs/images/deliverability-light.png"><img src="docs/images/deliverability-light.png" width="100%" alt="Deliverability and Reputation Guard" /></a> | <a href="docs/images/contacts-light.png"><img src="docs/images/contacts-light.png" width="100%" alt="Audience and Subscriber Hub" /></a> |
 
 <details>
-<summary>☀️ <b>View Light Theme Screenshot</b></summary>
+<summary>🌙 <b>Looking for Dark Mode? Click to preview dark theme screenshots</b></summary>
 <br />
 
-| **Command Center (Light Mode)** |
-|:---:|
-| <img src="docs/images/overview-light.png" width="100%" alt="Overview Light Mode" /> |
+| [**Overview (Dark)**](docs/images/overview-dark.png) | [**Campaigns (Dark)**](docs/images/campaigns-dark.png) |
+|:---:|:---:|
+| <a href="docs/images/overview-dark.png"><img src="docs/images/overview-dark.png" width="100%" alt="Overview Dark Mode" /></a> | <a href="docs/images/campaigns-dark.png"><img src="docs/images/campaigns-dark.png" width="100%" alt="Campaigns Dark Mode" /></a> |
+| [**Deliverability (Dark)**](docs/images/deliverability-dark.jpg) | [**Security Center (Dark)**](docs/images/account-security-dark.png) |
+| <a href="docs/images/deliverability-dark.jpg"><img src="docs/images/deliverability-dark.jpg" width="100%" alt="Deliverability Dark Mode" /></a> | <a href="docs/images/account-security-dark.png"><img src="docs/images/account-security-dark.png" width="100%" alt="Security Center Dark Mode" /></a> |
 
 </details>
 
 ---
 
-## ✨ Features Overview
+## Why SpiggleMail? (The Honest Comparison)
 
-<p align="center">
-  <img src="docs/images/features-grid.jpg" width="100%" alt="SpiggleMail Built-in Features Grid" />
-</p>
+Most email marketing platforms charge a **"subscriber tax"** — charging you punishing monthly fees just because your list grew, even if contacts haven't opened an email in months.
 
-| 🚫 **One-Click Unsubscribe** `RFC 8058` | ✉️ **Double Opt-In** |
-|:---|:---|
-| Signed `List-Unsubscribe` + `List-Unsubscribe-Post: List-Unsubscribe=One-Click` headers on every broadcast to ensure full Google & Yahoo compliance. | Automated double opt-in confirmation & branded welcome emails handled seamlessly. |
-| ✨ **Clean Lists & Deliverability** | 📊 **Honest Analytics** |
-| Automated syntax typo detection, disposable-domain blocklist sync, and real-time MX DNS record validation. | Recipient opens and per-URL click heatmaps with anti-bot link-scanner filtering. |
-| 📦 **Public Web Archive** `/archive` | 📡 **RSS 2.0 & Sitemap** |
-| SEO-friendly, sanitized public web archive for every newsletter issue you send. | An RSS 2.0 feed and auto-updating XML sitemap generated automatically. |
-| 📈 **Warm-Up Pilots** `5% Slice` | 🛡️ **Smart Bounce Handling** `AWS SNS` |
-| Domain reputation safety: test send a 5% warm-up slice first, then release the remainder. | Automated soft vs hard bounce routing and instant complaint suppression via SNS webhook. |
-| 🎨 **Modern 3-Column Studio** | 🔒 **Single-Operator Lockdown** |
-| Live split preview, dynamic personalization chips (`{{ contact.name }}`), and Gmail 102KB clip alerts. | Zero public signups. Single-operator passwordless OTP authentication locked to `OWNER_EMAIL`. |
-| ⚡ **Amazon SES Wholesale Engine** | 🤖 **REST API & Built-in MCP Server** |
-| Send 10,000 emails for $1.00 directly via AWS SES SDK v3 with Easy DKIM and custom MAIL FROM. | Bearer API keys (`full_access`, `send_only`) and native JSON-RPC 2.0 MCP server (`/api/mcp`) for AI agents. |
+| Capability | SpiggleMail Core (Self-Hosted) | SpiggleMail Cloud | Mailchimp | Beehiiv | Substack |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| **Cost at 50,000 Contacts** | **$0** (SES wholesale ~$5) | **$19/mo** (flat) | ~$350/mo | $99/mo | 10% gross cuts |
+| **Cost at 100,000 Contacts** | **$0** (SES wholesale ~$10) | **$29/mo** (flat) | ~$700/mo | $149/mo | 10% gross cuts |
+| **Contact Storage Limit** | **Unlimited** | **Unlimited** | Strict Tiers | Strict Tiers | Unlimited |
+| **Deliverability Engine** | Dedicated Amazon SES v3 | Dedicated AWS SES | Shared Pool | Shared Pool | Shared Pool |
+| **RFC 8058 1-Click Unsubscribe** | **Built-in Native** | **Built-in Native** | Add-on / Inconsistent | Partial | Basic |
+| **Disposable Email Defense** | Daily 10k+ domain sync | Daily 10k+ domain sync | None | None | None |
+| **Data & Contact Ownership** | 100% Direct SQL / DB | Export anytime CSV/JSON | Locked in | Exportable | Exportable |
+| **AI Agent Hub (MCP Server)** | **Native JSON-RPC 2.0** | **Native JSON-RPC 2.0** | None | None | None |
+| **Publication Website & RSS** | **Included (`/archive`)** | **Included (`/archive`)** | Paid Add-on | Included | Included |
+| **Multi-Domain Sending** | **Unlimited** | **Unlimited** | Paid Upgrades | 1 included | 1 only |
 
 ---
 
----
+## Self-Hosted vs SpiggleMail Managed Cloud
 
-## 🛠️ Technologies & Stack Versions
+SpiggleMail Core is 100% open-source under the MIT license. Run it on your own server, or let us manage the servers, reputation monitoring, and infrastructure for you.
 
-| Layer | Technology | Version | Purpose |
-|:---|:---|:---:|:---|
-| **Backend Framework** | [Laravel](https://laravel.com) | `13.x` (`13.40.0`) | Application core, queue workers, job dispatchers, and security middleware |
-| **Backend Language** | [PHP](https://www.php.net) | `^8.3` (tested on `8.5`) | Strict typed engine, OpenSSL cryptography, and native Ulid generation |
-| **Frontend UI** | [React](https://react.dev) | `19.x` (`19.3.1`) | High-performance interactive dashboard, wizards, and content studio |
-| **Type System** | [TypeScript](https://www.typescriptlang.org) | `7.x` (`7.0.2`) | Strict type checking with comprehensive data contracts across all views |
-| **SPA Bridge** | [Inertia.js](https://inertiajs.com) | `3.x` | Monolith modern routing with zero client-side state boilerplate |
-| **Design System** | [Tailwind CSS](https://tailwindcss.com) | `v4.x` (`4.3.4`) | High-contrast design system with `@custom-variant dark` theme support |
-| **Bundler & HMR** | [Vite](https://vitejs.dev) | `8.x` (`8.0.0`) | Sub-second frontend HMR and optimized production asset minification |
-| **SES Dispatch SDK** | [Amazon SES PHP SDK](https://aws.amazon.com/ses/) | `v3.x` (`^3.402`) | Official AWS SDK for Easy DKIM, custom MAIL FROM, and batch sending |
-| **Content Studio** | [TipTap](https://tiptap.dev) | `3.x` (`3.32.2`) | Headless rich-text editor for markdown/HTML with dynamic shortcodes |
-| **Iconography** | [Lucide React](https://lucide.dev) | `1.x` (`1.68.0`) | Semantic, accessible SVG icon library |
-| **Data Importer** | [PapaParse](https://www.papaparse.com/) | `5.x` (`5.7.0`) | High-speed client-side chunked CSV streaming & header mapping |
-| **Code Style** | [Laravel Pint](https://laravel.com/docs/pint) | `1.x` (`1.27.0`) | Automated PSR-12 code style enforcer |
-| **Testing** | [PHPUnit](https://phpunit.de) | `12.x` (`12.5.12`) | 94 automated feature tests covering deliverability, auth, and SES APIs |
-| **Database** | SQLite / MySQL / PostgreSQL / MariaDB | Any | Zero-config SQLite default with seamless enterprise database switching |
-| **Cache & Queue** | Database / Redis ([Predis](https://github.com/predis/predis)) | `3.x` (`3.7.0`) | High-throughput asynchronous batch workers and rate limiting |
+```
+┌──────────────────────────────────────┐     ┌──────────────────────────────────────┐
+│       Self-Hosted (Free & MIT)       │     │       SpiggleMail Managed Cloud      │
+├──────────────────────────────────────┤     ├──────────────────────────────────────┤
+│ • 100% Free and open source          │     │ • From $19/mo flat for 20,000 sends  │
+│ • Run on your own VPS or Docker      │     │ • Zero DevOps, zero server headaches │
+│ • Bring your own AWS SES credentials │     │ • Instant DKIM/SPF/DMARC onboarding  │
+│ • Direct MariaDB / Redis management  │     │ • Automated reputation warm-up ramps │
+│ • Complete control over your stack   │     │ • 99.9% uptime SLA & automated backups│
+└──────────────────────────────────────┘     └──────────────────────────────────────┘
+```
+
+> 🚀 **Prefer zero setup?** [Get started on SpiggleMail Cloud](https://spiggle-mail.com/pricing) — every feature on every plan, no lockouts, no subscriber tax.
 
 ---
 
-## Requirements
+## Core Built-in Features
 
-- **PHP 8.3+** (`openssl`, `pdo_sqlite` or `pdo_mysql`, `mbstring`, `fileinfo`, `xml`, `curl`)
-- **Composer 2.x**
-- **Node.js 20+** & **npm**
-- **Database**: SQLite (zero-config default) or MySQL / MariaDB / PostgreSQL
-- **Amazon SES Account** (or local Mailpit `:1025` for zero-cost local development)
+1. **Campaign Studio**
+   - Clean, distraction-free markdown and rich visual composer.
+   - Live split preview, dynamic personalization tokens (`{{ contact.name }}`), and real-time Gmail 102KB clip alerts.
+2. **Scheduling & Smart Queues**
+   - Schedule dispatches to the exact minute.
+   - Redis-backed high-throughput queue with rate limiting and automated recovery.
+3. **Publication Website & RSS 2.0**
+   - Every newsletter issue publishes automatically to your clean public website (`/archive`).
+   - Automatically generates an RSS 2.0 syndication feed and XML sitemap for SEO discovery.
+4. **Custom Domain & Reputation Guard**
+   - Send from your own domain (`hello@yourbrand.com`).
+   - Automated SPF, DKIM 2048-bit, and DMARC verification checklist.
+   - Strict adherence to the 2024 Google & Yahoo bulk sender mandates.
+5. **RFC 8058 One-Click Unsubscribe**
+   - Generates cryptographically signed `List-Unsubscribe` and `List-Unsubscribe-Post: List-Unsubscribe=One-Click` headers.
+   - Prevents recipients from clicking the spam button when they simply want to unsubscribe.
+6. **Embeddable Signup Forms & Automations**
+   - Minimalist copy-paste HTML/JS forms for any landing page or CMS.
+   - Automated double opt-in confirmations and instant welcome drip messages.
+7. **1-Click Subscriber Imports**
+   - High-speed streaming CSV import via PapaParse.
+   - Direct migration presets for Substack, Mailchimp, and Beehiiv.
+8. **Honest Human Analytics**
+   - Transparent opens and click heatmaps.
+   - Anti-bot link scanner filtering so security crawlers don't artificially inflate your metrics.
+9. **Model Context Protocol (MCP) Agent Hub**
+   - Native `/api/mcp` JSON-RPC 2.0 endpoint for Claude Code, Cursor, Codex, and AI autonomous agents.
+   - Manage subscriber queries, campaign drafts, and delivery health programmatically.
 
 ---
 
-## Quickstart Installation
+## Technical Architecture
+
+| Layer | Technology | Purpose |
+|:---|:---|:---|
+| **Backend Framework** | [Laravel 13](https://laravel.com) | Multi-tenant SaaS foundation, queue pipelines & scheduling |
+| **Backend Runtime** | [PHP ^8.3 \| 8.5](https://www.php.net) | Strict typing, OpenSSL cryptography, native ULID generation |
+| **Frontend UI** | [React 19](https://react.dev) | Interactive dashboard, campaign composers, and deliverability dials |
+| **Type System** | [TypeScript 7.x](https://www.typescriptlang.org) | Strict typed contracts across frontend components |
+| **Fullstack Bridge** | [Inertia.js 3.x](https://inertiajs.com) | Monolithic ergonomics with modern client-side routing |
+| **Styling** | [Tailwind CSS v4](https://tailwindcss.com) | High-contrast design tokens with seamless dark mode support |
+| **SES Dispatch SDK** | [AWS SES SDK v3](https://aws.amazon.com/ses/) | Easy DKIM, custom MAIL FROM, batch sending & webhook telemetry |
+| **Data Persistence** | MariaDB 10.x+ / MySQL / PostgreSQL | Relational ACID storage with single-operator or tenant isolation |
+| **Cache & Queue** | Redis ([Predis](https://github.com/predis/predis)) | High-throughput async batch workers and rate limiting |
+| **Testing Suite** | [PHPUnit 12](https://phpunit.de) | 94 passing tests covering deliverability, queues, and security |
+
+---
+
+## Quickstart (Self-Hosted)
+
+### Prerequisites
+- PHP 8.2+
+- Composer
+- Node.js 20+ & npm
+- MariaDB or MySQL
+- Redis
+
+### Installation Steps
 
 ```bash
 # 1. Clone the repository
 git clone https://github.com/skillbobby/Spiggle-Mail-Core.git
 cd Spiggle-Mail-Core
 
-# 2. Install PHP & frontend dependencies
+# 2. Install PHP and Node dependencies
 composer install
 npm install
 
-# 3. Configure environment & lock to your operator email
+# 3. Configure environment
 cp .env.example .env
 php artisan key:generate
-```
 
-Edit `.env` and set your operator email and public URL:
+# 4. Run database migrations & seeders
+php artisan migrate --seed
 
-```dotenv
-APP_NAME="SpiggleMail Core"
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://mail.yourdomain.com
+# 5. Sync disposable email domain blocklist (10,143+ domains)
+php artisan deliverability:sync-disposable-domains
 
-SPIGGLE_EDITION=core
-OWNER_EMAIL=you@yourdomain.com
-```
-
-Initialize the database, storage symlink, and production frontend bundle:
-
-```bash
-touch database/database.sqlite
-php artisan migrate --seed --force
-php artisan storage:link
+# 6. Build production frontend assets
 npm run build
+
+# 7. Start the local development server
+php artisan serve
 ```
 
----
-
-## Connecting Amazon SES Safely (Reputation Checklist)
-
-1. **Request AWS SES Production Access** in your chosen AWS region (Sandbox accounts are capped at 200 emails/24h and verified recipients only).
-2. **Create an SES Configuration Set** (e.g. `spiggle-reputation-events`) in the AWS SES Console:
-   - Add an **SNS Event Destination** for **Bounces**, **Complaints**, and **Deliveries**.
-   - Subscribe your SNS Topic (HTTPS protocol) to:
-     ```text
-     https://mail.yourdomain.com/api/webhooks/ses
-     ```
-     SpiggleMail automatically verifies the AWS X.509 signature and confirms the `SubscribeURL`.
-3. **Configure Credentials**:
-   - Either set `SES_DRIVER=live`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`, and `AWS_SES_CONFIGURATION_SET` in `.env`, **or** enter them in **Settings -> Mail Dispatch Engine** (encrypted at rest with `AES-256-CBC`).
-   - Click **Verify SES Account & Quotas** in `/settings` to confirm Production Access and inspect your `MaxSendRate`.
-4. **Verify Your Sending Domain (`/domains`)**:
-   - Add your domain in `/domains`, publish all **3 Easy DKIM CNAMEs**, **SPF**, **DMARC**, and **Custom MAIL FROM** (`MX` + `TXT` on `mail.yourdomain.com`), and click **Recheck DNS Records**.
-   - Live SES campaign dispatches are blocked until your sender domain is verified.
-
----
-
-## Running Queue Workers & Scheduler in Production
-
-Run a queue worker (via Supervisor or `systemd`) and the Laravel scheduler cron:
+### Docker Quickstart (Alternative)
 
 ```bash
-# Queue worker for rate-paced campaign batches & transactional emails
-php artisan queue:work --tries=3 --timeout=120
-
-# Crontab entry (every minute) for scheduled campaigns, warm-up slices & list cleanup
-* * * * * cd /path/to/Spiggle-Mail-Core && php artisan schedule:run >> /dev/null 2>&1
+docker compose up -d
+docker compose exec app php artisan migrate --seed
 ```
 
 ---
 
-## Running Tests
+## Deliverability & Reputation Safeguards
 
-```bash
-php artisan test
-```
+- **Daily Throwaway Blocklist**: Automatically syncs with 10,143+ active disposable email domains every night at 02:00.
+- **Circuit Breaker Rate Limiting**:
+  - Automatically pauses campaigns if bounce rate reaches $\ge 2\%$ or complaints reach $\ge 0.08\%$.
+  - Freezes dispatches immediately if hard bounces reach $\ge 5\%$ or complaints reach $\ge 0.3\%$.
+- **Amazon SNS Real-Time Telemetry**: Instant bounce & complaint webhook processing with automatic recipient suppression.
+- **Switchable Mock Driver**: Run full end-to-end tests without sending real emails using `SES_DRIVER=mock`.
 
 ---
 
-## Security & License
+## Community & Support
 
-- Credentials stored via the UI are encrypted at rest using Laravel `APP_KEY` (`AES-256-CBC`) and masked in responses.
-- Licensed under the [MIT License](LICENSE).
+- **Bug Reports & Issues:** [GitHub Issues](https://github.com/skillbobby/Spiggle-Mail-Core/issues)
+- **Hosted Platform:** [SpiggleMail Cloud](https://spiggle-mail.com)
+- **Documentation:** [spiggle-mail.com/docs](https://spiggle-mail.com/docs)
+- **License:** [MIT License](LICENSE)
