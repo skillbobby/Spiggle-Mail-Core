@@ -22,7 +22,7 @@
 SpiggleMail Core gives independent creators, developers, and companies complete ownership over their email subscriber list, web archive, and Amazon SES sender reputation—without per-subscriber SaaS markups or public multi-tenant attack surface.
 
 > **Looking for zero-ops managed hosting & multi-tenant workspaces?** Check out **SpiggleMail Cloud**, our managed SaaS edition with turnkey AWS SES infrastructure, multi-workspace management, and managed deliverability.  
-> 📺 **[Watch the SpiggleMail Walkthrough & Product Demo on YouTube](https://www.youtube.com/watch?v=SwVyRzY9VLo&t=14s)**
+> 📺 **[Watch the SpiggleMail Walkthrough & Product Demo on YouTube](https://youtu.be/hnmezxkxtVE?si=23Iw-48VrmT7soaO)**
 
 ---
 
