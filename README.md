@@ -1,4 +1,4 @@
-# SpiggleMail Core
+# MailJinny Core
 
 <p align="left">
   <a href="https://github.com/skillbobby/Spiggle-Mail-Core/releases"><img src="https://img.shields.io/badge/Release-v1.1.0-4F46E5.svg?style=flat-square&logo=git" alt="Release v1.1.0" /></a>
@@ -14,7 +14,7 @@
   <a href="https://phpunit.de"><img src="https://img.shields.io/badge/Tests-94_Passing-10B981.svg?style=flat-square" alt="PHPUnit Tests" /></a>
 </p>
 
-**SpiggleMail Core** is the free, self-hosted, source-available edition of MailJinny under the [Elastic License 2.0](LICENSE) (free to use, modify, and self-host — not for resale or commercial SaaS redistribution). Built with **Laravel 13**, **Inertia.js (React 19 + TypeScript)**, **MariaDB**, **Redis**, and **Amazon SES**.
+**MailJinny Core** is the free, self-hosted, source-available edition of MailJinny under the [Elastic License 2.0](LICENSE) (free to use, modify, and self-host — not for resale or commercial SaaS redistribution). Built with **Laravel 13**, **Inertia.js (React 19 + TypeScript)**, **MariaDB**, **Redis**, and **Amazon SES**.
 
 It gives independent creators, developers, and businesses complete ownership over their email subscriber list, publication archive, and sender reputation—without per-subscriber SaaS markups or vendor lock-in.
 
@@ -50,25 +50,6 @@ It gives independent creators, developers, and businesses complete ownership ove
 | <a href="docs/images/deliverability-dark.jpg"><img src="docs/images/deliverability-dark.jpg" width="100%" alt="Deliverability Dark Mode" /></a> | <a href="docs/images/account-security-dark.png"><img src="docs/images/account-security-dark.png" width="100%" alt="Security Center Dark Mode" /></a> |
 
 </details>
-
----
-
-## Why SpiggleMail? (The Honest Comparison)
-
-Most email marketing platforms charge a **"subscriber tax"** — charging you punishing monthly fees just because your list grew, even if contacts haven't opened an email in months.
-
-| Capability | Self-Hosted | MailJinny(Cloud) | Mailchimp | Beehiiv |
-|:---|:---:|:---:|:---:|:---:|
-| **Cost at 50,000 Contacts** | **$0** (SES wholesale ~$5) | **$19/mo** (flat) | ~$350/mo | $99/mo |
-| **Cost at 100,000 Contacts** | **$0** (SES wholesale ~$10) | **$29/mo** (flat) | ~$700/mo | $149/mo |
-| **Contact Storage Limit** | **Unlimited** | **Unlimited** | Strict Tiers | Strict Tiers |
-| **Deliverability Engine** | **You decide** — supports AWS SES, Postmark, Resend | Dedicated AWS SES | Shared Pool | Shared Pool |
-| **RFC 8058 1-Click Unsubscribe** | **Built-in Native** | **Built-in Native** | Add-on / Inconsistent | Partial |
-| **Disposable Email Defense** | Daily 10k+ domain sync | Daily 10k+ domain sync | None | None |
-| **Data & Contact Ownership** | 100% Direct SQL / DB | Export anytime CSV/JSON | Locked in | Exportable |
-| **AI Agent Hub (MCP Server)** | **Native JSON-RPC 2.0** | **Native JSON-RPC 2.0** | None | None |
-| **Publication Website & RSS** | **Included (`/archive`)** | **Included (`/archive`)** | Paid Add-on | Included |
-| **Multi-Domain Sending** | **Unlimited** | **Unlimited** | Paid Upgrades | 1 included |
 
 ---
 
