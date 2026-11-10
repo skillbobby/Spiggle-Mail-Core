@@ -2,7 +2,7 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "spiggle-mail/spiggle-mail-core",
     "type": "project",
-    "description": "SpiggleMail Core — Self-hosted, single-operator newsletter and AWS SES broadcast platform (MIT License).",
+    "description": "SpiggleMail Core — Self-hosted, single-operator newsletter and AWS SES broadcast platform (Elastic License 2.0).",
     "keywords": [
         "spiggle-mail",
         "newsletter",
@@ -19,7 +19,7 @@
         "issues": "https://github.com/skillbobby/Spiggle-Mail-Core/issues",
         "source": "https://github.com/skillbobby/Spiggle-Mail-Core"
     },
-    "license": "MIT",
+    "license": "Elastic-2.0",
     "require": {
         "php": "^8.3",
         "aws/aws-sdk-php": "^3.402",

@@ -2,8 +2,8 @@
 
 <p align="left">
   <a href="https://github.com/skillbobby/Spiggle-Mail-Core/releases"><img src="https://img.shields.io/badge/Release-v1.1.0-4F46E5.svg?style=flat-square&logo=git" alt="Release v1.1.0" /></a>
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-FACC15.svg?style=flat-square" alt="License MIT" /></a>
-  <a href="https://spiggle-mail.com"><img src="https://img.shields.io/badge/Website-spiggle--mail.com-1c1c1e.svg?style=flat-square" alt="Website" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Elastic_2.0_(No_Resale)-FACC15.svg?style=flat-square" alt="License Elastic 2.0 (No Resale)" /></a>
+  <a href="https://mailjinny.com"><img src="https://img.shields.io/badge/Website-mailjinny.com-1c1c1e.svg?style=flat-square" alt="Website" /></a>
   <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-13.x-FF2D20.svg?style=flat-square&logo=laravel&logoColor=white" alt="Laravel 13.x" /></a>
   <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-%5E8.3%20%7C%208.5-777BB4.svg?style=flat-square&logo=php&logoColor=white" alt="PHP ^8.3" /></a>
   <a href="https://react.dev"><img src="https://img.shields.io/badge/React-19.x-61DAFB.svg?style=flat-square&logo=react&logoColor=black" alt="React 19.x" /></a>
@@ -14,12 +14,18 @@
   <a href="https://phpunit.de"><img src="https://img.shields.io/badge/Tests-94_Passing-10B981.svg?style=flat-square" alt="PHPUnit Tests" /></a>
 </p>
 
-**SpiggleMail Core** is the free, self-hosted, MIT-licensed edition of SpiggleMail. Built with **Laravel 13**, **Inertia.js (React 19 + TypeScript)**, **MariaDB**, **Redis**, and **Amazon SES**.
+**SpiggleMail Core** is the free, self-hosted, source-available edition of MailJinny under the [Elastic License 2.0](LICENSE) (free to use, modify, and self-host — not for resale or commercial SaaS redistribution). Built with **Laravel 13**, **Inertia.js (React 19 + TypeScript)**, **MariaDB**, **Redis**, and **Amazon SES**.
 
-It gives independent creators, developers, and businesses complete ownership over their email subscriber list, publication archive, and Amazon SES sender reputation—without per-subscriber SaaS markups or vendor lock-in.
+It gives independent creators, developers, and businesses complete ownership over their email subscriber list, publication archive, and sender reputation—without per-subscriber SaaS markups or vendor lock-in.
 
-> 🌐 **Official Website & Docs:** [spiggle-mail.com](https://spiggle-mail.com)  
+> 🌐 **Official Website & Docs:** [mailjinny.com](https://mailjinny.com)  
 > 📺 **Video Walkthrough:** [Watch the Product Demo on YouTube](https://youtu.be/hnmezxkxtVE?si=23Iw-48VrmT7soaO)
+
+<p align="left">
+  <a href="https://github.com/sponsors/skillbobby">
+    <img src="https://img.shields.io/badge/Support_this_Project-%E2%9D%A4_Sponsor_on_GitHub-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white" alt="Support this Project" />
+  </a>
+</p>
 
 ---
 
@@ -51,38 +57,18 @@ It gives independent creators, developers, and businesses complete ownership ove
 
 Most email marketing platforms charge a **"subscriber tax"** — charging you punishing monthly fees just because your list grew, even if contacts haven't opened an email in months.
 
-| Capability | SpiggleMail Core (Self-Hosted) | SpiggleMail Cloud | Mailchimp | Beehiiv | Substack |
-|:---|:---:|:---:|:---:|:---:|:---:|
-| **Cost at 50,000 Contacts** | **$0** (SES wholesale ~$5) | **$19/mo** (flat) | ~$350/mo | $99/mo | 10% gross cuts |
-| **Cost at 100,000 Contacts** | **$0** (SES wholesale ~$10) | **$29/mo** (flat) | ~$700/mo | $149/mo | 10% gross cuts |
-| **Contact Storage Limit** | **Unlimited** | **Unlimited** | Strict Tiers | Strict Tiers | Unlimited |
-| **Deliverability Engine** | Dedicated Amazon SES v3 | Dedicated AWS SES | Shared Pool | Shared Pool | Shared Pool |
-| **RFC 8058 1-Click Unsubscribe** | **Built-in Native** | **Built-in Native** | Add-on / Inconsistent | Partial | Basic |
-| **Disposable Email Defense** | Daily 10k+ domain sync | Daily 10k+ domain sync | None | None | None |
-| **Data & Contact Ownership** | 100% Direct SQL / DB | Export anytime CSV/JSON | Locked in | Exportable | Exportable |
-| **AI Agent Hub (MCP Server)** | **Native JSON-RPC 2.0** | **Native JSON-RPC 2.0** | None | None | None |
-| **Publication Website & RSS** | **Included (`/archive`)** | **Included (`/archive`)** | Paid Add-on | Included | Included |
-| **Multi-Domain Sending** | **Unlimited** | **Unlimited** | Paid Upgrades | 1 included | 1 only |
-
----
-
-## Self-Hosted vs SpiggleMail Managed Cloud
-
-SpiggleMail Core is 100% open-source under the MIT license. Run it on your own server, or let us manage the servers, reputation monitoring, and infrastructure for you.
-
-```
-┌──────────────────────────────────────┐     ┌──────────────────────────────────────┐
-│       Self-Hosted (Free & MIT)       │     │       SpiggleMail Managed Cloud      │
-├──────────────────────────────────────┤     ├──────────────────────────────────────┤
-│ • 100% Free and open source          │     │ • From $19/mo flat for 20,000 sends  │
-│ • Run on your own VPS or Docker      │     │ • Zero DevOps, zero server headaches │
-│ • Bring your own AWS SES credentials │     │ • Instant DKIM/SPF/DMARC onboarding  │
-│ • Direct MariaDB / Redis management  │     │ • Automated reputation warm-up ramps │
-│ • Complete control over your stack   │     │ • 99.9% uptime SLA & automated backups│
-└──────────────────────────────────────┘     └──────────────────────────────────────┘
-```
-
-> 🚀 **Prefer zero setup?** [Get started on SpiggleMail Cloud](https://spiggle-mail.com/pricing) — every feature on every plan, no lockouts, no subscriber tax.
+| Capability | Self-Hosted | MailJinny(Cloud) | Mailchimp | Beehiiv |
+|:---|:---:|:---:|:---:|:---:|
+| **Cost at 50,000 Contacts** | **$0** (SES wholesale ~$5) | **$19/mo** (flat) | ~$350/mo | $99/mo |
+| **Cost at 100,000 Contacts** | **$0** (SES wholesale ~$10) | **$29/mo** (flat) | ~$700/mo | $149/mo |
+| **Contact Storage Limit** | **Unlimited** | **Unlimited** | Strict Tiers | Strict Tiers |
+| **Deliverability Engine** | **You decide** — supports AWS SES, Postmark, Resend | Dedicated AWS SES | Shared Pool | Shared Pool |
+| **RFC 8058 1-Click Unsubscribe** | **Built-in Native** | **Built-in Native** | Add-on / Inconsistent | Partial |
+| **Disposable Email Defense** | Daily 10k+ domain sync | Daily 10k+ domain sync | None | None |
+| **Data & Contact Ownership** | 100% Direct SQL / DB | Export anytime CSV/JSON | Locked in | Exportable |
+| **AI Agent Hub (MCP Server)** | **Native JSON-RPC 2.0** | **Native JSON-RPC 2.0** | None | None |
+| **Publication Website & RSS** | **Included (`/archive`)** | **Included (`/archive`)** | Paid Add-on | Included |
+| **Multi-Domain Sending** | **Unlimited** | **Unlimited** | Paid Upgrades | 1 included |
 
 ---
 
@@ -196,6 +182,7 @@ docker compose exec app php artisan migrate --seed
 ## Community & Support
 
 - **Bug Reports & Issues:** [GitHub Issues](https://github.com/skillbobby/Spiggle-Mail-Core/issues)
-- **Hosted Platform:** [SpiggleMail Cloud](https://spiggle-mail.com)
-- **Documentation:** [spiggle-mail.com/docs](https://spiggle-mail.com/docs)
-- **License:** [MIT License](LICENSE)
+- **Hosted Platform:** [MailJinny](https://mailjinny.com)
+- **Documentation:** [mailjinny.com/docs](https://mailjinny.com/docs)
+- **Sponsor:** [Support this project on GitHub Sponsors](https://github.com/sponsors/skillbobby)
+- **License:** [Elastic License 2.0 (Source-Available, No Resale)](LICENSE)
