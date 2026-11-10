@@ -1,4 +1,4 @@
-# MailJinny Core
+# MailJinny
 
 <p align="left">
   <a href="https://github.com/skillbobby/Spiggle-Mail-Core/releases"><img src="https://img.shields.io/badge/Release-v1.1.0-4F46E5.svg?style=flat-square&logo=git" alt="Release v1.1.0" /></a>
@@ -14,7 +14,7 @@
   <a href="https://phpunit.de"><img src="https://img.shields.io/badge/Tests-94_Passing-10B981.svg?style=flat-square" alt="PHPUnit Tests" /></a>
 </p>
 
-**MailJinny Core** is the free, self-hosted, source-available edition of MailJinny under the [Elastic License 2.0](LICENSE) (free to use, modify, and self-host — not for resale or commercial SaaS redistribution). Built with **Laravel 13**, **Inertia.js (React 19 + TypeScript)**, **MariaDB**, **Redis**, and **Amazon SES**.
+**MailJinny** is the free, self-hosted, source-available edition (managed hosting is available as **MailJinny Cloud**) under the [Elastic License 2.0](LICENSE) — free to use, modify, and self-host, not for resale or commercial SaaS redistribution. Built with **Laravel 13**, **Inertia.js (React 19 + TypeScript)**, **MariaDB**, **Redis**, and **Amazon SES**.
 
 It gives independent creators, developers, and businesses complete ownership over their email subscriber list, publication archive, and sender reputation—without per-subscriber SaaS markups or vendor lock-in.
 
@@ -53,7 +53,7 @@ It gives independent creators, developers, and businesses complete ownership ove
 
 ---
 
-## Core Built-in Features
+## Built-in Features
 
 1. **Campaign Studio**
    - Clean, distraction-free markdown and rich visual composer.
@@ -163,7 +163,7 @@ docker compose exec app php artisan migrate --seed
 ## Community & Support
 
 - **Bug Reports & Issues:** [GitHub Issues](https://github.com/skillbobby/Spiggle-Mail-Core/issues)
-- **Hosted Platform:** [MailJinny](https://mailjinny.com)
+- **Hosted Platform:** [MailJinny Cloud](https://mailjinny.com)
 - **Documentation:** [mailjinny.com/docs](https://mailjinny.com/docs)
 - **Sponsor:** [Support this project on GitHub Sponsors](https://github.com/sponsors/skillbobby)
 - **License:** [Elastic License 2.0 (Source-Available, No Resale)](LICENSE)
