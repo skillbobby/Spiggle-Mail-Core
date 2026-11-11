@@ -3,7 +3,6 @@
 <p align="left">
   <a href="https://github.com/skillbobby/Spiggle-Mail-Core/releases"><img src="https://img.shields.io/badge/Release-v1.1.0-4F46E5.svg?style=flat-square&logo=git" alt="Release v1.1.0" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Elastic_2.0_(No_Resale)-FACC15.svg?style=flat-square" alt="License Elastic 2.0 (No Resale)" /></a>
-  <a href="https://mailjinny.com"><img src="https://img.shields.io/badge/Website-mailjinny.com-1c1c1e.svg?style=flat-square" alt="Website" /></a>
   <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-13.x-FF2D20.svg?style=flat-square&logo=laravel&logoColor=white" alt="Laravel 13.x" /></a>
   <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-%5E8.3%20%7C%208.5-777BB4.svg?style=flat-square&logo=php&logoColor=white" alt="PHP ^8.3" /></a>
   <a href="https://react.dev"><img src="https://img.shields.io/badge/React-19.x-61DAFB.svg?style=flat-square&logo=react&logoColor=black" alt="React 19.x" /></a>
@@ -18,7 +17,6 @@
 
 It gives independent creators, developers, and businesses complete ownership over their email subscriber list, publication archive, and sender reputation—without per-subscriber SaaS markups or vendor lock-in.
 
-> 🌐 **Official Website & Docs:** [mailjinny.com](https://mailjinny.com)  
 > 📺 **Video Walkthrough:** [Watch the Product Demo on YouTube](https://youtu.be/hnmezxkxtVE?si=23Iw-48VrmT7soaO)
 
 <p align="left">
@@ -163,6 +161,5 @@ docker compose exec app php artisan migrate --seed
 ## Community & Support
 
 - **Bug Reports & Issues:** [GitHub Issues](https://github.com/skillbobby/Spiggle-Mail-Core/issues)
-- **Documentation:** [mailjinny.com/docs](https://mailjinny.com/docs)
 - **Sponsor:** [Support this project on GitHub Sponsors](https://github.com/sponsors/skillbobby)
 - **License:** [Elastic License 2.0 (Source-Available, No Resale)](LICENSE)
