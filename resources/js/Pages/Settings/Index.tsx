@@ -209,7 +209,7 @@ export default function SettingsIndex({
                                 <p className="text-xs text-zinc-400">
                                     {canManageSesCredentials
                                         ? 'Toggle between local zero-cost testing and production Amazon SES'
-                                        : 'Managed cloud AWS SES infrastructure with automated reputation guardrails'}
+                                        : 'Administrator-managed AWS SES infrastructure with automated reputation guardrails'}
                                 </p>
                             </div>
                         </div>
@@ -434,9 +434,9 @@ export default function SettingsIndex({
                     ) : (
                         <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-between gap-4">
                             <div className="space-y-1">
-                                <p className="text-sm font-medium text-white">Managed Cloud SES Infrastructure</p>
+                                <p className="text-sm font-medium text-white">Administrator-Managed SES Infrastructure</p>
                                 <p className="text-xs text-zinc-400">
-                                    Outbound delivery, SNS bounce/complaint loops, and IP reputation are managed automatically by SpiggleMail Cloud. Authenticate your custom domain in{' '}
+                                    Outbound delivery, SNS bounce/complaint loops, and IP reputation are managed at the instance level. Authenticate your custom domain in{' '}
                                     <a href="/domains" className="text-indigo-400 underline hover:text-indigo-300">
                                         Domain Authentication
                                     </a>{' '}

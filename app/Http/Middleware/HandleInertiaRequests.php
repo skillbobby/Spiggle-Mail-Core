@@ -172,7 +172,7 @@ class HandleInertiaRequests extends Middleware
 
         return [
             ...parent::share($request),
-            'edition' => config('spiggle.edition', 'cloud'),
+            'edition' => config('spiggle.edition', 'core'),
             'auth' => [
                 'user' => $user ? [
                     'id' => $user->id,
