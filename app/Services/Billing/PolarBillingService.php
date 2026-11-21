@@ -157,24 +157,39 @@ class PolarBillingService
         $customerId = $account->settings['polar_customer_id'] ?? null;
         $externalId = (string) $account->id;
 
+        // Polar meter "Email Dispatches" uses a custom_multiplier of 1000 (1 unit = 1,000 sends)
+        $scaledUnits = round($unitsCount / 1000.0, 4);
+
+        $eventPayload = [
+            'name' => 'email_dispatched',
+            'timestamp' => now()->toIso8601String(),
+            'metadata' => [
+                'units' => $scaledUnits,
+                'raw_emails' => $unitsCount,
+                'account_id' => $externalId,
+            ],
+        ];
+
+        if (! empty($customerId)) {
+            $eventPayload['customer_id'] = $customerId;
+        } else {
+            $eventPayload['external_customer_id'] = $externalId;
+        }
+
         try {
             $response = Http::withToken(config('services.polar.token'))
                 ->acceptJson()
                 ->asJson()
                 ->post("{$this->baseUrl}/events/ingest", [
-                    'events' => [
-                        [
-                            'name' => 'email_dispatched',
-                            'timestamp' => now()->toIso8601String(),
-                            'customer_id' => $customerId,
-                            'external_customer_id' => $externalId,
-                            'metadata' => [
-                                'units' => $unitsCount,
-                                'account_id' => $externalId,
-                            ],
-                        ],
-                    ],
+                    'events' => [$eventPayload],
                 ]);
+
+            if (! $response->successful()) {
+                Log::warning('[PolarBillingService] Failed to ingest meter event: '.$response->body(), [
+                    'status' => $response->status(),
+                    'account_id' => $account->id,
+                ]);
+            }
 
             return $response->successful();
         } catch (Throwable $e) {

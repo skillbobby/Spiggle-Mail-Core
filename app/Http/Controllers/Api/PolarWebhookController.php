@@ -88,10 +88,17 @@ class PolarWebhookController extends Controller
 
         $customerId = $data['customer_id'] ?? $data['customer']['id'] ?? null;
         if ($customerId) {
-            foreach (Account::all() as $acc) {
-                if (($acc->settings['polar_customer_id'] ?? null) === $customerId) {
-                    return $acc;
-                }
+            $account = Account::where('settings->polar_customer_id', $customerId)->first();
+            if ($account) {
+                return $account;
+            }
+        }
+
+        $subscriptionId = $data['subscription_id'] ?? $data['id'] ?? null;
+        if ($subscriptionId) {
+            $account = Account::where('settings->polar_subscription_id', $subscriptionId)->first();
+            if ($account) {
+                return $account;
             }
         }
 

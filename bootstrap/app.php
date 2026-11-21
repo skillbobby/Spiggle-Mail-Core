@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             'api/v1/unsubscribe/*',
             'api/webhooks/*',
+            'api/v1/billing/*',
             'embed/subscribe',
         ]);
 

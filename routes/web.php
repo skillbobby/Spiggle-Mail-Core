@@ -2216,4 +2216,11 @@ Route::middleware(['auth.spiggle'])->group(function () {
             'checkoutId' => $request->query('checkout_id'),
         ]);
     })->name('billing.success');
+
+    Route::prefix('api/v1/billing')->group(function () {
+        Route::post('/checkout', [\App\Http\Controllers\Api\BillingApiController::class, 'createCheckout']);
+        Route::post('/portal', [\App\Http\Controllers\Api\BillingApiController::class, 'portalUrl']);
+        Route::get('/subscription', [\App\Http\Controllers\Api\BillingApiController::class, 'getSubscription']);
+        Route::post('/settings', [\App\Http\Controllers\Api\BillingApiController::class, 'updateSettings']);
+    });
 });

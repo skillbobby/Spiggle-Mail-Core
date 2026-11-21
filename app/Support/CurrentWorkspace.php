@@ -16,6 +16,11 @@ use Illuminate\Support\Str;
  */
 final class CurrentWorkspace
 {
+    public static function get(?Request $request = null): ?Account
+    {
+        return self::account($request);
+    }
+
     public static function user(?Request $request = null): ?User
     {
         $request ??= request();

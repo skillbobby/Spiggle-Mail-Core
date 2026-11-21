@@ -118,4 +118,53 @@ class PolarBillingAndWebhookTest extends TestCase
         $campaign->refresh();
         $this->assertEquals('paused_refund_revoked', $campaign->status);
     }
+
+    public function test_meter_usage_records_scaled_units_to_polar(): void
+    {
+        config(['services.polar.token' => 'test_token']);
+
+        Http::fake([
+            'https://api.polar.sh/v1/events/ingest' => function (\Illuminate\Http\Client\Request $request) {
+                $events = $request['events'] ?? [];
+                $first = $events[0] ?? [];
+                $metadata = $first['metadata'] ?? [];
+
+                // 25,000 raw emails must scale to 25.0 units for Polar's meter
+                if (($metadata['units'] ?? null) == 25.0 && ($metadata['raw_emails'] ?? null) === 25000) {
+                    return Http::response(['ingested' => 1], 200);
+                }
+
+                return Http::response(['error' => 'invalid unit scaling'], 400);
+            },
+        ]);
+
+        $user = User::factory()->create();
+        $account = Account::create([
+            'user_id' => $user->id,
+            'name' => 'Scaler Test',
+            'status' => 'active',
+            'settings' => ['polar_customer_id' => 'cust_uuid_123'],
+        ]);
+
+        $service = new PolarBillingService();
+        $recorded = $service->recordMeterUsage($account, 25000);
+
+        $this->assertTrue($recorded);
+    }
+
+    public function test_current_workspace_get_resolves_account(): void
+    {
+        $user = User::factory()->create();
+        $account = Account::create([
+            'user_id' => $user->id,
+            'name' => 'Workspace Test',
+            'status' => 'active',
+        ]);
+
+        $this->actingAs($user);
+        $resolved = \App\Support\CurrentWorkspace::get();
+
+        $this->assertNotNull($resolved);
+        $this->assertEquals($account->id, $resolved->id);
+    }
 }
