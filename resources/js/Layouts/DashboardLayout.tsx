@@ -25,6 +25,7 @@ import {
   Check,
   Activity,
   CheckCircle2,
+  CreditCard,
 } from 'lucide-react';
 import type { Newsletter, User, AccountAlert } from '@/types';
 import { GetStartedPanel, type GetStartedData } from '@/Components/GetStartedPanel';
@@ -60,6 +61,7 @@ const ACCOUNT_NAV: readonly NavItem[] = [
   { href: '/domains', label: 'Domains', icon: Globe },
   { href: '/api-keys', label: 'API keys', icon: KeyRound },
   { href: '/deliverability', label: 'Deliverability & Health', icon: ShieldAlert },
+  { href: '/billing', label: 'Billing & Plan', icon: CreditCard },
   { href: '/account', label: 'Account & Security', icon: Settings },
 ];
 
