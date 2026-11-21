@@ -54,4 +54,19 @@ return [
         'chat_id' => env('TELEGRAM_CHAT_ID'),
     ],
 
+    'polar' => [
+        'token' => env('POLAR_ACCESS_TOKEN'),
+        'webhook_secret' => env('POLAR_WEBHOOK_SECRET'),
+        'organization_id' => env('POLAR_ORGANIZATION_ID', '494f9913-fd1e-461c-8fa1-c3f0b3740dcf'),
+        'meter_id' => env('POLAR_METER_ID', '1a92c493-3fc2-4375-abec-570c2750f52d'),
+        'products' => [
+            'starter_month' => env('POLAR_PRODUCT_STARTER_MONTH', 'e78f0986-7770-48e2-a8bb-2d7922cd1dff'),
+            'starter_year' => env('POLAR_PRODUCT_STARTER_YEAR', 'aead0880-c08f-4bdc-9c30-e51697fd1e00'),
+            'growth_month' => env('POLAR_PRODUCT_GROWTH_MONTH', '3a1b98d6-ca37-4861-ad69-6856d6b10188'),
+            'growth_year' => env('POLAR_PRODUCT_GROWTH_YEAR', 'bfe46e80-d44f-4b80-9929-8f20a12633a2'),
+            'scale_month' => env('POLAR_PRODUCT_SCALE_MONTH', '48aff0ef-3623-4a5b-980d-7407a75ca506'),
+            'scale_year' => env('POLAR_PRODUCT_SCALE_YEAR', '1bfd238e-5ba1-43d9-9beb-636d1d70630e'),
+        ],
+    ],
+
 ];

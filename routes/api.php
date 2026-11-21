@@ -544,3 +544,16 @@ Route::post('/webhooks/postmark', function (Request $request) {
 
     return response()->json(['status' => 'processed'], 200);
 });
+
+// --------------------------------------------------------------------------
+// Polar.sh Webhook & In-App Dynamic Billing Routes
+// --------------------------------------------------------------------------
+
+Route::post('/webhooks/polar', [\App\Http\Controllers\Api\PolarWebhookController::class, 'handle']);
+
+Route::prefix('v1/billing')->group(function () {
+    Route::post('/checkout', [\App\Http\Controllers\Api\BillingApiController::class, 'createCheckout']);
+    Route::post('/portal', [\App\Http\Controllers\Api\BillingApiController::class, 'portalUrl']);
+    Route::get('/subscription', [\App\Http\Controllers\Api\BillingApiController::class, 'getSubscription']);
+    Route::post('/settings', [\App\Http\Controllers\Api\BillingApiController::class, 'updateSettings']);
+});

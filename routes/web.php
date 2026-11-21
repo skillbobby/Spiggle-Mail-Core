@@ -2190,3 +2190,30 @@ XML;
 
     return response($xml, 200)->header('Content-Type', 'application/xml; charset=utf-8');
 });
+
+// --------------------------------------------------------------------------
+// Billing & Subscription Web Routes
+// --------------------------------------------------------------------------
+Route::middleware(['auth.spiggle'])->group(function () {
+    Route::get('/billing', function (Request $request) {
+        $account = \App\Support\CurrentWorkspace::get($request);
+        $settings = $account?->settings ?? [];
+
+        return Inertia::render('Billing', [
+            'edition' => config('spiggle.edition'),
+            'polarConfigured' => ! empty(config('services.polar.token')),
+            'plan' => $settings['plan'] ?? 'free',
+            'monthlyQuota' => (int) ($settings['monthly_sends_limit'] ?? 0),
+            'subscriptionStatus' => $settings['subscription_status'] ?? ($account?->status === 'active' ? 'active' : 'inactive'),
+            'pauseAtQuotaLimit' => (bool) ($settings['pause_at_quota_limit'] ?? false),
+            'cancelAtPeriodEnd' => (bool) ($settings['cancel_at_period_end'] ?? false),
+            'currentPeriodEnd' => $settings['current_period_end'] ?? null,
+        ]);
+    })->name('billing');
+
+    Route::get('/billing/success', function (Request $request) {
+        return Inertia::render('BillingSuccess', [
+            'checkoutId' => $request->query('checkout_id'),
+        ]);
+    })->name('billing.success');
+});

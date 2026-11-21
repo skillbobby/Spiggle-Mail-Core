@@ -84,6 +84,45 @@ class SendCampaignBatchJob implements ShouldQueue
         }
 
         $accountSettings = $account?->settings ?? [];
+
+        // Subscription & Quota Guard (Cloud / Polar mode)
+        if ($account && config('spiggle.edition') !== 'core' && ! empty(config('services.polar.token'))) {
+            $subStatus = $accountSettings['subscription_status'] ?? 'inactive';
+            if (in_array($subStatus, ['revoked', 'refunded', 'past_due'], true)) {
+                $pauseMsg = "Campaign paused: Subscription is {$subStatus}. Please update your billing plan.";
+                DB::table('campaigns')->where('id', $campaign->id)->update([
+                    'status' => 'paused',
+                    'pause_reason' => $pauseMsg,
+                ]);
+                Log::warning("Campaign {$campaign->id} paused: account {$account->id} subscription is {$subStatus}.");
+
+                return;
+            }
+
+            // Check if user requested halting when monthly send quota is reached
+            $pauseAtQuota = (bool) ($accountSettings['pause_at_quota_limit'] ?? false);
+            $quotaLimit = (int) ($accountSettings['monthly_sends_limit'] ?? 0);
+            if ($pauseAtQuota && $quotaLimit > 0) {
+                $monthSends = (int) DB::table('messages')
+                    ->join('campaigns as c', 'messages.campaign_id', '=', 'c.id')
+                    ->join('newsletters as n', 'c.newsletter_id', '=', 'n.id')
+                    ->where('n.account_id', $account->id)
+                    ->where('messages.sent_at', '>=', now()->startOfMonth())
+                    ->count();
+
+                if ($monthSends >= $quotaLimit) {
+                    $pauseMsg = "Monthly send limit reached ({$monthSends}/{$quotaLimit}). Campaign held per user preference to prevent metered overage charges.";
+                    DB::table('campaigns')->where('id', $campaign->id)->update([
+                        'status' => 'paused',
+                        'pause_reason' => $pauseMsg,
+                    ]);
+                    Log::info("Campaign {$campaign->id} paused: account {$account->id} reached monthly quota ({$monthSends}/{$quotaLimit}) with overage-cap enabled.");
+
+                    return;
+                }
+            }
+        }
+
         $sendRateLimit = max(1, min(200, (int) ($accountSettings['send_rate_limit'] ?? 14)));
         $configurationSet = ! empty($accountSettings['ses_configuration_set'])
             ? (string) $accountSettings['ses_configuration_set']
@@ -393,6 +432,15 @@ class SendCampaignBatchJob implements ShouldQueue
                 ]);
 
                 DB::table('campaigns')->where('id', $campaign->id)->increment('sent_count');
+            }
+        }
+
+        // Record metered usage to Polar in Cloud mode
+        if ($actualDispatchedInBatch > 0 && $account && ! empty(config('services.polar.token'))) {
+            try {
+                app(\App\Services\Billing\PolarBillingService::class)->recordMeterUsage($account, $actualDispatchedInBatch);
+            } catch (\Throwable $e) {
+                Log::warning("[SendCampaignBatchJob] Meter reporting failed: {$e->getMessage()}");
             }
         }
 
